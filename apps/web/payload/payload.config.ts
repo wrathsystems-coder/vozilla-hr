@@ -18,6 +18,9 @@ import { Dealers } from "./collections/Dealers";
 import { DealerUsers } from "./collections/DealerUsers";
 import { UsedCarListings } from "./collections/UsedCarListings";
 import { UsedCarImages } from "./collections/UsedCarImages";
+import { LeadRequests } from "./collections/LeadRequests";
+import { LeadAssignments } from "./collections/LeadAssignments";
+import { GdprRequests } from "./collections/GdprRequests";
 import { HeroImage, SpecsTable, ProsCons, CtaButton, DisclaimerBox } from "./blocks";
 
 const filename = fileURLToPath(import.meta.url);
@@ -46,6 +49,9 @@ export default buildConfig({
     DealerUsers,
     UsedCarListings,
     UsedCarImages,
+    LeadRequests,
+    LeadAssignments,
+    GdprRequests,
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
