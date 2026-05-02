@@ -13,6 +13,8 @@ const IGNORE = [
   "**/build/**",
   "**/coverage/**",
   "**/payload-types.ts",
+  // Master placeholder index documents every XXX_; do not scan it against itself.
+  "**/PLACEHOLDERS.md",
 ];
 
 async function main() {

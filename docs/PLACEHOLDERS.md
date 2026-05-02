@@ -61,7 +61,27 @@ build ako ih ima. Lokalno samo prijavljuje hits.
 
 ## Env varijable — `.env.example`
 
-> Ažurira se u Koraku 9 (sve `XXX_` env vrijednosti se popunjavaju izvan repo-a u `.env.local` lokalno i Vercel dashboardu produkcijski).
+Vrijednosti se popunjavaju izvan repo-a: lokalno u `apps/web/.env.local`,
+produkcijski na Vercel project settings (encrypted). Sentry / GA4 / PostHog
+varijable su prazne u MVP-u jer su feature-flagged OFF u `config/feature-flags.yml`.
+
+| Placeholder                | Status | Sprint | Opis                                                                |
+| -------------------------- | ------ | ------ | ------------------------------------------------------------------- |
+| `XXX_DATABASE_URL`         | ⬜     | 0      | Postgres connection string (Docker lokalno, Supabase pooler u prod) |
+| `XXX_PAYLOAD_SECRET`       | ⬜     | 0      | Payload CMS secret, 32+ random chars                                |
+| `XXX_SITE_URL`             | ⬜     | 0      | Public site URL bez trailing slash-a                                |
+| `XXX_RESEND_API_KEY`       | ⬜     | 4      | Resend API key (dev fallback console.warn ako nedostaje)            |
+| `XXX_RESEND_FROM_EMAIL`    | ⬜     | 4      | Default "from" email, mora biti na verified Resend domeni           |
+| `XXX_RECAPTCHA_SITE_KEY`   | ⬜     | 4      | Google reCAPTCHA v3 site key (NEXT*PUBLIC*)                         |
+| `XXX_RECAPTCHA_SECRET_KEY` | ⬜     | 4      | Google reCAPTCHA v3 secret key                                      |
+| `XXX_COOKIEBOT_ID`         | ⬜     | 2      | Cookiebot site ID (NEXT*PUBLIC*)                                    |
+| `XXX_CRON_SECRET`          | ⬜     | 5      | Vercel Cron auth header secret                                      |
+
+Empty u MVP-u (Sprint 7+ ili Phase 2):
+
+- `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`
+- `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
 
 ## Pravne stranice (Sprint 2+)
 

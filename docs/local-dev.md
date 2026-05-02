@@ -14,10 +14,11 @@ cd vozilla-hr
 nvm use            # if using nvm
 pnpm install
 docker compose up -d
-cp .env.example .env.local
-# Edit .env.local:
+cp .env.example apps/web/.env.local
+# Edit apps/web/.env.local:
 #   DATABASE_URL=postgresql://vozilla:vozilla@localhost:5432/vozilla_hr_dev
 #   PAYLOAD_SECRET=<32+ random characters>
+#   NEXT_PUBLIC_SITE_URL=http://localhost:3000
 pnpm dev
 ```
 
