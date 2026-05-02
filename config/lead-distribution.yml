@@ -1,0 +1,27 @@
+# Težine za quality_score algoritam (Carwow-style controlled auction).
+# Spec: docs/spec/04-features-and-flows.md "Lead distribution".
+
+weights:
+  W_response: 0.40       # 1 / avg_response_time_hours
+  W_conversion: 0.30     # conversion_rate (sold/total)
+  W_rating: 0.20         # avg_rating
+  W_capacity: 0.10       # 1 - current_load_ratio
+
+rules:
+  closest_dealer_always_included: true   # Carwow pravilo
+  max_dealers_per_lead: 5
+  default_dealers_per_lead: 5
+  min_dealers_per_lead: 3
+
+throttling:
+  max_leads_per_dealer_per_day: 20
+  max_leads_per_dealer_per_week: 80
+
+reminders:
+  first_reminder_hours: 24
+  second_reminder_hours: 48
+  expire_no_response_hours: 72
+
+score_thresholds:
+  warn_below: 0.30
+  suspend_below: 0.15

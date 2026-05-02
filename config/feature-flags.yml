@@ -1,0 +1,31 @@
+# Feature flagovi za MVP. Sve OFF što nije u core MVP-u.
+# Spec: docs/spec/01-vision-and-scope.md "Što NIJE u MVP-u".
+
+# Komunikacija
+newsletter: false
+sms_notifications: false
+whatsapp_notifications: false
+
+# Analytics i tracking
+google_analytics_4: false
+posthog: false
+meta_pixel: false
+hotjar: false
+
+# UI
+dark_mode: false
+
+# Auth
+user_accounts: false
+
+# Lead flow
+real_time_auction: false
+
+# Dealer
+dealer_self_upload_listings: false
+public_dealer_profiles: false
+dealer_subscription_billing: false
+
+# Listings
+sell_my_car: false
+trade_in_valuation: false

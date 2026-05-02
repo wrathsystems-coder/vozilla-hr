@@ -1,0 +1,20 @@
+# Sticky widget "Dobij najbolju cijenu". Bottom-right.
+
+sticky_widget:
+  enabled: true
+  position: "bottom-right"
+  triggers:
+    delay_seconds: 8
+    scroll_percent: 40
+  dismissal:
+    remember_for_hours: 24
+  excluded_paths:
+    - "/admin/*"
+    - "/dileri/*"
+    - "/upit/*"
+    - "/zatrazi-ponudu"
+    - "/gdpr-zahtjev"
+    - "/opci-uvjeti"
+    - "/politika-privatnosti"
+    - "/politika-kolacica"
+    - "/impressum"

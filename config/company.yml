@@ -1,0 +1,38 @@
+# Podaci o nositelju platforme. Vlasnik popunjava XXX_ vrijednosti.
+# Sve [XXX_*] mora biti popunjeno prije produkcije.
+
+legal_name: "[XXX_COMPANY_LEGAL_NAME]"        # npr. "Vozilla d.o.o."
+short_name: "vozilla.hr"
+
+oib: "[XXX_COMPANY_OIB]"                       # 11 znamenki
+mbs: "[XXX_COMPANY_MBS]"                        # max 9 znamenki
+
+address:
+  street: "[XXX_COMPANY_STREET]"
+  city: "[XXX_COMPANY_CITY]"
+  postcode: "[XXX_COMPANY_POSTCODE]"           # 5 znamenki
+  country: "Hrvatska"
+
+court_register:
+  court_name: "[XXX_COURT_REGISTER_NAME]"      # npr. "Trgovački sud u Zagrebu"
+  registration_number: "[XXX_COURT_REGISTRATION_NUMBER]"
+
+share_capital:
+  amount: "[XXX_SHARE_CAPITAL_AMOUNT]"
+  currency: "EUR"
+  paid_in_full: true
+
+management:
+  director_name: "[XXX_DIRECTOR_NAME]"
+
+contact:
+  email_general: "[XXX_CONTACT_EMAIL_GENERAL]"
+  email_dpo: "[XXX_CONTACT_EMAIL_DPO]"
+  email_dealers: "[XXX_CONTACT_EMAIL_DEALERS]"
+  phone: "[XXX_CONTACT_PHONE]"
+  website: "https://vozilla.hr"
+
+bank:
+  name: "[XXX_BANK_NAME]"
+  iban: "[XXX_BANK_IBAN]"
+  swift: "[XXX_BANK_SWIFT]"
