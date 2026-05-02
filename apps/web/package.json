@@ -22,12 +22,15 @@
     "@payloadcms/db-postgres": "^3.5.0",
     "@payloadcms/next": "^3.5.0",
     "@payloadcms/richtext-lexical": "^3.5.0",
+    "@react-email/components": "^0.0.32",
+    "@react-email/render": "^1.0.5",
     "drizzle-orm": "^0.36.4",
     "next": "^15.1.0",
     "payload": "^3.5.0",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^4.0.0",
     "sharp": "^0.33.0"
   },
   "devDependencies": {
