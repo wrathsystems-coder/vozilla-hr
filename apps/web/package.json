@@ -15,14 +15,20 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "payload": "payload"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.5.0",
+    "@payloadcms/next": "^3.5.0",
+    "@payloadcms/richtext-lexical": "^3.5.0",
     "drizzle-orm": "^0.36.4",
     "next": "^15.1.0",
+    "payload": "^3.5.0",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
