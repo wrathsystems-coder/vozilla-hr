@@ -9,6 +9,7 @@ Ovaj dokument je **trajna memorija projekta** za AI agenta koji radi na vozilla.
 Senior fullstack developer koji radi na **vozilla.hr** — hrvatskoj verziji Carwowa (marketplace + lead generation + media za istraživanje, usporedbu i kupnju vozila u Hrvatskoj).
 
 Tvoj stack:
+
 - **Next.js 15** (App Router) + **TypeScript** (strict mode)
 - **PostgreSQL** (preko Supabase)
 - **Drizzle ORM** (preporučeno; Prisma kao alternativa ako procijeniš bolje)
@@ -21,18 +22,18 @@ Tvoj stack:
 
 ## Glavni dokumenti za referencu (čitaj prije rada)
 
-| Dokument | Kad gledaš |
-|---|---|
-| `docs/spec/SPEC.md` | Master overview svih 7 faza |
-| `docs/spec/01-vision-and-scope.md` | Tko su korisnici, što je MVP |
-| `docs/spec/02-legal-and-compliance.md` | GDPR, OUP, cookies, captcha |
-| `docs/spec/03-information-architecture.md` | Sitemap, sve URL-ove |
-| `docs/spec/04-features-and-flows.md` | Lead distribution, korisnički tokovi |
-| `docs/spec/05-data-and-systems.md` | Schema, stack detalji |
-| `docs/spec/06-branding-and-assets.md` | Placeholderi, gdje ide što |
-| `docs/spec/07-delivery-and-deployment.md` | Sprint plan, deploy proces |
-| `docs/PLACEHOLDERS.md` | Master index svih XXX vrijednosti (ti ga ažuriraš) |
-| `docs/how-leads-work.md` | Business logika (ti je pišeš tijekom rada) |
+| Dokument                                   | Kad gledaš                                         |
+| ------------------------------------------ | -------------------------------------------------- |
+| `docs/spec/SPEC.md`                        | Master overview svih 7 faza                        |
+| `docs/spec/01-vision-and-scope.md`         | Tko su korisnici, što je MVP                       |
+| `docs/spec/02-legal-and-compliance.md`     | GDPR, OUP, cookies, captcha                        |
+| `docs/spec/03-information-architecture.md` | Sitemap, sve URL-ove                               |
+| `docs/spec/04-features-and-flows.md`       | Lead distribution, korisnički tokovi               |
+| `docs/spec/05-data-and-systems.md`         | Schema, stack detalji                              |
+| `docs/spec/06-branding-and-assets.md`      | Placeholderi, gdje ide što                         |
+| `docs/spec/07-delivery-and-deployment.md`  | Sprint plan, deploy proces                         |
+| `docs/PLACEHOLDERS.md`                     | Master index svih XXX vrijednosti (ti ga ažuriraš) |
+| `docs/how-leads-work.md`                   | Business logika (ti je pišeš tijekom rada)         |
 
 Ako neki spec dokument govori jedno a CLAUDE.md drugo — **CLAUDE.md je nadređen**. Spec je "što napraviti", CLAUDE.md je "kako se ponašati radeći to".
 
@@ -43,6 +44,7 @@ Ako neki spec dokument govori jedno a CLAUDE.md drugo — **CLAUDE.md je nadređ
 ### 1. NIKAD ne generiraj brand assete
 
 Logo, fotografije, hero slike, slike vozila, ikone marki, OG slike, screenshoteі — **sve ovo dodaje korisnik**. Tvoj posao je:
+
 - Pripremi točan file path / Payload polje gdje asset ide
 - Stavi placeholder file (vidno označen tekstom "PLACEHOLDER — REPLACE")
 - Napiši README upute s točnim specifikacijama (dimenzije, format, težina)
@@ -58,6 +60,7 @@ UI labels su iznimka: gumb "Pošalji upit", placeholder forme "Tvoj email", erro
 ### 3. Konfigurabilno > hardcoded
 
 Sve što se može mijenjati naknadno mora biti u **`config/*.yml`** ili **Payload Settings global**:
+
 - Boje, fontovi, radius
 - Kontaktni podaci firme
 - API ključevi (u `.env`)
@@ -99,6 +102,7 @@ CI ima axe-core check — fail = ne deploy.
 ### 7. Atomični commit-i s opisnim porukama
 
 Format: `<type>(<scope>): <opis>` (Conventional Commits)
+
 - `feat(leads): add 4-step lead request wizard`
 - `fix(forms): handle disconnected network on step 3`
 - `chore(deps): update Drizzle to 0.30`
@@ -110,6 +114,7 @@ Jedan commit = jedna logička promjena. **Ne miješaj** feature + bugfix + refac
 ### 8. Testiraj prije commit-a
 
 Lokalno mora proći:
+
 ```bash
 pnpm lint && pnpm type-check && pnpm test && pnpm placeholders:check && pnpm build
 ```
@@ -119,6 +124,7 @@ Ako bilo što fail-a, fix prije commit-a. Ako se ne može fix u razumnom vremenu
 ### 9. Pravne stranice ne diraj — pripremaj kostur
 
 Stranice `opci-uvjeti`, `politika-privatnosti`, `politika-kolacica`, `impressum` imaju **prazan kostur s placeholder tekstom**. Korisnik popunjava sadržaj kroz Payload. Tvoj posao:
+
 - Stranica radi i renderira Payload sadržaj
 - Sadržaj defaulta je `[XXX_OUP_TEKST: pravnik dostavlja]`
 - Datum zadnje izmjene se automatski ažurira
@@ -130,6 +136,7 @@ Impressum je iznimka: agent **automatski generira** content iz `config/company.y
 ### 10. Pitaj prije velikih promjena
 
 Ako planiraš:
+
 - Zamijeniti library (npr. Drizzle za Prisma, ili obrnuto)
 - Mijenjati Payload schema na način koji traži migraciju + data transform
 - Refaktorirati komponentu kojom se koristi >5 mjesta
@@ -157,21 +164,22 @@ Ako je promjena lokalna (jedna komponenta, jedan endpoint, jedan utility) — sa
 
 ## Hrvatski specifikum (provjeri uvijek)
 
-| Stavka | Format / pravilo |
-|---|---|
-| **OIB** | 11 znamenki, validacija checksumom — utility u `lib/utils/oib.ts` |
-| **MBS** | Matični broj subjekta, max 9 znamenki |
-| **Telefon** | Prihvati `+385 XX XXX XXXX`, `0XX XXX XXXX` — normaliziraj u E.164 (`+385...`) u bazi |
-| **Datum** | `DD.MM.YYYY.` (s točkama) — ne `YYYY-MM-DD` u UI-ju |
-| **Vrijeme** | `HH:mm` (24h) |
-| **Cijena** | `12.345,67 €` (točka tisućice, zarez decimala, € na kraju s razmakom) |
-| **Poštanski broj** | 5 znamenki, prvi 1-5 |
-| **Županije** | 21 ukupno (20 + Grad Zagreb), seed u `seeds/counties-hr.json` |
-| **Sortiranje** | Hrvatski abecedni red: a, b, c, č, ć, d, dž, đ, e, f, ... — koristi `Intl.Collator('hr')` |
-| **URL slug** | Bez dijakritika (`skoda-octavia`, ne `škoda-octavia`) — ASCII-safe |
-| **Marka, model** | Capitalized u UI (`Audi A4`), lowercase u slug-u (`audi-a4`) |
+| Stavka             | Format / pravilo                                                                          |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| **OIB**            | 11 znamenki, validacija checksumom — utility u `lib/utils/oib.ts`                         |
+| **MBS**            | Matični broj subjekta, max 9 znamenki                                                     |
+| **Telefon**        | Prihvati `+385 XX XXX XXXX`, `0XX XXX XXXX` — normaliziraj u E.164 (`+385...`) u bazi     |
+| **Datum**          | `DD.MM.YYYY.` (s točkama) — ne `YYYY-MM-DD` u UI-ju                                       |
+| **Vrijeme**        | `HH:mm` (24h)                                                                             |
+| **Cijena**         | `12.345,67 €` (točka tisućice, zarez decimala, € na kraju s razmakom)                     |
+| **Poštanski broj** | 5 znamenki, prvi 1-5                                                                      |
+| **Županije**       | 21 ukupno (20 + Grad Zagreb), seed u `seeds/counties-hr.json`                             |
+| **Sortiranje**     | Hrvatski abecedni red: a, b, c, č, ć, d, dž, đ, e, f, ... — koristi `Intl.Collator('hr')` |
+| **URL slug**       | Bez dijakritika (`skoda-octavia`, ne `škoda-octavia`) — ASCII-safe                        |
+| **Marka, model**   | Capitalized u UI (`Audi A4`), lowercase u slug-u (`audi-a4`)                              |
 
 Utility funkcije (agent obvezan napraviti rano u Sprintu 1):
+
 - `lib/utils/format.ts` — `formatPrice()`, `formatDate()`, `formatPhone()`, `formatPostcode()`
 - `lib/utils/validate.ts` — `validateOIB()`, `validatePhoneHR()`, `validatePostcodeHR()`, `validateEmail()`
 - `lib/utils/slug.ts` — `slugify()` koja briše dijakritike
@@ -220,16 +228,16 @@ pnpm payload seed                 # Payload seed (initial admin etc)
 
 Custom workflow-i za uobičajene zadatke:
 
-| Komanda | Što radi |
-|---|---|
-| `/checkpoint` | Spremi progres (commit + summary u Progress Log) |
-| `/new-page <slug>` | Kreiraj novu stranicu po template-u |
-| `/new-block <name>` | Kreiraj novi Lexical block za Payload editor |
-| `/audit-a11y <path>` | Accessibility audit jedne stranice |
-| `/audit-perf <path>` | Performance audit jedne stranice |
-| `/seed-from-csv <file>` | Import seed CSV u bazu |
-| `/payload-collection <name>` | Generiraj novu Payload kolekciju s defaults |
-| `/email-template <name>` | Kreiraj novi React Email template |
+| Komanda                      | Što radi                                         |
+| ---------------------------- | ------------------------------------------------ |
+| `/checkpoint`                | Spremi progres (commit + summary u Progress Log) |
+| `/new-page <slug>`           | Kreiraj novu stranicu po template-u              |
+| `/new-block <name>`          | Kreiraj novi Lexical block za Payload editor     |
+| `/audit-a11y <path>`         | Accessibility audit jedne stranice               |
+| `/audit-perf <path>`         | Performance audit jedne stranice                 |
+| `/seed-from-csv <file>`      | Import seed CSV u bazu                           |
+| `/payload-collection <name>` | Generiraj novu Payload kolekciju s defaults      |
+| `/email-template <name>`     | Kreiraj novi React Email template                |
 
 Definicije ovih komandi su u `.claude/commands/*.md` — čitaj ih prije korištenja.
 
@@ -267,6 +275,7 @@ Definicije ovih komandi su u `.claude/commands/*.md` — čitaj ih prije korišt
 ## Definicija "gotov" za sprint
 
 Sprint je **gotov** kad:
+
 - ✅ Svi deliverables iz `07-delivery-and-deployment.md` za taj sprint su implementirani
 - ✅ `pnpm build` prolazi
 - ✅ `pnpm test` prolazi (uključujući e2e za sprintove 4+)
@@ -290,9 +299,13 @@ Ažuriraj na kraju svakog značajnog rada. Format:
 - Ključne odluke (samo ako je nešto netrivijalno odlučeno)
 ```
 
-### 2026-XX-XX — Sprint 0 — Initial Setup
-- _(agent popunjava tijekom rada)_
+### 2026-05-02 — Sprint 0 — Initial Setup
+
+- Scaffolded: pnpm workspace (Node 22.x, pnpm 9.15.0), Next.js 15 + TS strict + Tailwind 4 (CSS-first), Drizzle + docker-compose Postgres 16 + lazy `getDb()`, Payload CMS 3 (admin route, REST/GraphQL, withPayload), React Email + Resend stub with dev console fallback, all 5 config files (`company.yml`, `theme.ts`, `lead-distribution.yml`, `widgets.yml`, `feature-flags.yml`), placeholder-check script + Husky pre-commit/pre-push + Vitest (slug util + 4 tests), all 15 docs (PLACEHOLDERS.md is the master XXX index), `.env.example` at root, 8 slash commands. 11 commits.
+- Verify pipeline: `pnpm test` (4 ✓), `pnpm lint`, `pnpm type-check`, `pnpm placeholders:check` (111 hits in dev mode, expected), `pnpm build` (with stub env vars) all pass. Build now runs `placeholders:check` first — fails strict in CI (`NODE_ENV=production`), reports-only locally.
+- Otvorena za Sprint 1: rename `admins` collection slug → `admin_users` per spec section 5; commit `apps/web/payload-types.ts` after first `payload generate:types`; finalize brand HEX before Sprint 7; provision external services (Supabase, Vercel, Resend, reCAPTCHA, Cookiebot) — owner action.
+- Ključne odluke: Drizzle final (Prisma alternativa otklonjena), Cookiebot final (Iubenda otklonjena), Tailwind 4 (CSS-first @theme, no `tailwind.config.ts`), lazy `getDb()` umjesto module-level throw, Husky 9 sa minimal pre-commit (lint-staged + placeholders) i pre-push (type-check + test). Auth collection inline u `payload.config.ts` za Sprint 0 — extract u Sprint 1.
 
 ---
 
-*CLAUDE.md zadnji put ažuriran: pri kreiranju projekta. Mijenjaj samo ako se mijenjaju pravila projekta — ne za svakodnevne stvari (te idu u Progress Log).*
+_CLAUDE.md zadnji put ažuriran: pri kreiranju projekta. Mijenjaj samo ako se mijenjaju pravila projekta — ne za svakodnevne stvari (te idu u Progress Log)._
