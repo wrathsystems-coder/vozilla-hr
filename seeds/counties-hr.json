@@ -1,0 +1,23 @@
+[
+  { "slug": "zagrebacka", "name": "Zagrebačka županija", "sort_order": 1 },
+  { "slug": "krapinsko-zagorska", "name": "Krapinsko-zagorska županija", "sort_order": 2 },
+  { "slug": "sisacko-moslavacka", "name": "Sisačko-moslavačka županija", "sort_order": 3 },
+  { "slug": "karlovacka", "name": "Karlovačka županija", "sort_order": 4 },
+  { "slug": "varazdinska", "name": "Varaždinska županija", "sort_order": 5 },
+  { "slug": "koprivnicko-krizevacka", "name": "Koprivničko-križevačka županija", "sort_order": 6 },
+  { "slug": "bjelovarsko-bilogorska", "name": "Bjelovarsko-bilogorska županija", "sort_order": 7 },
+  { "slug": "primorsko-goranska", "name": "Primorsko-goranska županija", "sort_order": 8 },
+  { "slug": "licko-senjska", "name": "Ličko-senjska županija", "sort_order": 9 },
+  { "slug": "viroviticko-podravska", "name": "Virovitičko-podravska županija", "sort_order": 10 },
+  { "slug": "pozesko-slavonska", "name": "Požeško-slavonska županija", "sort_order": 11 },
+  { "slug": "brodsko-posavska", "name": "Brodsko-posavska županija", "sort_order": 12 },
+  { "slug": "zadarska", "name": "Zadarska županija", "sort_order": 13 },
+  { "slug": "osjecko-baranjska", "name": "Osječko-baranjska županija", "sort_order": 14 },
+  { "slug": "sibensko-kninska", "name": "Šibensko-kninska županija", "sort_order": 15 },
+  { "slug": "vukovarsko-srijemska", "name": "Vukovarsko-srijemska županija", "sort_order": 16 },
+  { "slug": "splitsko-dalmatinska", "name": "Splitsko-dalmatinska županija", "sort_order": 17 },
+  { "slug": "istarska", "name": "Istarska županija", "sort_order": 18 },
+  { "slug": "dubrovacko-neretvanska", "name": "Dubrovačko-neretvanska županija", "sort_order": 19 },
+  { "slug": "medjimurska", "name": "Međimurska županija", "sort_order": 20 },
+  { "slug": "grad-zagreb", "name": "Grad Zagreb", "sort_order": 21 }
+]

@@ -1,0 +1,12 @@
+[
+  { "postcode_prefix": "10", "county_id": 21, "city": "Zagreb" },
+  { "postcode_prefix": "20", "county_id": 19, "city": "Dubrovnik" },
+  { "postcode_prefix": "21", "county_id": 17, "city": "Split" },
+  { "postcode_prefix": "23", "county_id": 13, "city": "Zadar" },
+  { "postcode_prefix": "31", "county_id": 14, "city": "Osijek" },
+  { "postcode_prefix": "35", "county_id": 12, "city": "Slavonski Brod" },
+  { "postcode_prefix": "42", "county_id": 5, "city": "Varaždin" },
+  { "postcode_prefix": "47", "county_id": 4, "city": "Karlovac" },
+  { "postcode_prefix": "51", "county_id": 8, "city": "Rijeka" },
+  { "postcode_prefix": "52", "county_id": 18, "city": "Pula" }
+]

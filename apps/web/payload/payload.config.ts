@@ -79,6 +79,10 @@ export default buildConfig({
   }),
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },
+    // Disable auto-push: Payload would try to drop Drizzle-managed tables
+    // (counties, audit_log, ...) it doesn't know about. Use migrations
+    // explicitly via `pnpm payload migrate`.
+    push: false,
   }),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

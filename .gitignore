@@ -60,5 +60,8 @@ playwright/.cache/
 *.pem
 .cache/
 
-# Claude Code (local user settings only — commit settings.json and commands/)
-.claude/settings.local.json
+# Claude Code — only commit settings.json and commands/
+.claude/*
+!.claude/settings.json
+!.claude/commands/
+!.claude/commands/**

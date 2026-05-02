@@ -1,0 +1,7 @@
+slug,legal_name,oib,email,password,phone,street,city,postcode,county_id,brands,monthly_lead_cap
+demo-auto-zagreb,DEMO Auto Zagreb d.o.o.,12345678903,demo-zagreb@example.com,DemoPass123!,+385911111111,Ilica 100,Zagreb,10000,21,audi|skoda,30
+demo-vw-split,DEMO VW Split d.o.o.,98765432106,demo-split@example.com,DemoPass123!,+385912222222,Gundulićeva 50,Split,21000,17,audi|skoda,25
+demo-bmw-rijeka,DEMO BMW Rijeka d.o.o.,11111111119,demo-rijeka@example.com,DemoPass123!,+385913333333,Korzo 30,Rijeka,51000,8,audi,20
+demo-skoda-osijek,DEMO Škoda Osijek d.o.o.,33333333335,demo-osijek@example.com,DemoPass123!,+385914444444,Trg slobode 5,Osijek,31000,14,skoda,20
+demo-multi-zadar,DEMO Multi Zadar d.o.o.,55555555551,demo-zadar@example.com,DemoPass123!,+385915555555,Široka 22,Zadar,23000,13,audi|skoda,15
+demo-pula-auto,DEMO Pula Auto d.o.o.,77777777778,demo-pula@example.com,DemoPass123!,+385916666666,Riva 12,Pula,52100,18,skoda,15

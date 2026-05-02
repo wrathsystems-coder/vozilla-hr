@@ -1,0 +1,4 @@
+brand_slug,brand_name,model_slug,model_name,body_type_slug,segment,year_from,year_to,base_price_eur,fuel_types,transmissions,hero_image_filename,description_short,is_active
+audi,Audi,a4,A4,limuzina,D,2015,2026,40000,benzin|dizel|hibrid,manual|automatic,audi-a4.jpg,"Premium D-segment limuzina s naglaskom na eleganciju i tehnologiju",true
+audi,Audi,q3,Q3,suv,J,2018,2026,38000,benzin|dizel,automatic,audi-q3.jpg,"Compact premium SUV s modernom tehnologijom",true
+skoda,Škoda,octavia,Octavia,karavan,C,2014,2026,25000,benzin|dizel|hibrid,manual|automatic,skoda-octavia.jpg,"Praktična obiteljska limuzina/karavan",true
