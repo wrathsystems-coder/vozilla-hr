@@ -9,9 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "test": "echo 'No tests yet (Korak 7)' && exit 0",
-    "test:watch": "echo 'No tests yet (Korak 7)' && exit 0",
-    "test:e2e": "echo 'No e2e tests yet (Korak 7)' && exit 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "echo 'E2E setup in Sprint 4' && exit 0",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -43,6 +43,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.1.0",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
   }
 }

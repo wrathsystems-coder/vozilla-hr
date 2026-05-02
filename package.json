@@ -24,9 +24,13 @@
     "payload": "pnpm --filter web payload",
     "placeholders:check": "tsx scripts/check-placeholders.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "glob": "^11.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tsx": "^4.19.2",
