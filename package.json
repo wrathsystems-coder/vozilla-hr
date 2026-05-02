@@ -26,6 +26,7 @@
     "seed:vehicles": "pnpm --filter web seed:vehicles",
     "seed:demo": "pnpm --filter web seed:demo",
     "seed:cleanup-demo": "pnpm --filter web seed:cleanup-demo",
+    "generate:docs": "pnpm --filter web generate:docs",
     "placeholders:check": "tsx scripts/check-placeholders.ts",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
