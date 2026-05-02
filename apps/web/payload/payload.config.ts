@@ -22,6 +22,14 @@ import { LeadRequests } from "./collections/LeadRequests";
 import { LeadAssignments } from "./collections/LeadAssignments";
 import { GdprRequests } from "./collections/GdprRequests";
 import { HeroImage, SpecsTable, ProsCons, CtaButton, DisclaimerBox } from "./blocks";
+import {
+  Settings,
+  MarketingCopy,
+  EmailSettings,
+  LeadDistribution,
+  LeasingDefaults,
+  WidgetSettings,
+} from "./globals";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -52,6 +60,14 @@ export default buildConfig({
     LeadRequests,
     LeadAssignments,
     GdprRequests,
+  ],
+  globals: [
+    Settings,
+    MarketingCopy,
+    EmailSettings,
+    LeadDistribution,
+    LeasingDefaults,
+    WidgetSettings,
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
