@@ -1,7 +1,11 @@
-// Schema entries dolaze u Sprintu 1: counties, consent_log, audit_log,
-// magic_link_tokens, rate_limit_buckets, newsletter_subscribers,
-// quiz_results, email_log.
-// Payload-managed tablice (Brands, Models, Dealers, ...) žive u
-// apps/web/payload/collections/, ne ovdje.
+// Drizzle raw operational tables. Payload-managed collections live in
+// apps/web/payload/collections/.
 
-export {};
+export * from "./counties";
+export * from "./consentLog";
+export * from "./auditLog";
+export * from "./magicLinkTokens";
+export * from "./rateLimitBuckets";
+export * from "./newsletterSubscribers";
+export * from "./quizResults";
+export * from "./emailLog";
