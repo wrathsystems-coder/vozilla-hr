@@ -3,25 +3,19 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { fileURLToPath } from "url";
 import path from "path";
+import { AdminUsers } from "./collections/AdminUsers";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
-    user: "admins",
+    user: "admin_users",
     meta: {
       titleSuffix: " — vozilla.hr admin",
     },
   },
-  collections: [
-    {
-      slug: "admins",
-      auth: true,
-      admin: { useAsTitle: "email" },
-      fields: [],
-    },
-  ],
+  collections: [AdminUsers],
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL },
