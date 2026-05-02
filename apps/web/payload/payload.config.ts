@@ -4,6 +4,7 @@ import { lexicalEditor, BlocksFeature } from "@payloadcms/richtext-lexical";
 import { fileURLToPath } from "url";
 import path from "path";
 import { AdminUsers } from "./collections/AdminUsers";
+import { Media } from "./collections/Media";
 import { BodyTypes } from "./collections/BodyTypes";
 import { Brands } from "./collections/Brands";
 import { Models } from "./collections/Models";
@@ -13,6 +14,10 @@ import { Reviews } from "./collections/Reviews";
 import { Articles } from "./collections/Articles";
 import { Pages } from "./collections/Pages";
 import { ComparisonPairs } from "./collections/ComparisonPairs";
+import { Dealers } from "./collections/Dealers";
+import { DealerUsers } from "./collections/DealerUsers";
+import { UsedCarListings } from "./collections/UsedCarListings";
+import { UsedCarImages } from "./collections/UsedCarImages";
 import { HeroImage, SpecsTable, ProsCons, CtaButton, DisclaimerBox } from "./blocks";
 
 const filename = fileURLToPath(import.meta.url);
@@ -27,6 +32,7 @@ export default buildConfig({
   },
   collections: [
     AdminUsers,
+    Media,
     BodyTypes,
     Brands,
     Models,
@@ -36,6 +42,10 @@ export default buildConfig({
     Articles,
     Pages,
     ComparisonPairs,
+    Dealers,
+    DealerUsers,
+    UsedCarListings,
+    UsedCarImages,
   ],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
