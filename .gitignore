@@ -9,8 +9,6 @@ out/
 
 # Payload
 apps/web/payload/media/
-# payload-types.ts ignored in Sprint 0 — generate and commit it in Sprint 1
-apps/web/payload-types.ts
 
 # Drizzle
 apps/web/lib/db/migrations/meta/_journal.json.bak

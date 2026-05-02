@@ -74,6 +74,9 @@ function flattenFields(fields: unknown[], prefix = ""): FlatField[] {
 }
 
 async function generateDatabaseSchemaDoc() {
+  // Payload's buildConfig returns Promise<SanitizedConfig>; resolve once.
+  const cfg = await Promise.resolve(config);
+
   let md = `# Database schema — vozilla.hr\n\n`;
   md += `> Auto-generated from Drizzle schema (\`apps/web/lib/db/schema/\`) and Payload config. Run \`pnpm generate:docs\` to refresh.\n\n`;
 
@@ -123,7 +126,7 @@ async function generateDatabaseSchemaDoc() {
   md += `Content + entiteti managed by Payload CMS 3. Tablice se kreiraju kroz Payload migracije (\`apps/web/migrations/\`).\n\n`;
 
   console.log("  → introspecting Payload collections");
-  const collections = config.collections ?? [];
+  const collections = cfg.collections ?? [];
   for (const collection of collections) {
     const slug = (collection as unknown as { slug: string }).slug;
     md += `### \`${slug}\`\n\n`;
@@ -148,7 +151,7 @@ async function generateDatabaseSchemaDoc() {
   md += `Singleton config držan u DB-u, izložen kroz Payload admin za runtime override.\n\n`;
 
   console.log("  → introspecting Payload globals");
-  const globals = config.globals ?? [];
+  const globals = cfg.globals ?? [];
   for (const global of globals) {
     const slug = (global as unknown as { slug: string }).slug;
     md += `### \`${slug}\`\n\n`;

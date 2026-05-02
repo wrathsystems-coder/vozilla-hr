@@ -15,7 +15,11 @@ build ako ih ima. Lokalno samo prijavljuje hits.
 
 ---
 
-## Pravna osoba i kontakt — `config/company.yml`
+## Pravna osoba i kontakt — `config/company.yml` + Payload `Settings` global
+
+Build-time defaults u `config/company.yml`. Runtime override u Payload
+admin → Settings global (Sprint 4+ logika čita override prvi, fallback
+na YAML).
 
 | Placeholder                     | Status | Opis                                        |
 | ------------------------------- | ------ | ------------------------------------------- |
@@ -44,13 +48,17 @@ build ako ih ima. Lokalno samo prijavljuje hits.
 | `XXX_BRAND_PRIMARY` | 🔧     | Primarna brand boja (default `#000000`, HEX) |
 | `XXX_BRAND_ACCENT`  | 🔧     | Akcent boja (default `#FFC107`, HEX)         |
 
-## Marketing tekstovi — Payload Settings (Sprint 1+) i kod
+## Marketing tekstovi — Payload `MarketingCopy` global + kod
 
-| Placeholder            | Status | Lokacija                         | Opis                              |
-| ---------------------- | ------ | -------------------------------- | --------------------------------- |
-| `XXX_HERO_HEADLINE`    | ⬜     | `apps/web/app/(public)/page.tsx` | Hero naslov, 5-8 riječi           |
-| `XXX_SITE_DESCRIPTION` | ⬜     | `apps/web/app/layout.tsx`        | Meta description, 150-160 znakova |
-| `XXX_TAGLINE`          | ⬜     | TBD (Payload Settings, Sprint 2) | Tagline, 8-12 riječi              |
+Hero, value props, how*it_works, testimonials populiraš kroz Payload
+admin → MarketingCopy global. Code-side default je `[XXX*\*]` placeholder
+dok Payload polje nije popunjeno.
+
+| Placeholder            | Status | Lokacija                                       | Opis                              |
+| ---------------------- | ------ | ---------------------------------------------- | --------------------------------- |
+| `XXX_HERO_HEADLINE`    | ⬜     | `app/(public)/page.tsx` + `MarketingCopy.hero` | Hero naslov, 5-8 riječi           |
+| `XXX_SITE_DESCRIPTION` | ⬜     | `app/layout.tsx` + Settings `seo_defaults`     | Meta description, 150-160 znakova |
+| `XXX_TAGLINE`          | ⬜     | Settings `brand.tagline`                       | Tagline, 8-12 riječi              |
 
 ## Email tekstovi — `apps/web/emails/`
 
@@ -72,9 +80,9 @@ varijable su prazne u MVP-u jer su feature-flagged OFF u `config/feature-flags.y
 | `XXX_SITE_URL`             | ⬜     | 0      | Public site URL bez trailing slash-a                                |
 | `XXX_RESEND_API_KEY`       | ⬜     | 4      | Resend API key (dev fallback console.warn ako nedostaje)            |
 | `XXX_RESEND_FROM_EMAIL`    | ⬜     | 4      | Default "from" email, mora biti na verified Resend domeni           |
-| `XXX_RECAPTCHA_SITE_KEY`   | ⬜     | 4      | Google reCAPTCHA v3 site key (NEXT*PUBLIC*)                         |
+| `XXX_RECAPTCHA_SITE_KEY`   | ⬜     | 4      | Google reCAPTCHA v3 site key (browser-exposed)                      |
 | `XXX_RECAPTCHA_SECRET_KEY` | ⬜     | 4      | Google reCAPTCHA v3 secret key                                      |
-| `XXX_COOKIEBOT_ID`         | ⬜     | 2      | Cookiebot site ID (NEXT*PUBLIC*)                                    |
+| `XXX_COOKIEBOT_ID`         | ⬜     | 2      | Cookiebot site ID (browser-exposed)                                 |
 | `XXX_CRON_SECRET`          | ⬜     | 5      | Vercel Cron auth header secret                                      |
 
 Empty u MVP-u (Sprint 7+ ili Phase 2):
