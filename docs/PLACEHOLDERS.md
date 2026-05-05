@@ -58,6 +58,7 @@ manualni reminder za pre-launch checklist.
 | Asset       | Status | Lokacija                                | Trenutni fallback                                                      |
 | ----------- | ------ | --------------------------------------- | ---------------------------------------------------------------------- |
 | Header logo | ⬜     | `apps/web/components/layout/Header.tsx` | Inline tekstualni wordmark "vozilla.hr". Zamijeniti SVG-om kad stigne. |
+| Footer logo | ⬜     | `apps/web/components/layout/Footer.tsx` | Inline tekstualni wordmark "vozilla.hr". Isti tretman kao header.      |
 
 ## Marketing tekstovi — Payload `MarketingCopy` global + kod
 
