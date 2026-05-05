@@ -27,7 +27,7 @@ export default function MobileNav() {
         aria-label="Otvori navigaciju"
         aria-expanded={open}
         aria-controls="mobile-nav-drawer"
-        className="-mr-2 p-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 md:hidden"
+        className="focus-visible:outline-brand-accent -mr-2 p-2 focus-visible:outline-2 focus-visible:outline-offset-2 md:hidden"
       >
         <Menu className="h-6 w-6" aria-hidden="true" />
       </button>
@@ -39,7 +39,7 @@ export default function MobileNav() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobilna navigacija"
-            className="absolute inset-y-0 right-0 flex w-80 max-w-full flex-col bg-white p-6"
+            className="bg-surface absolute inset-y-0 right-0 flex w-80 max-w-full flex-col p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end">
@@ -47,7 +47,7 @@ export default function MobileNav() {
                 type="button"
                 onClick={close}
                 aria-label="Zatvori navigaciju"
-                className="-mr-2 p-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+                className="focus-visible:outline-brand-accent -mr-2 p-2 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
@@ -60,7 +60,7 @@ export default function MobileNav() {
                     <Link
                       href={item.href}
                       onClick={close}
-                      className="block text-base font-medium text-gray-900 hover:text-yellow-600"
+                      className="text-text hover:text-brand-accent block text-base font-medium"
                     >
                       {item.label}
                     </Link>
@@ -73,14 +73,14 @@ export default function MobileNav() {
               <Link
                 href={primaryCta.href}
                 onClick={close}
-                className="block w-full rounded-md bg-yellow-400 px-4 py-3 text-center text-sm font-semibold text-black hover:bg-yellow-500"
+                className="bg-brand-accent text-brand-primary block w-full rounded-md px-4 py-3 text-center text-sm font-semibold transition-colors hover:opacity-90"
               >
                 {primaryCta.label}
               </Link>
-              <ul className="mt-4 flex flex-col gap-2 text-sm text-gray-600">
+              <ul className="text-text-muted mt-4 flex flex-col gap-2 text-sm">
                 {secondaryNav.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} onClick={close} className="hover:text-gray-900">
+                    <Link href={item.href} onClick={close} className="hover:text-text">
                       {item.label}
                     </Link>
                   </li>

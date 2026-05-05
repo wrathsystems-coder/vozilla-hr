@@ -1,15 +1,16 @@
 import Link from "next/link";
+import Container from "@/components/ui/Container";
 import { mainNav, primaryCta, secondaryNav } from "./nav-items";
 import MobileNav from "./MobileNav";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="border-surface-border bg-surface sticky top-0 z-50 border-b">
+      <Container className="flex h-16 items-center justify-between">
         <Link
           href="/"
           aria-label="vozilla.hr — početna"
-          className="text-xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+          className="focus-visible:outline-brand-accent text-xl font-bold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4"
         >
           vozilla.hr
         </Link>
@@ -20,7 +21,7 @@ export default function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-gray-900 hover:text-yellow-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+                  className="text-text hover:text-brand-accent focus-visible:outline-brand-accent text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-4"
                 >
                   {item.label}
                 </Link>
@@ -35,7 +36,7 @@ export default function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-gray-600 hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+                  className="text-text-muted hover:text-text focus-visible:outline-brand-accent text-sm focus-visible:outline-2 focus-visible:outline-offset-4"
                 >
                   {item.label}
                 </Link>
@@ -44,14 +45,14 @@ export default function Header() {
           </ul>
           <Link
             href={primaryCta.href}
-            className="rounded-md bg-yellow-400 px-4 py-2 text-sm font-semibold text-black hover:bg-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600"
+            className="bg-brand-accent text-brand-primary focus-visible:outline-brand-accent rounded-md px-4 py-2 text-sm font-semibold transition-colors hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             {primaryCta.label}
           </Link>
         </div>
 
         <MobileNav />
-      </div>
+      </Container>
     </header>
   );
 }
