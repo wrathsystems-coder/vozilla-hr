@@ -48,6 +48,17 @@ na YAML).
 | `XXX_BRAND_PRIMARY` | 🔧     | Primarna brand boja (default `#000000`, HEX) |
 | `XXX_BRAND_ACCENT`  | 🔧     | Akcent boja (default `#FFC107`, HEX)         |
 
+## Brand assets — soft placeholders (ne fail-aju build)
+
+Vizualni asseti (logo, favicon, OG slike) koje vlasnik dostavlja prema
+specifikaciji. Ne koriste `XXX_*` marker u kodu — fallback je
+funkcionalan (npr. tekstualni wordmark) i build prolazi. Ovaj index je
+manualni reminder za pre-launch checklist.
+
+| Asset       | Status | Lokacija                                | Trenutni fallback                                                      |
+| ----------- | ------ | --------------------------------------- | ---------------------------------------------------------------------- |
+| Header logo | ⬜     | `apps/web/components/layout/Header.tsx` | Inline tekstualni wordmark "vozilla.hr". Zamijeniti SVG-om kad stigne. |
+
 ## Marketing tekstovi — Payload `MarketingCopy` global + kod
 
 Hero, value props, how*it_works, testimonials populiraš kroz Payload
