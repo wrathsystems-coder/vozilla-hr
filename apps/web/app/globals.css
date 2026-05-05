@@ -1,5 +1,34 @@
 @import "tailwindcss";
 
+/* Mirror config/theme.ts 1:1. Update both files in lockstep. */
+@theme {
+  --color-brand-primary: #000000;
+  --color-brand-accent: #ffc107;
+
+  --color-text: #0a0a0a;
+  --color-text-muted: #525252;
+  --color-text-inverse: #ffffff;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f5f5;
+  --color-surface-border: #e5e5e5;
+
+  --color-state-success: #16a34a;
+  --color-state-warning: #eab308;
+  --color-state-error: #dc2626;
+  --color-state-info: #2563eb;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,7 +38,7 @@ html {
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

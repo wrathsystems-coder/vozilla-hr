@@ -1,4 +1,5 @@
-// Brand theme tokeni. Sprint 1 importira u globals.css preko @theme {}.
+// Brand theme tokeni. Source spec za Tailwind 4 @theme blok u
+// apps/web/app/globals.css — vrijednosti se manualno održavaju 1:1.
 // HEX kodove agent smije generirati (CLAUDE.md rule #1 iznimka), korisnik
 // finalizira u Sprintu 7.
 
