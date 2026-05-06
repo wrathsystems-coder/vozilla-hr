@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import CookieBanner from "@/components/widgets/CookieBanner";
+import JsonLd from "@/lib/seo/jsonld";
 import { siteUrl } from "@/lib/seo/site-url";
 import "../globals.css";
 
@@ -54,14 +55,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
     <html lang="hr">
       <body>
         <CookieBanner />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={websiteJsonLd} />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[70] focus:rounded focus:bg-black focus:px-3 focus:py-2 focus:text-white"
