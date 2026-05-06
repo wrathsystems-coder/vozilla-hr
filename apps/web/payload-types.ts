@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | "Pacific/Midway"
-  | "Pacific/Niue"
-  | "Pacific/Honolulu"
-  | "Pacific/Rarotonga"
-  | "America/Anchorage"
-  | "Pacific/Gambier"
-  | "America/Los_Angeles"
-  | "America/Tijuana"
-  | "America/Denver"
-  | "America/Phoenix"
-  | "America/Chicago"
-  | "America/Guatemala"
-  | "America/New_York"
-  | "America/Bogota"
-  | "America/Caracas"
-  | "America/Santiago"
-  | "America/Buenos_Aires"
-  | "America/Sao_Paulo"
-  | "Atlantic/South_Georgia"
-  | "Atlantic/Azores"
-  | "Atlantic/Cape_Verde"
-  | "Europe/London"
-  | "Europe/Berlin"
-  | "Africa/Lagos"
-  | "Europe/Athens"
-  | "Africa/Cairo"
-  | "Europe/Moscow"
-  | "Asia/Riyadh"
-  | "Asia/Dubai"
-  | "Asia/Baku"
-  | "Asia/Karachi"
-  | "Asia/Tashkent"
-  | "Asia/Calcutta"
-  | "Asia/Dhaka"
-  | "Asia/Almaty"
-  | "Asia/Jakarta"
-  | "Asia/Bangkok"
-  | "Asia/Shanghai"
-  | "Asia/Singapore"
-  | "Asia/Tokyo"
-  | "Asia/Seoul"
-  | "Australia/Brisbane"
-  | "Australia/Sydney"
-  | "Pacific/Guam"
-  | "Pacific/Noumea"
-  | "Pacific/Auckland"
-  | "Pacific/Fiji";
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
@@ -86,10 +86,10 @@ export interface Config {
     lead_requests: LeadRequest;
     lead_assignments: LeadAssignment;
     gdpr_requests: GdprRequest;
-    "payload-kv": PayloadKv;
-    "payload-locked-documents": PayloadLockedDocument;
-    "payload-preferences": PayloadPreference;
-    "payload-migrations": PayloadMigration;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
@@ -111,12 +111,10 @@ export interface Config {
     lead_requests: LeadRequestsSelect<false> | LeadRequestsSelect<true>;
     lead_assignments: LeadAssignmentsSelect<false> | LeadAssignmentsSelect<true>;
     gdpr_requests: GdprRequestsSelect<false> | GdprRequestsSelect<true>;
-    "payload-kv": PayloadKvSelect<false> | PayloadKvSelect<true>;
-    "payload-locked-documents":
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>;
-    "payload-preferences": PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    "payload-migrations": PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: number;
@@ -191,7 +189,7 @@ export interface DealerAuthOperations {
 export interface AdminUser {
   id: number;
   name: string;
-  role: "super_admin" | "admin" | "operator" | "viewer";
+  role: 'super_admin' | 'admin' | 'operator' | 'viewer';
   /**
    * TOTP-based 2FA. Implementation lands in Sprint 7.
    */
@@ -219,7 +217,7 @@ export interface AdminUser {
       }[]
     | null;
   password?: string | null;
-  collection: "admin_users";
+  collection: 'admin_users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -231,7 +229,7 @@ export interface Media {
    * ALT tekst (HR, a11y obavezno)
    */
   alt: string;
-  source: "vlastite" | "press_kit" | "dealer_uploaded" | "stock_photo";
+  source: 'vlastite' | 'press_kit' | 'dealer_uploaded' | 'stock_photo';
   /**
    * npr. "Foto: Audi AG"
    */
@@ -346,7 +344,7 @@ export interface Model {
   slug: string;
   name: string;
   body_type: number | BodyType;
-  segment?: ("A" | "B" | "C" | "D" | "E" | "F" | "J" | "M" | "S") | null;
+  segment?: ('A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'J' | 'M' | 'S') | null;
   /**
    * npr. "B9", "Mk7", "T-Roc"
    */
@@ -357,8 +355,8 @@ export interface Model {
    * Početna cijena (EUR)
    */
   base_price_eur?: number | null;
-  fuel_types?: ("benzin" | "dizel" | "hibrid" | "phev" | "ev" | "lpg" | "cng")[] | null;
-  transmissions?: ("manual" | "automatic" | "dct" | "cvt")[] | null;
+  fuel_types?: ('benzin' | 'dizel' | 'hibrid' | 'phev' | 'ev' | 'lpg' | 'cng')[] | null;
+  transmissions?: ('manual' | 'automatic' | 'dct' | 'cvt')[] | null;
   description_md?: string | null;
   hero_image_path?: string | null;
   is_active?: boolean | null;
@@ -377,14 +375,14 @@ export interface ModelVersion {
    * Trim/version label (npr. "2.0 TDI Sport", "1.5 TSI Style")
    */
   name: string;
-  engine_type?: ("benzin" | "dizel" | "hibrid" | "phev" | "ev") | null;
+  engine_type?: ('benzin' | 'dizel' | 'hibrid' | 'phev' | 'ev') | null;
   /**
    * Zapremnina u cm³
    */
   engine_displacement_cc?: number | null;
   power_kw?: number | null;
   power_hp?: number | null;
-  transmission?: ("manual" | "automatic" | "dct" | "cvt") | null;
+  transmission?: ('manual' | 'automatic' | 'dct' | 'cvt') | null;
   /**
    * L/100km kombinirano (WLTP)
    */
@@ -443,8 +441,8 @@ export interface Review {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -498,7 +496,7 @@ export interface Article {
   id: number;
   slug: string;
   title: string;
-  category_slug?: ("vodici" | "savjeti" | "vijesti" | "tehnologija") | null;
+  category_slug?: ('vodici' | 'savjeti' | 'vijesti' | 'tehnologija') | null;
   author?: (number | null) | AdminUser;
   /**
    * Kratki sažetak (~160 znakova) za listinge i SEO
@@ -512,8 +510,8 @@ export interface Article {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -547,8 +545,8 @@ export interface Page {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -584,8 +582,8 @@ export interface ComparisonPair {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -680,7 +678,7 @@ export interface Dealer {
       }[]
     | null;
   password?: string | null;
-  collection: "dealers";
+  collection: 'dealers';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -692,7 +690,7 @@ export interface DealerUser {
   name: string;
   email: string;
   phone?: string | null;
-  role: "manager" | "agent";
+  role: 'manager' | 'agent';
   is_active?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -726,7 +724,7 @@ export interface UsedCarListing {
    * VIN — opcijski. Sprint 7 šifrira u prod-u.
    */
   vin?: string | null;
-  condition: "excellent" | "good" | "fair" | "poor";
+  condition: 'excellent' | 'good' | 'fair' | 'poor';
   description_md?: string | null;
   location: {
     /**
@@ -735,7 +733,7 @@ export interface UsedCarListing {
     county_id: number;
     city: string;
   };
-  status: "draft" | "active" | "sold" | "expired";
+  status: 'draft' | 'active' | 'sold' | 'expired';
   sold_at?: string | null;
   expires_at?: string | null;
   view_count?: number | null;
@@ -781,12 +779,12 @@ export interface LeadRequest {
    */
   customer_county_id: number;
   customer_postcode: string;
-  preferred_contact_method?: ("phone" | "email" | "any") | null;
+  preferred_contact_method?: ('phone' | 'email' | 'any') | null;
   /**
    * npr. "9-17h", "vikend"
    */
   best_contact_time?: string | null;
-  request_type: "new" | "used" | "leasing" | "unsure";
+  request_type: 'new' | 'used' | 'leasing' | 'unsure';
   brand?: (number | null) | Brand;
   model?: (number | null) | Model;
   /**
@@ -804,17 +802,17 @@ export interface LeadRequest {
   comments?: string | null;
   price_min?: number | null;
   price_max?: number | null;
-  financing_type?: ("cash" | "bank_loan" | "leasing" | "undecided") | null;
+  financing_type?: ('cash' | 'bank_loan' | 'leasing' | 'undecided') | null;
   deposit?: number | null;
   period_months?: number | null;
-  time_frame?: ("immediate" | "1m" | "3m" | "6m" | "later") | null;
+  time_frame?: ('immediate' | '1m' | '3m' | '6m' | 'later') | null;
   has_trade_in?: boolean | null;
   trade_in_data?: {
     brand?: string | null;
     model?: string | null;
     year?: number | null;
     mileage_km?: number | null;
-    condition?: ("excellent" | "good" | "fair" | "poor") | null;
+    condition?: ('excellent' | 'good' | 'fair' | 'poor') | null;
     estimated_value_eur?: number | null;
   };
   /**
@@ -822,12 +820,12 @@ export interface LeadRequest {
    */
   gdpr_consent_at: string;
   marketing_consent?: boolean | null;
-  source?: ("home" | "model_page" | "sticky_widget" | "quiz" | "other") | null;
+  source?: ('home' | 'model_page' | 'sticky_widget' | 'quiz' | 'other') | null;
   recaptcha_score?: number | null;
   recaptcha_action?: string | null;
   ip_address?: string | null;
   user_agent?: string | null;
-  status: "new" | "under_review" | "in_progress" | "sent" | "closed" | "spam";
+  status: 'new' | 'under_review' | 'in_progress' | 'sent' | 'closed' | 'spam';
   internal_notes?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -840,12 +838,12 @@ export interface LeadAssignment {
   id: number;
   lead: number | LeadRequest;
   dealer: number | Dealer;
-  status: "sent" | "viewed" | "contacted" | "closed";
+  status: 'sent' | 'viewed' | 'contacted' | 'closed';
   sent_at?: string | null;
   viewed_at?: string | null;
   contacted_at?: string | null;
   closed_at?: string | null;
-  outcome?: ("sold" | "not_sold" | "customer_unresponsive" | "other") | null;
+  outcome?: ('sold' | 'not_sold' | 'customer_unresponsive' | 'other') | null;
   outcome_reason?: string | null;
   dealer_notes?: string | null;
   /**
@@ -881,13 +879,13 @@ export interface GdprRequest {
    * OIB, opcijski (validira se ako popunjeno)
    */
   customer_oib?: string | null;
-  request_type: "access" | "erasure" | "rectification" | "portability" | "objection";
+  request_type: 'access' | 'erasure' | 'rectification' | 'portability' | 'objection';
   /**
    * Povezani lead (ako postoji)
    */
   lead_request?: (number | null) | LeadRequest;
   description?: string | null;
-  status: "pending" | "in_progress" | "resolved" | "rejected";
+  status: 'pending' | 'in_progress' | 'resolved' | 'rejected';
   admin_notes?: string | null;
   resolved_at?: string | null;
   /**
@@ -924,85 +922,85 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: "admin_users";
+        relationTo: 'admin_users';
         value: number | AdminUser;
       } | null)
     | ({
-        relationTo: "media";
+        relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
-        relationTo: "body_types";
+        relationTo: 'body_types';
         value: number | BodyType;
       } | null)
     | ({
-        relationTo: "brands";
+        relationTo: 'brands';
         value: number | Brand;
       } | null)
     | ({
-        relationTo: "models";
+        relationTo: 'models';
         value: number | Model;
       } | null)
     | ({
-        relationTo: "model_versions";
+        relationTo: 'model_versions';
         value: number | ModelVersion;
       } | null)
     | ({
-        relationTo: "vehicle_attributes";
+        relationTo: 'vehicle_attributes';
         value: number | VehicleAttribute;
       } | null)
     | ({
-        relationTo: "reviews";
+        relationTo: 'reviews';
         value: number | Review;
       } | null)
     | ({
-        relationTo: "articles";
+        relationTo: 'articles';
         value: number | Article;
       } | null)
     | ({
-        relationTo: "pages";
+        relationTo: 'pages';
         value: number | Page;
       } | null)
     | ({
-        relationTo: "comparison_pairs";
+        relationTo: 'comparison_pairs';
         value: number | ComparisonPair;
       } | null)
     | ({
-        relationTo: "dealers";
+        relationTo: 'dealers';
         value: number | Dealer;
       } | null)
     | ({
-        relationTo: "dealer_users";
+        relationTo: 'dealer_users';
         value: number | DealerUser;
       } | null)
     | ({
-        relationTo: "used_car_listings";
+        relationTo: 'used_car_listings';
         value: number | UsedCarListing;
       } | null)
     | ({
-        relationTo: "used_car_images";
+        relationTo: 'used_car_images';
         value: number | UsedCarImage;
       } | null)
     | ({
-        relationTo: "lead_requests";
+        relationTo: 'lead_requests';
         value: number | LeadRequest;
       } | null)
     | ({
-        relationTo: "lead_assignments";
+        relationTo: 'lead_assignments';
         value: number | LeadAssignment;
       } | null)
     | ({
-        relationTo: "gdpr_requests";
+        relationTo: 'gdpr_requests';
         value: number | GdprRequest;
       } | null);
   globalSlug?: string | null;
   user:
     | {
-        relationTo: "admin_users";
+        relationTo: 'admin_users';
         value: number | AdminUser;
       }
     | {
-        relationTo: "dealers";
+        relationTo: 'dealers';
         value: number | Dealer;
       };
   updatedAt: string;
@@ -1016,11 +1014,11 @@ export interface PayloadPreference {
   id: number;
   user:
     | {
-        relationTo: "admin_users";
+        relationTo: 'admin_users';
         value: number | AdminUser;
       }
     | {
-        relationTo: "dealers";
+        relationTo: 'dealers';
         value: number | Dealer;
       };
   key?: string | null;
@@ -1741,19 +1739,19 @@ export interface EmailSetting {
   templates?:
     | {
         key:
-          | "lead-confirmation"
-          | "lead-to-dealer"
-          | "magic-link"
-          | "gdpr-request-received"
-          | "gdpr-request-resolved"
-          | "dealer-password-reset"
-          | "admin-new-lead-notification"
-          | "dealer-reminder-1"
-          | "dealer-reminder-2"
-          | "customer-feedback-3d"
-          | "customer-feedback-14d"
-          | "customer-feedback-30d"
-          | "newsletter-confirm";
+          | 'lead-confirmation'
+          | 'lead-to-dealer'
+          | 'magic-link'
+          | 'gdpr-request-received'
+          | 'gdpr-request-resolved'
+          | 'dealer-password-reset'
+          | 'admin-new-lead-notification'
+          | 'dealer-reminder-1'
+          | 'dealer-reminder-2'
+          | 'customer-feedback-3d'
+          | 'customer-feedback-14d'
+          | 'customer-feedback-30d'
+          | 'newsletter-confirm';
         enabled?: boolean | null;
         /**
          * Ako prazno, koristi default subject iz template-a
@@ -1862,7 +1860,7 @@ export interface WidgetSetting {
   id: number;
   sticky_widget?: {
     enabled?: boolean | null;
-    position?: ("bottom-right" | "bottom-left") | null;
+    position?: ('bottom-right' | 'bottom-left') | null;
     triggers?: {
       delay_seconds?: number | null;
       scroll_percent?: number | null;
@@ -2103,7 +2101,7 @@ export interface CollectionsWidget {
   data?: {
     [k: string]: unknown;
   };
-  width: "full";
+  width: 'full';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2113,6 +2111,7 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-declare module "payload" {
+
+declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }
