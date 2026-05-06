@@ -217,6 +217,23 @@ export const getModelVersions = unstable_cache(
   { tags: ["model_versions"], revalidate: ONE_HOUR },
 );
 
+export const getAllActiveModels = unstable_cache(
+  async (): Promise<ModelWithRefs[]> => {
+    const p = await payload();
+    const result = await p.find({
+      collection: "models",
+      where: { is_active: { equals: true } },
+      limit: 5000,
+      depth: DEPTH,
+    });
+    return (result.docs as Model[]).filter(
+      (m): m is ModelWithRefs => isPopulated(m.brand) && isPopulated(m.body_type),
+    );
+  },
+  ["catalog:models:all-active"],
+  { tags: ["models"], revalidate: ONE_HOUR },
+);
+
 export const getReviewsForModel = unstable_cache(
   async (modelId: number, limit = 3): Promise<Review[]> => {
     const p = await payload();
