@@ -1,20 +1,65 @@
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import { siteUrl } from "@/lib/seo/site-url";
 import "../globals.css";
 
+const description = "[XXX_SITE_DESCRIPTION: opis platforme, 150-160 znakova]";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: {
     default: "vozilla.hr",
     template: "%s — vozilla.hr",
   },
-  description: "[XXX_SITE_DESCRIPTION: opis platforme, 150-160 znakova]",
+  description,
+  openGraph: {
+    type: "website",
+    locale: "hr_HR",
+    url: "/",
+    siteName: "vozilla.hr",
+    title: "vozilla.hr",
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "vozilla.hr",
+    description,
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "vozilla.hr",
+  url: siteUrl(),
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "vozilla.hr",
+  url: siteUrl(),
+  inLanguage: "hr-HR",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${siteUrl()}/pretraga?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="hr">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[70] focus:rounded focus:bg-black focus:px-3 focus:py-2 focus:text-white"
