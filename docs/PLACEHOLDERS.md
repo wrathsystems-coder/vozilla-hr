@@ -132,14 +132,27 @@ Empty u MVP-u (Sprint 7+ ili Phase 2):
 - `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
 - `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
 
-## Pravne stranice (Sprint 2+)
+## Pravne stranice
 
-> Sadržaj OUP-a, Politike privatnosti, Politike kolačića isporučuje
-> pravnik. Stranice imaju kostur s `[XXX_OUP_TEKST: pravnik dostavlja]`
-> placeholderom u Payload Pages kolekciji.
+> OUP, Politiku privatnosti i Politiku kolačića isporučuje pravnik —
+> agent samo renderira kostur i `[XXX_*_TEKST]` placeholder dok finalni
+> tekst ne stigne u Payload Pages kolekciju.
+>
+> Impressum agent **automatski generira** strukturom `<dl>` iz
+> `[XXX_COMPANY_*]` / `[XXX_COURT_*]` / `[XXX_BANK_*]` markera koji su
+> dokumentirani u sekciji "Pravna osoba i kontakt" gore — vlasnik
+> popunjava vrijednosti, ne piše tekst.
+>
+> PDF download je trenutno disabled placeholder gumb. Sprint 7 polish
+> wire-a actual PDF iz Lexical content-a.
 
-| Placeholder       | Status | Opis                                     |
-| ----------------- | ------ | ---------------------------------------- |
-| `[XXX_OUP_TEKST]` | ⬜     | Opći uvjeti — pravnik dostavlja          |
-| `[XXX_PP_TEKST]`  | ⬜     | Politika privatnosti — pravnik dostavlja |
-| `[XXX_PK_TEKST]`  | ⬜     | Politika kolačića — pravnik dostavlja    |
+| Placeholder                   | Status | Lokacija                                     | Opis                                     |
+| ----------------------------- | ------ | -------------------------------------------- | ---------------------------------------- |
+| `[XXX_OUP_TEKST]`             | ⬜     | `app/(public)/opci-uvjeti/page.tsx`          | Opći uvjeti — pravnik dostavlja          |
+| `[XXX_PP_TEKST]`              | ⬜     | `app/(public)/politika-privatnosti/page.tsx` | Politika privatnosti — pravnik dostavlja |
+| `[XXX_PK_TEKST]`              | ⬜     | `app/(public)/politika-kolacica/page.tsx`    | Politika kolačića — pravnik dostavlja    |
+| `XXX_GDPR_INTRO`              | ⬜     | `app/(public)/gdpr-zahtjev/page.tsx`         | Uvod o procesu i roku obrade             |
+| `XXX_GDPR_ACCESS_BODY`        | ⬜     | `app/(public)/gdpr-zahtjev/page.tsx`         | Pravo na pristup, 1-2 rečenice           |
+| `XXX_GDPR_RECTIFICATION_BODY` | ⬜     | `app/(public)/gdpr-zahtjev/page.tsx`         | Pravo na ispravak, 1-2 rečenice          |
+| `XXX_GDPR_ERASURE_BODY`       | ⬜     | `app/(public)/gdpr-zahtjev/page.tsx`         | Pravo na brisanje + retention period     |
+| `XXX_GDPR_COMPLAINT_BODY`     | ⬜     | `app/(public)/gdpr-zahtjev/page.tsx`         | Žalba AZOP-u, kontakt DPO                |
