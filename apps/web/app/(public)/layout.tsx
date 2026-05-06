@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import CookieBanner from "@/components/widgets/CookieBanner";
 import { siteUrl } from "@/lib/seo/site-url";
 import "../globals.css";
 
@@ -52,6 +53,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <html lang="hr">
       <body>
+        <CookieBanner />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
