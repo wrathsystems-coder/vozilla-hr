@@ -1,12 +1,62 @@
 [
-  { "slug": "limuzina", "name": "Limuzina", "sort_order": 1 },
-  { "slug": "hatchback", "name": "Hatchback", "sort_order": 2 },
-  { "slug": "karavan", "name": "Karavan", "sort_order": 3 },
-  { "slug": "suv", "name": "SUV", "sort_order": 4 },
-  { "slug": "crossover", "name": "Crossover", "sort_order": 5 },
-  { "slug": "coupe", "name": "Coupé", "sort_order": 6 },
-  { "slug": "cabriolet", "name": "Cabriolet", "sort_order": 7 },
-  { "slug": "mpv", "name": "MPV", "sort_order": 8 },
-  { "slug": "pickup", "name": "Pickup", "sort_order": 9 },
-  { "slug": "mini", "name": "Mini", "sort_order": 10 }
+  {
+    "slug": "limuzina",
+    "name": "Limuzina",
+    "icon_svg_path": "/placeholders/vehicles/limuzina.svg",
+    "sort_order": 1
+  },
+  {
+    "slug": "hatchback",
+    "name": "Hatchback",
+    "icon_svg_path": "/placeholders/vehicles/hatchback.svg",
+    "sort_order": 2
+  },
+  {
+    "slug": "karavan",
+    "name": "Karavan",
+    "icon_svg_path": "/placeholders/vehicles/karavan.svg",
+    "sort_order": 3
+  },
+  {
+    "slug": "suv",
+    "name": "SUV",
+    "icon_svg_path": "/placeholders/vehicles/suv.svg",
+    "sort_order": 4
+  },
+  {
+    "slug": "crossover",
+    "name": "Crossover",
+    "icon_svg_path": "/placeholders/vehicles/crossover.svg",
+    "sort_order": 5
+  },
+  {
+    "slug": "coupe",
+    "name": "Coupé",
+    "icon_svg_path": "/placeholders/vehicles/coupe.svg",
+    "sort_order": 6
+  },
+  {
+    "slug": "cabriolet",
+    "name": "Cabriolet",
+    "icon_svg_path": "/placeholders/vehicles/cabriolet.svg",
+    "sort_order": 7
+  },
+  {
+    "slug": "mpv",
+    "name": "MPV",
+    "icon_svg_path": "/placeholders/vehicles/mpv.svg",
+    "sort_order": 8
+  },
+  {
+    "slug": "pickup",
+    "name": "Pickup",
+    "icon_svg_path": "/placeholders/vehicles/pickup.svg",
+    "sort_order": 9
+  },
+  {
+    "slug": "mini",
+    "name": "Mini",
+    "icon_svg_path": "/placeholders/vehicles/mini.svg",
+    "sort_order": 10
+  }
 ]

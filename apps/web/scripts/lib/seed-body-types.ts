@@ -8,6 +8,7 @@ export async function seedBodyTypes(payload: Payload) {
   const data = JSON.parse(await readFile(filePath, "utf-8")) as Array<{
     slug: string;
     name: string;
+    icon_svg_path?: string;
     sort_order: number;
   }>;
   console.log(`  → loaded ${data.length} rows`);

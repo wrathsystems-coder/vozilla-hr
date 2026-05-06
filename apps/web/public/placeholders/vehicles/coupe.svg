@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Coupé silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M16 62 C16 52 24 48 32 48 L52 38 C58 32 68 28 78 28 L120 28 C132 28 142 34 148 42 L174 50 C182 52 184 56 184 62" />
+  <path d="M76 28 L76 48 M118 28 L118 48" />
+  <line x1="22" y1="62" x2="40" y2="62" />
+  <line x1="60" y1="62" x2="142" y2="62" />
+  <line x1="162" y1="62" x2="178" y2="62" />
+  <circle cx="50" cy="62" r="9" />
+  <circle cx="152" cy="62" r="9" />
+</svg>

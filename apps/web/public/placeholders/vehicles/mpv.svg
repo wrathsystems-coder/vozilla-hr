@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="MPV silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 62 C14 52 22 48 30 48 L42 22 C46 18 52 14 60 14 L150 14 C160 14 168 22 170 30 L184 44 C190 48 192 54 192 62" />
+  <path d="M58 14 L58 48 M104 14 L104 48 M148 14 L156 32" />
+  <line x1="20" y1="62" x2="38" y2="62" />
+  <line x1="58" y1="62" x2="142" y2="62" />
+  <line x1="162" y1="62" x2="186" y2="62" />
+  <circle cx="48" cy="62" r="9.5" />
+  <circle cx="152" cy="62" r="9.5" />
+</svg>

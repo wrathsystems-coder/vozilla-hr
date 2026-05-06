@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Generička silueta vozila" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M16 60 C16 51 24 47 32 47 L46 33 C50 28 56 24 64 24 L132 24 C142 24 150 30 154 38 L174 48 C182 50 184 53 184 60" />
+  <path d="M62 24 L62 47 M104 24 L104 47 M138 24 L146 47" />
+  <line x1="22" y1="60" x2="40" y2="60" />
+  <line x1="60" y1="60" x2="140" y2="60" />
+  <line x1="160" y1="60" x2="178" y2="60" />
+  <circle cx="50" cy="60" r="9" />
+  <circle cx="150" cy="60" r="9" />
+</svg>

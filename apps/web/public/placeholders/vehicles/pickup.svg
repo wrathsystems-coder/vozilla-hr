@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Pickup silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 60 C12 52 20 48 28 48 L40 28 C44 24 50 20 58 20 L100 20 L100 48 L188 48 L188 60" />
+  <path d="M58 20 L58 48 M86 20 L86 48" />
+  <line x1="18" y1="60" x2="38" y2="60" />
+  <line x1="58" y1="60" x2="142" y2="60" />
+  <line x1="162" y1="60" x2="184" y2="60" />
+  <circle cx="48" cy="60" r="9" />
+  <circle cx="152" cy="60" r="9" />
+</svg>

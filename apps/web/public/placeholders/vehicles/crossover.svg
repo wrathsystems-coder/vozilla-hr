@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Crossover silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M14 61 C14 51 22 47 30 47 L44 28 C48 22 54 18 62 18 L138 18 C148 18 156 24 160 32 L176 44 C184 48 186 53 186 61" />
+  <path d="M60 18 L60 47 M104 18 L104 47 M144 18 L154 36" />
+  <line x1="20" y1="61" x2="38" y2="61" />
+  <line x1="58" y1="61" x2="142" y2="61" />
+  <line x1="162" y1="61" x2="180" y2="61" />
+  <circle cx="48" cy="61" r="9.5" />
+  <circle cx="152" cy="61" r="9.5" />
+</svg>

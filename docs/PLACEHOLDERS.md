@@ -55,10 +55,12 @@ specifikaciji. Ne koriste `XXX_*` marker u kodu — fallback je
 funkcionalan (npr. tekstualni wordmark) i build prolazi. Ovaj index je
 manualni reminder za pre-launch checklist.
 
-| Asset       | Status | Lokacija                                | Trenutni fallback                                                      |
-| ----------- | ------ | --------------------------------------- | ---------------------------------------------------------------------- |
-| Header logo | ⬜     | `apps/web/components/layout/Header.tsx` | Inline tekstualni wordmark "vozilla.hr". Zamijeniti SVG-om kad stigne. |
-| Footer logo | ⬜     | `apps/web/components/layout/Footer.tsx` | Inline tekstualni wordmark "vozilla.hr". Isti tretman kao header.      |
+| Asset                     | Status | Lokacija                                                                    | Trenutni fallback                                                                                                                       |
+| ------------------------- | ------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Header logo               | ⬜     | `apps/web/components/layout/Header.tsx`                                     | Inline tekstualni wordmark "vozilla.hr". Zamijeniti SVG-om kad stigne.                                                                  |
+| Footer logo               | ⬜     | `apps/web/components/layout/Footer.tsx`                                     | Inline tekstualni wordmark "vozilla.hr". Isti tretman kao header.                                                                       |
+| Brand logoi (po marki)    | ⬜     | `apps/web/public/branding/brands/{slug}.svg`                                | Text wordmark u `BrandCard` (NAZIV velikim slovima, brand-accent box) ili generic `public/placeholders/brand-wordmark-placeholder.svg`. |
+| Hero slike modela / marki | ⬜     | Payload Media library + `models.hero_image_path` / `brands.hero_image_path` | Silueta po body_type iz `public/placeholders/vehicles/{slug}.svg` (agent generira; mijenja se Payload upload-om).                       |
 
 ## Marketing tekstovi — Payload `MarketingCopy` global + kod
 

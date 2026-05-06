@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="SUV silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 62 C12 52 22 48 30 48 L42 24 C46 18 52 14 60 14 L142 14 C152 14 160 20 164 28 L176 44 C184 48 188 54 188 62" />
+  <path d="M58 14 L58 48 M104 14 L104 48 M148 14 L160 32" />
+  <line x1="18" y1="62" x2="38" y2="62" />
+  <line x1="58" y1="62" x2="142" y2="62" />
+  <line x1="162" y1="62" x2="182" y2="62" />
+  <circle cx="48" cy="62" r="10" />
+  <circle cx="152" cy="62" r="10" />
+</svg>

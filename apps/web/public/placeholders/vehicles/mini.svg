@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" role="img" aria-label="Mini silueta" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M40 60 C40 52 48 48 56 48 L66 36 C70 30 76 26 84 26 L116 26 C124 26 130 30 134 36 L144 48 C152 48 160 52 160 60" />
+  <path d="M82 26 L82 48 M118 26 L118 48" />
+  <line x1="46" y1="60" x2="60" y2="60" />
+  <line x1="80" y1="60" x2="120" y2="60" />
+  <line x1="140" y1="60" x2="154" y2="60" />
+  <circle cx="70" cy="60" r="8" />
+  <circle cx="130" cy="60" r="8" />
+</svg>
