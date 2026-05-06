@@ -1,4 +1,21 @@
 brand_slug,brand_name,model_slug,model_name,body_type_slug,segment,year_from,year_to,base_price_eur,fuel_types,transmissions,hero_image_filename,description_short,is_active
-audi,Audi,a4,A4,limuzina,D,2015,2026,40000,benzin|dizel|hibrid,manual|automatic,audi-a4.jpg,"Premium D-segment limuzina s naglaskom na eleganciju i tehnologiju",true
-audi,Audi,q3,Q3,suv,J,2018,2026,38000,benzin|dizel,automatic,audi-q3.jpg,"Compact premium SUV s modernom tehnologijom",true
-skoda,Škoda,octavia,Octavia,karavan,C,2014,2026,25000,benzin|dizel|hibrid,manual|automatic,skoda-octavia.jpg,"Praktična obiteljska limuzina/karavan",true
+audi,Audi,a4,A4,limuzina,D,2015,2026,40000,benzin|dizel|hibrid,manual|automatic,audi-a4.jpg,"Premium D-segment limuzina s naglaskom na eleganciju i tehnologiju.",true
+audi,Audi,a3,A3,hatchback,C,2020,2026,32000,benzin|dizel|phev,automatic|dct,audi-a3.jpg,"Kompaktni premium hatchback s naprednom tehnologijom.",true
+audi,Audi,q3,Q3,suv,J,2018,2026,38000,benzin|dizel,automatic,audi-q3.jpg,"Compact premium SUV s modernom tehnologijom i visokom razinom opreme.",true
+bmw,BMW,serija-3,Serija 3,limuzina,D,2019,2026,45000,benzin|dizel|hibrid,automatic,bmw-serija-3.jpg,"Sportski orijentirana premium limuzina srednje klase.",true
+bmw,BMW,x1,X1,suv,J,2022,2026,42000,benzin|dizel|phev,automatic|dct,bmw-x1.jpg,"Kompaktni premium SUV s modernim dizajnom i hibridnim opcijama.",true
+volkswagen,Volkswagen,golf,Golf,hatchback,C,2019,2026,24000,benzin|dizel|hibrid,manual|automatic|dct,volkswagen-golf.jpg,"Najprodavaniji europski hatchback s pouzdanošću i ekonomičnošću.",true
+volkswagen,Volkswagen,passat,Passat,karavan,D,2014,2024,32000,dizel|hibrid,automatic|dct,volkswagen-passat.jpg,"Praktična obiteljska limuzina/karavan poznata po komforu.",true
+volkswagen,Volkswagen,t-roc,T-Roc,suv,C,2017,2026,28000,benzin|dizel,manual|automatic|dct,volkswagen-t-roc.jpg,"Karakterističan crossover s mladenačkim dizajnom.",true
+skoda,Škoda,octavia,Octavia,karavan,C,2014,2026,25000,benzin|dizel|hibrid,manual|automatic,skoda-octavia.jpg,"Praktična obiteljska limuzina/karavan s naglaskom na prostor i opremu.",true
+skoda,Škoda,fabia,Fabia,hatchback,B,2021,2026,17000,benzin,manual|automatic,skoda-fabia.jpg,"Kompaktni gradski hatchback s odličnim odnosom cijene i kvalitete.",true
+skoda,Škoda,kodiaq,Kodiaq,suv,J,2017,2026,38000,benzin|dizel,automatic|dct,skoda-kodiaq.jpg,"Veliki obiteljski SUV s opcijom 7 sjedala.",true
+toyota,Toyota,yaris,Yaris,hatchback,B,2020,2026,21000,hibrid,cvt,toyota-yaris.jpg,"Pouzdani gradski hibrid niske potrošnje.",true
+toyota,Toyota,corolla,Corolla,karavan,C,2019,2026,24000,benzin|hibrid,cvt|manual,toyota-corolla.jpg,"Bestseller iz Toyota palete — pouzdana obiteljska limuzina/karavan.",true
+toyota,Toyota,rav4,RAV4,suv,J,2019,2026,38000,hibrid|phev,cvt,toyota-rav4.jpg,"Hibridni SUV s naglaskom na ekonomičnost i pouzdanost.",true
+hyundai,Hyundai,tucson,Tucson,suv,C,2021,2026,29000,benzin|dizel|hibrid|phev,automatic|dct,hyundai-tucson.jpg,"Suvremeni SUV s prepoznatljivim dizajnom i bogatom opremom.",true
+hyundai,Hyundai,kona-electric,Kona Electric,suv,J,2018,2026,36000,ev,automatic,hyundai-kona-electric.jpg,"Električni kompaktni SUV s dometom preko 400 km.",true
+dacia,Dacia,sandero,Sandero,hatchback,B,2020,2026,12000,benzin|lpg,manual,dacia-sandero.jpg,"Najpovoljniji novi hatchback na hrvatskom tržištu.",true
+dacia,Dacia,duster,Duster,suv,C,2017,2026,16000,benzin|dizel|lpg,manual|automatic,dacia-duster.jpg,"Pristupačni SUV s naglaskom na praktičnost i robusnost.",true
+tesla,Tesla,model-3,Model 3,limuzina,D,2019,2026,45000,ev,automatic,tesla-model-3.jpg,"Električna limuzina koja je redefinirala segment.",true
+tesla,Tesla,model-y,Model Y,suv,J,2022,2026,50000,ev,automatic,tesla-model-y.jpg,"Električni crossover s velikim prtljažnikom i visokim performansama.",true

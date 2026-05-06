@@ -17,14 +17,14 @@ pnpm seed:cleanup-demo     # briše sve is_demo=true zapise + leadovi @example.c
 
 ## Datoteke
 
-| File                         | Tip          | Opis                                                                      |
-| ---------------------------- | ------------ | ------------------------------------------------------------------------- |
-| `counties-hr.json`           | seed         | 21 hrvatskih županija (Drizzle `counties` tablica)                        |
-| `postcodes-counties-hr.json` | runtime data | Top 10 prefiksa za `/api/lookup/postcode/{code}` (Sprint 4)               |
-| `body-types.json`            | seed         | 10 tipova karoserija (Payload `body_types`)                               |
-| `template-vehicles.csv`      | template     | Header + 3 primjera. Vlasnik popunjava, importer UPSERT-a.                |
-| `sample-dealers.csv`         | demo         | 6 demo dilera s valjanim OIB-evima i `@example.com` emailovima            |
-| `sample-leads.json`          | demo         | 10 demo leadova s `@example.com` emailovima, raznolik request_type/status |
+| File                         | Tip          | Opis                                                                        |
+| ---------------------------- | ------------ | --------------------------------------------------------------------------- |
+| `counties-hr.json`           | seed         | 21 hrvatskih županija (Drizzle `counties` tablica)                          |
+| `postcodes-counties-hr.json` | runtime data | Top 10 prefiksa za `/api/lookup/postcode/{code}` (Sprint 4)                 |
+| `body-types.json`            | seed         | 10 tipova karoserija (Payload `body_types`)                                 |
+| `template-vehicles.csv`      | template     | Header + 20 demo redova (10 marki). Vlasnik nadopunjuje, importer UPSERT-a. |
+| `sample-dealers.csv`         | demo         | 6 demo dilera s valjanim OIB-evima i `@example.com` emailovima              |
+| `sample-leads.json`          | demo         | 10 demo leadova s `@example.com` emailovima, raznolik request_type/status   |
 
 ## Format `template-vehicles.csv`
 
