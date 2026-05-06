@@ -66,11 +66,25 @@ Hero, value props, how*it_works, testimonials populiraš kroz Payload
 admin → MarketingCopy global. Code-side default je `[XXX*\*]` placeholder
 dok Payload polje nije popunjeno.
 
-| Placeholder            | Status | Lokacija                                       | Opis                              |
-| ---------------------- | ------ | ---------------------------------------------- | --------------------------------- |
-| `XXX_HERO_HEADLINE`    | ⬜     | `app/(public)/page.tsx` + `MarketingCopy.hero` | Hero naslov, 5-8 riječi           |
-| `XXX_SITE_DESCRIPTION` | ⬜     | `app/layout.tsx` + Settings `seo_defaults`     | Meta description, 150-160 znakova |
-| `XXX_TAGLINE`          | ⬜     | Settings `brand.tagline`                       | Tagline, 8-12 riječi              |
+| Placeholder               | Status | Lokacija                                            | Opis                                            |
+| ------------------------- | ------ | --------------------------------------------------- | ----------------------------------------------- |
+| `XXX_HERO_HEADLINE`       | ⬜     | `components/home/Hero.tsx` + `MarketingCopy.hero`   | Hero naslov, 5-8 riječi                         |
+| `XXX_HERO_SUBHEADLINE`    | ⬜     | `components/home/Hero.tsx`                          | Hero podnaslov, 1-2 rečenice                    |
+| `XXX_VP_1/2/3_TITLE`      | ⬜     | `components/home/ValueProps.tsx`                    | Value prop naslov, 3-5 riječi (3 stavke)        |
+| `XXX_VP_1/2/3_BODY`       | ⬜     | `components/home/ValueProps.tsx`                    | Value prop body, 1-2 rečenice (3 stavke)        |
+| `XXX_HIW_1/2/3_TITLE`     | ⬜     | `components/home/HowItWorks.tsx`                    | How-it-works step naslov, 2-4 riječi (3 stavke) |
+| `XXX_HIW_1/2/3_BODY`      | ⬜     | `components/home/HowItWorks.tsx`                    | How-it-works step body, 1-2 rečenice (3 stavke) |
+| `XXX_TRUST_DEALERS`       | ⬜     | `components/home/TrustSignals.tsx`                  | Broj provjerenih dilera (npr. "120+")           |
+| `XXX_TRUST_CUSTOMERS`     | ⬜     | `components/home/TrustSignals.tsx`                  | Broj zadovoljnih kupaca                         |
+| `XXX_TRUST_REVIEWS`       | ⬜     | `components/home/TrustSignals.tsx`                  | Broj objavljenih recenzija                      |
+| `XXX_QUIZ_CTA_HEADLINE`   | ⬜     | `components/home/QuizCta.tsx`                       | Quiz CTA naslov, 6-10 riječi                    |
+| `XXX_QUIZ_CTA_BODY`       | ⬜     | `components/home/QuizCta.tsx`                       | Quiz CTA body, 1-2 rečenice                     |
+| `XXX_NEWSLETTER_HEADLINE` | ⬜     | `components/home/NewsletterCta.tsx`                 | Newsletter naslov, 4-7 riječi                   |
+| `XXX_NEWSLETTER_BODY`     | ⬜     | `components/home/NewsletterCta.tsx`                 | Newsletter body, 1-2 rečenice                   |
+| `XXX_FINAL_CTA_HEADLINE`  | ⬜     | `components/home/FinalCta.tsx`                      | Final CTA naslov, 5-8 riječi                    |
+| `XXX_FINAL_CTA_BODY`      | ⬜     | `components/home/FinalCta.tsx`                      | Final CTA body, 1-2 rečenice                    |
+| `XXX_SITE_DESCRIPTION`    | ⬜     | `app/(public)/layout.tsx` + Settings `seo_defaults` | Meta description, 150-160 znakova               |
+| `XXX_TAGLINE`             | ⬜     | `components/layout/Footer.tsx` + `Settings`         | Tagline, 8-12 riječi                            |
 
 ## Email tekstovi — `apps/web/emails/`
 

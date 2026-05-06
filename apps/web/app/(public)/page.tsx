@@ -1,11 +1,27 @@
+import CategoriesGrid from "@/components/home/CategoriesGrid";
+import FinalCta from "@/components/home/FinalCta";
+import Hero from "@/components/home/Hero";
+import HowItWorks from "@/components/home/HowItWorks";
+import NewsletterCta from "@/components/home/NewsletterCta";
+import PopularBrands from "@/components/home/PopularBrands";
+import QuizCta from "@/components/home/QuizCta";
+import RecentReviews from "@/components/home/RecentReviews";
+import TrustSignals from "@/components/home/TrustSignals";
+import ValueProps from "@/components/home/ValueProps";
+
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-4xl font-bold">vozilla.hr</h1>
-      <p className="mt-4 text-lg text-gray-700">[XXX_HERO_HEADLINE: 5-8 riječi]</p>
-      <p className="mt-2 text-sm text-gray-500">
-        Sprint 0 placeholder — pravi sadržaj dolazi u Sprintu 2.
-      </p>
-    </div>
+    <>
+      <Hero />
+      <ValueProps />
+      <HowItWorks />
+      <CategoriesGrid />
+      <PopularBrands />
+      <RecentReviews />
+      <TrustSignals />
+      <QuizCta />
+      <NewsletterCta />
+      <FinalCta />
+    </>
   );
 }
