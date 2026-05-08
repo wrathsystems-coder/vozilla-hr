@@ -9,6 +9,13 @@ export default defineConfig({
     environment: "node",
     include: ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
     globals: false,
+    setupFiles: ["./tests/setup.ts"],
+    // Integration tests share the dev Postgres in docker-compose. Running
+    // test files in parallel against the same tables produces flakes when
+    // two suites truncate the same table at once. Single-fork mode runs
+    // files sequentially (unit tests are fast enough that the cost is
+    // negligible).
+    fileParallelism: false,
   },
   resolve: {
     alias: {
