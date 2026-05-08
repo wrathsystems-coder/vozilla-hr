@@ -1,0 +1,14 @@
+# Google reCAPTCHA v3 score thresholds.
+# Spec: docs/spec/02-legal-and-compliance.md "CAPTCHA — Google reCAPTCHA v3".
+#
+# Score: 0.0 (definitely a bot) → 1.0 (definitely human).
+#
+# - score < block_below           → reject submission outright (HTTP 403)
+# - block_below <= score < review → accept but flag the lead for admin review
+# - score >= review_below         → accept normally
+#
+# Sprint 7 polish may surface these in the LeadDistribution / Settings global
+# so admins can tune without redeploy. For MVP, YAML is enough.
+
+block_below: 0.3
+review_below: 0.5
