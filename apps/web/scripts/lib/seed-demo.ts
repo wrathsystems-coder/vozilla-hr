@@ -15,6 +15,8 @@ type DealerRow = {
   city: string;
   postcode: string;
   county_id: string;
+  lat: string;
+  lng: string;
   brands: string;
   monthly_lead_cap: string;
 };
@@ -79,6 +81,8 @@ export async function seedDemo(payload: Payload) {
           city: row.city,
           postcode: row.postcode,
           county_id: parseInt(row.county_id, 10),
+          lat: parseFloat(row.lat),
+          lng: parseFloat(row.lng),
         },
         brands: brandIds,
         scoring: { monthly_lead_cap: parseInt(row.monthly_lead_cap, 10) },
