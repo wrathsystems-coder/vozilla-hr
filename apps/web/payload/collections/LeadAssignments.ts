@@ -18,6 +18,15 @@ export const LeadAssignments: CollectionConfig = {
     { name: "lead", type: "relationship", relationTo: "lead_requests", required: true },
     { name: "dealer", type: "relationship", relationTo: "dealers", required: true },
     {
+      name: "quality_score_at_dispatch",
+      type: "number",
+      admin: {
+        readOnly: true,
+        description:
+          "Snapshot dealer.quality_score u trenutku dispatch-a — audit trail za rang dilera.",
+      },
+    },
+    {
       name: "status",
       type: "select",
       required: true,

@@ -22,7 +22,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-15T10:00:00.000Z",
     "marketing_consent": true,
-    "source": "home",
+    "source": "header",
     "status": "new"
   },
   {
@@ -53,7 +53,7 @@
     },
     "gdpr_consent_at": "2026-04-16T11:30:00.000Z",
     "marketing_consent": false,
-    "source": "model_page",
+    "source": "detail",
     "status": "new"
   },
   {
@@ -79,7 +79,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-17T09:15:00.000Z",
     "marketing_consent": true,
-    "source": "sticky_widget",
+    "source": "sticky",
     "status": "under_review"
   },
   {
@@ -124,7 +124,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-19T08:00:00.000Z",
     "marketing_consent": true,
-    "source": "home",
+    "source": "header",
     "status": "new"
   },
   {
@@ -157,7 +157,7 @@
     },
     "gdpr_consent_at": "2026-04-20T16:45:00.000Z",
     "marketing_consent": true,
-    "source": "model_page",
+    "source": "detail",
     "status": "in_progress"
   },
   {
@@ -181,7 +181,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-21T12:00:00.000Z",
     "marketing_consent": false,
-    "source": "home",
+    "source": "header",
     "status": "sent"
   },
   {
@@ -207,7 +207,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-22T10:30:00.000Z",
     "marketing_consent": true,
-    "source": "sticky_widget",
+    "source": "sticky",
     "status": "new"
   },
   {
@@ -230,7 +230,7 @@
     "has_trade_in": false,
     "gdpr_consent_at": "2026-04-23T17:20:00.000Z",
     "marketing_consent": false,
-    "source": "model_page",
+    "source": "detail",
     "status": "closed"
   },
   {

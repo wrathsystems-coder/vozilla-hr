@@ -59,6 +59,7 @@ export const LeadRequests: CollectionConfig = {
               options: [
                 { label: "Telefon", value: "phone" },
                 { label: "Email", value: "email" },
+                { label: "WhatsApp", value: "whatsapp" },
                 { label: "Bilo koje", value: "any" },
               ],
             },
@@ -114,6 +115,18 @@ export const LeadRequests: CollectionConfig = {
                 { label: "Kredit banke", value: "bank_loan" },
                 { label: "Leasing", value: "leasing" },
                 { label: "Razmislit ću", value: "undecided" },
+              ],
+            },
+            {
+              name: "leasing_type",
+              type: "select",
+              admin: {
+                description: "Vrsta leasinga (ako financing_type === 'leasing')",
+                condition: (data) => data?.financing_type === "leasing",
+              },
+              options: [
+                { label: "Operativni leasing", value: "operating" },
+                { label: "Financijski leasing", value: "financial" },
               ],
             },
             { name: "deposit", type: "number" },
@@ -172,11 +185,21 @@ export const LeadRequests: CollectionConfig = {
             {
               name: "source",
               type: "select",
+              admin: {
+                description:
+                  "Mirrors `?izvor=` (CtaSource in lib/catalog/cta.ts). Single source of truth — frontend value goes straight into this column.",
+              },
               options: [
-                { label: "Web — naslovnica", value: "home" },
-                { label: "Web — model stranica", value: "model_page" },
-                { label: "Web — sticky widget", value: "sticky_widget" },
-                { label: "Web — quiz", value: "quiz" },
+                { label: "Header CTA", value: "header" },
+                { label: "Nova vozila hub", value: "hub" },
+                { label: "Brand stranica", value: "brand" },
+                { label: "Kategorija stranica", value: "category" },
+                { label: "Model detail", value: "detail" },
+                { label: "Recenzija", value: "recenzija" },
+                { label: "Usporedba", value: "usporedba" },
+                { label: "Quiz", value: "quiz" },
+                { label: "Leasing kalkulator", value: "leasing" },
+                { label: "Sticky widget", value: "sticky" },
                 { label: "Drugo", value: "other" },
               ],
             },

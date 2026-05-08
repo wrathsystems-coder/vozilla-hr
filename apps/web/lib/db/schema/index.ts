@@ -6,6 +6,7 @@ export * from "./consentLog";
 export * from "./auditLog";
 export * from "./magicLinkTokens";
 export * from "./rateLimitBuckets";
+export * from "./idempotencyKeys";
 export * from "./newsletterSubscribers";
 export * from "./quizResults";
 export * from "./emailLog";
