@@ -22,4 +22,9 @@ export default defineConfig({
       "@": path.resolve(dirname, "."),
     },
   },
+  // Match Next.js' automatic JSX runtime so .tsx files (React Email
+  // templates, future component tests) don't need an explicit React import.
+  esbuild: {
+    jsx: "automatic",
+  },
 });
