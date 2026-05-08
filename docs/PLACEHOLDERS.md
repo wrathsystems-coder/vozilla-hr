@@ -105,10 +105,15 @@ nije finaliziran.
 
 ## Email tekstovi — `apps/web/emails/`
 
-| Placeholder              | Status | Opis                                                 |
-| ------------------------ | ------ | ---------------------------------------------------- |
-| `XXX_COMPANY_LEGAL_NAME` | ⬜     | (vidi gore)                                          |
-| `XXX_COMPANY_ADDRESS`    | ⬜     | Composite iz `company.yml`: street + city + postcode |
+| Placeholder                       | Status | Lokacija                                                 | Opis                                                              |
+| --------------------------------- | ------ | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| `XXX_COMPANY_LEGAL_NAME`          | ⬜     | `_layout.tsx`                                            | (vidi gore — recikliraj iz Settings global)                       |
+| `XXX_COMPANY_ADDRESS`             | ⬜     | `_layout.tsx`                                            | Composite iz `company.yml`: street + city + postcode              |
+| `XXX_LEAD_PROCESSING_HOURS_RANGE` | ⬜     | `lead-confirmation.tsx`                                  | Raspon u kojem operater obrađuje upit (npr. "24-48", "1-2 radna") |
+| `XXX_EMAIL_SIGNATURE_LEAD`        | ⬜     | `lead-confirmation.tsx`                                  | Brand-voice potpis za customer-facing potvrdu                     |
+| `XXX_EMAIL_SIGNATURE_DEALER`      | ⬜     | `lead-to-dealer.tsx`                                     | Brand-voice potpis za dealer-facing notifikaciju                  |
+| `XXX_EMAIL_SIGNATURE_GENERIC`     | ⬜     | `magic-link.tsx`                                         | Generic potpis za sistemske emailove (tracker, password reset)    |
+| `XXX_EMAIL_SIGNATURE_GDPR`        | ⬜     | `gdpr-request-received.tsx`, `gdpr-request-resolved.tsx` | Brand-voice potpis za GDPR komunikaciju (npr. "Voditelj obrade")  |
 
 ## Env varijable — `.env.example`
 
