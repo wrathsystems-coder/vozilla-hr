@@ -22,6 +22,22 @@ export function validatePhoneHR(phone: string): boolean {
   return PHONE_HR_REGEX.test(cleaned);
 }
 
+/**
+ * Strict E.164 form for DB storage: "+385XXXXXXXX" (no spaces, no leading 0).
+ * Returns null when input isn't a valid HR number — caller decides whether
+ * to reject or fall back. Use formatPhone() in lib/utils/format.ts for
+ * display formatting.
+ */
+export function normalizePhoneE164(phone: string): string | null {
+  const cleaned = phone.replace(/[\s()-]/g, "");
+  if (!PHONE_HR_REGEX.test(cleaned)) return null;
+  let national: string;
+  if (cleaned.startsWith("+385")) national = cleaned.slice(4);
+  else if (cleaned.startsWith("00385")) national = cleaned.slice(5);
+  else national = cleaned.slice(1); // leading "0"
+  return `+385${national}`;
+}
+
 export function validatePostcodeHR(postcode: string): boolean {
   return POSTCODE_HR_REGEX.test(postcode.trim());
 }

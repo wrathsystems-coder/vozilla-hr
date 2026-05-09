@@ -20,6 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(dirname, "."),
+      "@payload-config": path.resolve(dirname, "./payload/payload.config.ts"),
     },
   },
   // Match Next.js' automatic JSX runtime so .tsx files (React Email

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { validatePhoneHR, validatePostcodeHR, validateEmail } from "@/lib/utils/validate";
+import {
+  normalizePhoneE164,
+  validateEmail,
+  validatePhoneHR,
+  validatePostcodeHR,
+} from "@/lib/utils/validate";
 
 describe("validatePhoneHR", () => {
   it("accepts +385 international format", () => {
@@ -23,6 +28,20 @@ describe("validatePhoneHR", () => {
 
   it("rejects letters", () => {
     expect(validatePhoneHR("0911234abc")).toBe(false);
+  });
+});
+
+describe("normalizePhoneE164", () => {
+  it("normalizes 0XX, +385, and 00385 prefixes to +385XXXXXXXX", () => {
+    expect(normalizePhoneE164("0911234567")).toBe("+385911234567");
+    expect(normalizePhoneE164("+385 91 123 4567")).toBe("+385911234567");
+    expect(normalizePhoneE164("00385911234567")).toBe("+385911234567");
+  });
+
+  it("returns null for invalid HR phones", () => {
+    expect(normalizePhoneE164("0911")).toBeNull();
+    expect(normalizePhoneE164("0911234abc")).toBeNull();
+    expect(normalizePhoneE164("+44 20 7946 0958")).toBeNull();
   });
 });
 
