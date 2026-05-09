@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import CookieBanner from "@/components/widgets/CookieBanner";
+import StickyWidget from "@/components/widgets/StickyWidget";
 import JsonLd from "@/lib/seo/jsonld";
 import { siteUrl } from "@/lib/seo/site-url";
 import "../globals.css";
@@ -66,6 +67,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
+        <StickyWidget />
       </body>
     </html>
   );

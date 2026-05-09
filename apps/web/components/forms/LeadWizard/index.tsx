@@ -53,7 +53,27 @@ export default function LeadWizard({ brands, models, counties, initialDraft }: L
   // Restore localStorage draft once on mount. Honeypot stays empty even if
   // a prior session had garbage in it.
   useEffect(() => {
-    setDraft((current) => readDraftFromStorage(current));
+    setDraft((current) => {
+      const restoredDraft = readDraftFromStorage(current);
+      if (typeof window === "undefined") return restoredDraft;
+      // Sticky widget hands off email/phone via sessionStorage. One-shot.
+      const prefillRaw = window.sessionStorage.getItem("vozilla:wizard-prefill");
+      if (!prefillRaw) return restoredDraft;
+      try {
+        const prefill = JSON.parse(prefillRaw) as {
+          customer_email?: string;
+          customer_phone?: string;
+        };
+        window.sessionStorage.removeItem("vozilla:wizard-prefill");
+        return {
+          ...restoredDraft,
+          customer_email: prefill.customer_email ?? restoredDraft.customer_email,
+          customer_phone: prefill.customer_phone ?? restoredDraft.customer_phone,
+        };
+      } catch {
+        return restoredDraft;
+      }
+    });
     setRestored(true);
   }, []);
 
