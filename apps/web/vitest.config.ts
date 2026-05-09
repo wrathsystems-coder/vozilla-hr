@@ -21,6 +21,9 @@ export default defineConfig({
     alias: {
       "@": path.resolve(dirname, "."),
       "@payload-config": path.resolve(dirname, "./payload/payload.config.ts"),
+      // Next.js' server-only sentinel — in production it crashes if imported
+      // from the client bundle; in tests we just need it to resolve to a no-op.
+      "server-only": path.resolve(dirname, "./tests/stubs/server-only.ts"),
     },
   },
   // Match Next.js' automatic JSX runtime so .tsx files (React Email
