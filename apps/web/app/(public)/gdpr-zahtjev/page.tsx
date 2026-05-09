@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Eye, MessageSquare, Pencil, Trash2 } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
+import GdprRequestForm from "./GdprRequestForm";
 
 export const metadata: Metadata = {
   title: "GDPR zahtjev",
@@ -53,18 +55,15 @@ export default function GdprZahtjevPage() {
 
       <div className="border-surface-border bg-surface-muted mt-12 rounded-md border p-8">
         <Heading level={2}>Podnošenje zahtjeva</Heading>
-        <p className="text-text-muted mt-3">
-          Forma za podnošenje zahtjeva uskoro je dostupna. Do tada nas možete kontaktirati izravno
-          na DPO email adresu:
+        <p className="text-text-muted mb-6 mt-3 text-sm">
+          Riješit ćemo tvoj zahtjev unutar 30 dana, kako nalaže GDPR. Ako trebaš pomoć ili imaš
+          dodatna pitanja, kontaktiraj nas na DPO email iz našeg{" "}
+          <Link href="/impressum" className="text-text hover:text-brand-accent underline">
+            impressuma
+          </Link>
+          .
         </p>
-        <p className="mt-4">
-          <a
-            href="mailto:[XXX_CONTACT_EMAIL_DPO]"
-            className="text-text hover:text-brand-accent focus-visible:outline-brand-accent text-sm font-medium underline focus-visible:outline-2 focus-visible:outline-offset-4"
-          >
-            [XXX_CONTACT_EMAIL_DPO]
-          </a>
-        </p>
+        <GdprRequestForm />
       </div>
     </Container>
   );
