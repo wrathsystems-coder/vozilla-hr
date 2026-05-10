@@ -38,7 +38,10 @@ function loadScript(key: string): Promise<void> {
 
 export async function executeRecaptcha(action: string): Promise<string> {
   const key = siteKey();
-  if (!key) return "";
+  // Dev placeholder: server's verifyRecaptcha checks the SECRET key env
+  // first and dev_bypasses regardless of token content. Sending a non-
+  // empty placeholder satisfies the API's Zod min(1) constraint.
+  if (!key) return "dev-bypass-token";
 
   await loadScript(key);
   return new Promise((resolve, reject) => {
