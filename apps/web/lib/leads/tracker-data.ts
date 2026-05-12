@@ -17,6 +17,8 @@ export type TrackerAssignment = {
   contactedAt: string | null;
   closedAt: string | null;
   outcome: LeadAssignment["outcome"] | null;
+  markedInterested: boolean;
+  markedNotInterested: boolean;
 };
 
 export type TrackerData = {
@@ -58,6 +60,8 @@ export async function loadTrackerData(leadId: number): Promise<TrackerData | nul
       contactedAt: a.contacted_at ?? null,
       closedAt: a.closed_at ?? null,
       outcome: a.outcome ?? null,
+      markedInterested: Boolean(a.customer_feedback?.marked_interested),
+      markedNotInterested: Boolean(a.customer_feedback?.marked_not_interested),
     };
   });
 

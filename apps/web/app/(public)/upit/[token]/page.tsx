@@ -5,7 +5,9 @@ import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import { validateToken } from "@/lib/magic-link";
 import { loadTrackerData, type TrackerAssignment } from "@/lib/leads/tracker-data";
+import BoughtForm from "./BoughtForm";
 import CancelButton from "./CancelButton";
+import DealerInterestButtons from "./DealerInterestButtons";
 
 export const dynamic = "force-dynamic";
 
@@ -82,7 +84,8 @@ export default async function TrackerPage({ params }: { params: Promise<{ token:
         ) : (
           <>
             <Timeline lead={lead} />
-            <Dealers assignments={assignments} />
+            <Dealers assignments={assignments} token={token} />
+            <Bought token={token} />
             <Actions token={token} />
           </>
         )}
@@ -153,7 +156,7 @@ function Timeline({ lead }: { lead: { status: string; createdAt?: string } }) {
   );
 }
 
-function Dealers({ assignments }: { assignments: TrackerAssignment[] }) {
+function Dealers({ assignments, token }: { assignments: TrackerAssignment[]; token: string }) {
   if (assignments.length === 0) {
     return (
       <section className="border-surface-border bg-surface-muted rounded-md border p-5">
@@ -176,7 +179,7 @@ function Dealers({ assignments }: { assignments: TrackerAssignment[] }) {
         {assignments.map((a) => (
           <li
             key={a.id}
-            className="border-surface-border bg-surface space-y-1 rounded-md border p-4"
+            className="border-surface-border bg-surface space-y-2 rounded-md border p-4"
           >
             <p className="text-text font-medium">
               {a.dealerName}
@@ -184,9 +187,34 @@ function Dealers({ assignments }: { assignments: TrackerAssignment[] }) {
             </p>
             <p className="text-text-muted text-sm">{ASSIGNMENT_STATUS_LABEL[a.status]}</p>
             <DealerTimestamps assignment={a} />
+            {a.status !== "closed" ? (
+              <div className="pt-1">
+                <DealerInterestButtons
+                  token={token}
+                  assignmentId={a.id}
+                  initialInterested={a.markedInterested}
+                  initialNotInterested={a.markedNotInterested}
+                />
+              </div>
+            ) : null}
           </li>
         ))}
       </ul>
+    </section>
+  );
+}
+
+function Bought({ token }: { token: string }) {
+  return (
+    <section className="border-surface-border space-y-3 rounded-md border p-5">
+      <Heading level={2} className="text-base">
+        Jesi li kupio vozilo?
+      </Heading>
+      <p className="text-text-muted text-sm">
+        Ako si kupio vozilo (preko nas ili negdje drugdje), javi nam — zaustavit ćemo dalje
+        kontaktiranje od strane dilera.
+      </p>
+      <BoughtForm token={token} />
     </section>
   );
 }
