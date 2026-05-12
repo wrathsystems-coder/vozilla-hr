@@ -6,6 +6,8 @@ import GdprRequestResolved, { type GdprRequestResolvedProps } from "@/emails/gdp
 import AdminNewLeadNotification, {
   type AdminNewLeadProps,
 } from "@/emails/admin-new-lead-notification";
+import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-reminder-1";
+import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
 import { sendEmail, type SendResult } from "@/lib/email/client";
 
 // Single entry point for transactional email. Discriminated union on `key`
@@ -23,7 +25,9 @@ export type DispatchArgs =
   | { key: "magic-link"; to: Recipients; props: MagicLinkProps }
   | { key: "gdpr-request-received"; to: Recipients; props: GdprRequestReceivedProps }
   | { key: "gdpr-request-resolved"; to: Recipients; props: GdprRequestResolvedProps }
-  | { key: "admin-new-lead-notification"; to: Recipients; props: AdminNewLeadProps };
+  | { key: "admin-new-lead-notification"; to: Recipients; props: AdminNewLeadProps }
+  | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
+  | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props };
 
 export async function dispatch(args: DispatchArgs): Promise<SendResult> {
   let template;
@@ -63,6 +67,14 @@ export async function dispatch(args: DispatchArgs): Promise<SendResult> {
       subject = `[admin] Novi upit ${args.props.displayId}${
         args.props.flagReview ? " (review)" : ""
       }`;
+      break;
+    case "dealer-reminder-1":
+      template = DealerReminder1(args.props);
+      subject = `Podsjetnik: kupac čeka odgovor — ${args.props.displayId}`;
+      break;
+    case "dealer-reminder-2":
+      template = DealerReminder2(args.props);
+      subject = `Drugi podsjetnik: ${args.props.displayId} ističe za ${Math.round(args.props.expiresInHours)}h`;
       break;
   }
 
