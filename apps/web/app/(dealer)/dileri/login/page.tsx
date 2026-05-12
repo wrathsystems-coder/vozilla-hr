@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false, nocache: true },
 };
 
-type SearchParams = Promise<{ redirect?: string; reason?: string }>;
+type SearchParams = Promise<{ redirect?: string; reason?: string; reset?: string }>;
 
 export default async function DealerLoginPage({ searchParams }: { searchParams: SearchParams }) {
   const session = await getDealerSession();
-  const { redirect: redirectTo, reason } = await searchParams;
+  const { redirect: redirectTo, reason, reset } = await searchParams;
 
   if (session) {
     // Already authenticated — bounce to dashboard (or wherever they were headed).
@@ -31,6 +31,15 @@ export default async function DealerLoginPage({ searchParams }: { searchParams: 
             Prijavi se da pristupiš leadovima koje ti je dodijelio vozilla.hr.
           </p>
         </div>
+
+        {reset === "ok" ? (
+          <p
+            className="rounded-md border border-emerald-500/30 bg-emerald-500/5 p-3 text-sm"
+            role="status"
+          >
+            Lozinka je postavljena. Prijavi se s novom lozinkom.
+          </p>
+        ) : null}
 
         {reason === "inactive" ? (
           <p
