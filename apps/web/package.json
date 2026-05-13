@@ -17,6 +17,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
+    "db:setup-search": "tsx scripts/setup-search-indexes.ts",
     "payload": "payload",
     "seed": "tsx scripts/seed.ts",
     "seed:vehicles": "tsx scripts/seed-vehicles.ts",

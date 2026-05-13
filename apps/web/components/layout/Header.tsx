@@ -3,6 +3,7 @@ import Container from "@/components/ui/Container";
 import { mainNav, primaryCta, secondaryNav } from "./nav-items";
 import MegaMenu from "./MegaMenu";
 import MobileNav from "./MobileNav";
+import SearchOverlay from "./SearchOverlay";
 import { getAllBodyTypes, getTopBrandsForMegaMenu } from "@/lib/catalog/fetch";
 
 const NOVA_VOZILA_HREF = "/nova-vozila";
@@ -62,7 +63,8 @@ export default async function Header() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          <SearchOverlay />
           <ul className="flex items-center gap-4">
             {secondaryNav.map((item) => (
               <li key={item.href}>
