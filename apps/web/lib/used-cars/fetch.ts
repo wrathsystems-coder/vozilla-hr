@@ -3,7 +3,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import { getPayload, type Where } from "payload";
 import config from "@payload-config";
-import type { Brand, BodyType, Model, UsedCarListing } from "@/payload-types";
+import type { Brand, BodyType, Media, Model, UsedCarImage, UsedCarListing } from "@/payload-types";
 import { USED_CAR_PAGE_SIZE, type UsedCarFilter, type UsedCarSort } from "./filter";
 
 /**
@@ -235,4 +235,111 @@ export async function fetchUsedCarById(id: number): Promise<UsedCarDetail | null
   } catch {
     return null;
   }
+}
+
+export type GalleryImage = {
+  url: string;
+  alt: string;
+  isHero: boolean;
+  width: number | null;
+  height: number | null;
+};
+
+export async function fetchUsedCarImages(listingId: number): Promise<GalleryImage[]> {
+  const p = await payload();
+  const r = await p.find({
+    collection: "used_car_images",
+    where: { listing: { equals: listingId } },
+    sort: "sort_order",
+    limit: 50,
+    depth: 1,
+  });
+  return (r.docs as UsedCarImage[])
+    .map((img) => {
+      const media = isPopulated<Media>(img.media as number | Media) ? (img.media as Media) : null;
+      if (!media?.url) return null;
+      return {
+        url: media.url,
+        alt: media.alt ?? "",
+        isHero: Boolean(img.is_hero),
+        width: media.width ?? null,
+        height: media.height ?? null,
+      };
+    })
+    .filter((g): g is GalleryImage => g !== null);
+}
+
+/**
+ * "Slični oglasi" rail for the detail page. Two-tier fallback:
+ *
+ *   1. Same model (different listings)
+ *   2. Same body type (different models)
+ *
+ * Both tiers exclude the current listing. We pull at most `limit` total and
+ * keep the natural order returned by Payload (newest first via -createdAt).
+ */
+export async function fetchSimilarListings(
+  current: UsedCarDetail,
+  limit = 6,
+): Promise<UsedCarListItem[]> {
+  const p = await payload();
+  const sameModel = await p.find({
+    collection: "used_car_listings",
+    where: {
+      and: [
+        { status: { equals: "active" } },
+        { id: { not_equals: current.id } },
+        { model: { equals: current.model.id } },
+      ],
+    },
+    sort: "-createdAt",
+    limit,
+    depth: 2,
+  });
+
+  const docs = [...(sameModel.docs as UsedCarListing[])];
+
+  if (docs.length < limit) {
+    const sameBody = await p.find({
+      collection: "used_car_listings",
+      where: {
+        and: [
+          { status: { equals: "active" } },
+          { id: { not_equals: current.id } },
+          { "model.body_type": { equals: current.model.body_type.id } },
+          { model: { not_equals: current.model.id } },
+        ],
+      },
+      sort: "-createdAt",
+      limit: limit - docs.length,
+      depth: 2,
+    });
+    docs.push(...(sameBody.docs as UsedCarListing[]));
+  }
+
+  // Project into the same card shape the listings page uses.
+  return docs.map((l) => {
+    const model = isPopulated<ModelWithRefs>(l.model as number | ModelWithRefs)
+      ? (l.model as ModelWithRefs)
+      : null;
+    const brand = model && isPopulated<Brand>(model.brand) ? model.brand : null;
+    const bodyType = model && isPopulated<BodyType>(model.body_type) ? model.body_type : null;
+    return {
+      id: l.id,
+      publicId: l.public_id,
+      brandName: brand?.name ?? "—",
+      brandSlug: brand?.slug ?? "",
+      modelName: model?.name ?? "—",
+      modelSlug: model?.slug ?? "",
+      bodyTypeSlug: bodyType?.slug ?? null,
+      year: l.year,
+      mileageKm: l.mileage_km,
+      priceEur: l.price_eur,
+      color: l.color ?? null,
+      countyId: l.location?.county_id ?? null,
+      city: l.location?.city ?? null,
+      heroImagePath: model?.hero_image_path ?? null,
+      createdAt: l.createdAt,
+    };
+  });
 }
