@@ -95,13 +95,14 @@ render po slugu prožive). Do tada svaka stranica ima inline `[XXX_*]`
 markere da `placeholders:check` blokira produkcijski build dok content
 nije finaliziran.
 
-| Placeholder grupa                             | Stavki | Lokacija                                            | Opis                                                                  |
-| --------------------------------------------- | ------ | --------------------------------------------------- | --------------------------------------------------------------------- |
-| `XXX_ABOUT_*`                                 | 4      | `app/(public)/o-nama/page.tsx`                      | Intro + Misija / Pristup / Tim body                                   |
-| `XXX_CONTACT_INTRO`                           | 1      | `app/(public)/kontakt/page.tsx`                     | Uvod stranice (kontaktni podaci recikliraju existing `XXX_CONTACT_*`) |
-| `XXX_HIW_FULL_*`                              | 13     | `app/(public)/kako-funkcionira/page.tsx`            | Intro + 6 koraka × (title + body)                                     |
-| `XXX_FAQ_INTRO`, `XXX_FAQ_N_Q`, `XXX_FAQ_N_A` | 41     | `app/(public)/cesta-pitanja/page.tsx`               | Intro + 20 pitanja × (Q + A); FAQPage Schema.org renderira se inline  |
-| `XXX_REVIEW_VETTING_*`                        | 5      | `app/(public)/kako-provjeravamo-recenzije/page.tsx` | Intro + 4 sekcije body (DSA compliance)                               |
+| Placeholder grupa                             | Stavki | Lokacija                                            | Opis                                                                                       |
+| --------------------------------------------- | ------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `XXX_ABOUT_*`                                 | 4      | `app/(public)/o-nama/page.tsx`                      | Intro + Misija / Pristup / Tim body                                                        |
+| `XXX_CONTACT_INTRO`                           | 1      | `app/(public)/kontakt/page.tsx`                     | Uvod stranice (kontaktni podaci recikliraju existing `XXX_CONTACT_*`)                      |
+| `XXX_HIW_FULL_*`                              | 13     | `app/(public)/kako-funkcionira/page.tsx`            | Intro + 6 koraka × (title + body)                                                          |
+| `XXX_FAQ_INTRO`, `XXX_FAQ_N_Q`, `XXX_FAQ_N_A` | 41     | `app/(public)/cesta-pitanja/page.tsx`               | Intro + 20 pitanja × (Q + A); FAQPage Schema.org renderira se inline                       |
+| `XXX_REVIEW_VETTING_*`                        | 5      | `app/(public)/kako-provjeravamo-recenzije/page.tsx` | Intro + 4 sekcije body (DSA compliance)                                                    |
+| `XXX_LEASING_VODIC_TEKST`                     | 1      | `app/(public)/leasing/vodic/page.tsx`               | Fallback marker; editor popunjava kroz Payload Page slug `leasing-vodic` (Lexical content) |
 
 ## Email tekstovi — `apps/web/emails/`
 
