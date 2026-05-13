@@ -21,6 +21,33 @@ lifecycle-a od submita do dispatch-a.
 
 ---
 
+## Entry points (izvori)
+
+Svaki CTA koji vodi na `/zatrazi-ponudu/` nosi `?izvor=...` query param da
+backend zna odakle je upit došao. Vrijednost pada u `lead_requests.source`
+(Postgres enum). Sprint 6 dodaje 4 nova ulaza preko `requestQuoteHref()`
+helpera u `lib/catalog/cta.ts`:
+
+| Izvor       | Ulaz                                                                                        | Pre-fill                    |
+| ----------- | ------------------------------------------------------------------------------------------- | --------------------------- |
+| `header`    | Globalni "Zatraži ponudu" CTA u header-u                                                    | (ništa)                     |
+| `hub`       | `/nova-vozila/` hub stranice                                                                | (ništa)                     |
+| `brand`     | `/nova-vozila/marke/{brand}/`                                                               | `marka`                     |
+| `category`  | `/nova-vozila/kategorije/{kat}/`                                                            | `kategorija`                |
+| `detail`    | `/nova-vozila/marke/{brand}/{model}/`                                                       | `marka`, `model`            |
+| `recenzija` | `/recenzije/{slug}/` (Sprint 6)                                                             | `marka`, `model`            |
+| `usporedba` | `/usporedi/` (dynamic + `/usporedi/{slug}/`)                                                | `marka`, `model`            |
+| `leasing`   | `/leasing/kalkulator/` (Sprint 6)                                                           | `cijena`, `polog`, `period` |
+| `quiz`      | `/pomoc-pri-izboru/rezultati/{token}/` (Sprint 6)                                           | `marka`, `model`            |
+| `sticky`    | Sticky widget mini-forma                                                                    | (ništa)                     |
+| `other`     | Fallback (npr. `/rabljena-vozila/oglas/{id}/` — `oglas` enum value čeka Sprint 7 migraciju) | varies                      |
+
+`other` je trenutno korišten za rabljene-oglase CTA jer `oglas` nije u
+enum-u — dodaje se Sprint 7 zajedno s Postgres `ALTER TYPE ADD VALUE`
+migracijom.
+
+---
+
 ## Lifecycle staze
 
 ### 1. Submit — `POST /api/leads`
