@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getAllActiveBrands, getAllActiveModels, getAllBodyTypes } from "@/lib/catalog/fetch";
+import { listArticles } from "@/lib/articles/fetch";
 import { listPublishedComparisons } from "@/lib/comparisons/fetch";
+import { listReviews } from "@/lib/reviews/fetch";
 import { siteUrl } from "@/lib/seo/site-url";
 import { now } from "@/lib/utils/time";
 
@@ -97,6 +99,47 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch (err) {
     console.warn("sitemap: comparisons unavailable, skipping comparison routes.", err);
+  }
+
+  // Editorial — reviews + articles. First page only; pagination URLs
+  // aren't worth indexing. 500-row ceiling keeps a runaway catalog from
+  // ballooning the sitemap.
+  try {
+    const reviews = await listReviews(1);
+    for (const r of reviews.reviews) {
+      entries.push({
+        url: `${base}/recenzije/${r.slug}`,
+        lastModified: r.updatedAt ? new Date(r.updatedAt) : fallbackTimestamp,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      });
+    }
+  } catch (err) {
+    console.warn("sitemap: reviews unavailable, skipping review routes.", err);
+  }
+
+  try {
+    const articles = await listArticles(1);
+    for (const a of articles.articles) {
+      entries.push({
+        url: `${base}/savjeti/${a.slug}`,
+        lastModified: a.updatedAt ? new Date(a.updatedAt) : fallbackTimestamp,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    }
+  } catch (err) {
+    console.warn("sitemap: articles unavailable, skipping article routes.", err);
+  }
+
+  // Article-category index pages (static enum — always emit).
+  for (const cat of ["vodici", "savjeti", "vijesti", "tehnologija"] as const) {
+    entries.push({
+      url: `${base}/savjeti/kategorija/${cat}`,
+      lastModified: fallbackTimestamp,
+      changeFrequency: "weekly",
+      priority: 0.4,
+    });
   }
 
   return entries;
