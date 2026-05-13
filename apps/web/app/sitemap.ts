@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllActiveBrands, getAllActiveModels, getAllBodyTypes } from "@/lib/catalog/fetch";
+import { listPublishedComparisons } from "@/lib/comparisons/fetch";
 import { siteUrl } from "@/lib/seo/site-url";
 import { now } from "@/lib/utils/time";
 
@@ -79,6 +80,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   } catch (err) {
     console.warn("sitemap: catalog routes unavailable, serving static portion only.", err);
+  }
+
+  // Pre-generated comparison pairs — independent try/catch so a Payload
+  // hiccup loading comparisons doesn't drop catalog routes that already
+  // succeeded above.
+  try {
+    const comparisons = await listPublishedComparisons();
+    for (const c of comparisons) {
+      entries.push({
+        url: `${base}/usporedi/${c.slug}`,
+        lastModified: c.updatedAt ? new Date(c.updatedAt) : fallbackTimestamp,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    }
+  } catch (err) {
+    console.warn("sitemap: comparisons unavailable, skipping comparison routes.", err);
   }
 
   return entries;
