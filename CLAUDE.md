@@ -147,6 +147,33 @@ Ako planiraš:
 
 Ako je promjena lokalna (jedna komponenta, jedan endpoint, jedan utility) — samo radi.
 
+### 11. Filter architecture (Sprint 8 catalog faza — load-bearing)
+
+Vehicle filteri **moraju biti multi-select gdje god ima smisla**. Single-select samo kad logika to fizički traži (npr. "novo vs rabljeno" — jedan brand × model je ili novo ili rabljeno, ne oboje istovremeno). Default: multi.
+
+**OR within group, AND between groups.** `(Audi OR BMW) AND (diesel OR hybrid) AND (price 20-40k)`. Korisnik koji čeka 5+ marki ili 2+ goriva mora dobiti unija matcheva, ne grešku.
+
+**URL query params multi-select format** — comma-separated values per param (`?marka=audi,bmw,mercedes&gorivo=diesel,hybrid`), range parovi `_od`/`_do` (`?cijena_od=20000&cijena_do=40000`). State je shareable + bookmarkable. Parser koristi `URLSearchParams.getAll()` + split-on-comma.
+
+**Numeric filteri = range slider s preset bucket presjecima.** Cijena/godina/km/snaga/max brzina/prtljažnik/težina/ubrzanje — sve dvostruko-ručka (od-do). Buckets ispod ('do 20k', '20-30k', '30-40k', '40k+') kao quick presets, slider ostaje glavna kontrola.
+
+**Faceted counts uz svaki filter.** Audi (1243), BMW (892). Kombinacije koje vraćaju 0 rezultata ne pucaju — disabled state s 0 count, korisnik vidi koliko bi mu se rezultata raspršilo bez tog filtera. Implementacija: jedan count query per facet dim s svim filterima APLICIRANIM osim taj jedan.
+
+**DB layout pravila za skaliranje na 20k+ vozila:**
+
+- Typed columns na `model_versions` (ne text-u-vehicle_attributes) za sve filterable numeric (max_speed_kmh, boot_capacity_l, weight_kg, acceleration_0_100_s, length_mm, itd.). Range filter MORA biti index-friendly.
+- Multi-valued enum-i (oprema, fuel_types[]) idu u `text[]` columns s **GIN indexima** — `WHERE equipment @> ARRAY['panorama']` lookup je O(log n).
+- Single-valued enum-i (`transmission`, `engine_type`) ostaju standard text columns s B-tree index ako su filterable u listings.
+- Composite indexi za česte combo filtere: `(brand_id, body_type_id)`, `(fuel_type, transmission)`, `(year, price_eur)`.
+- `count(*)` queries — Postgres handle 20k bez problema; cache rezultate `unstable_cache` taggan `model_versions`.
+- Materialised view OR denormalisation samo ako benchmark pokaže problem (defer until evidence).
+
+**SEO / canonical pravilo**: filter combos nisu indexabili individualno. Canonical `/nova-vozila/` (bez filter param-a) na svim filtered listings; filtered URL-ovi `noindex` + `follow`. Iznimka: `/nova-vozila/marke/{brand}/` ostaje canonical i indexabilna jer je brand-only landing strani.
+
+**Single source of truth = `model_versions` collection** za new-car catalog filtere. `used_car_listings` JOIN-a model_versions za inheritance spec sheet-a; listing-specific override-i (km, year-specific price, condition) ostaju na listing rowu.
+
+---
+
 ---
 
 ## Workflow po zadatku
