@@ -841,6 +841,7 @@ export interface LeadRequest {
         | "quiz"
         | "leasing"
         | "sticky"
+        | "oglas"
         | "other"
       )
     | null;
@@ -850,6 +851,15 @@ export interface LeadRequest {
   user_agent?: string | null;
   status: "new" | "under_review" | "in_progress" | "sent" | "closed" | "spam";
   internal_notes?: string | null;
+  /**
+   * Track which feedback emails have gone out (Sprint 7 cron). Set 'disabled' to opt the lead out (e.g. customer asked to be left alone or admin marked spam).
+   */
+  customer_feedback_emails?: {
+    disabled?: boolean | null;
+    day3_sent_at?: string | null;
+    day14_sent_at?: string | null;
+    day30_sent_at?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1540,6 +1550,14 @@ export interface LeadRequestsSelect<T extends boolean = true> {
   user_agent?: T;
   status?: T;
   internal_notes?: T;
+  customer_feedback_emails?:
+    | T
+    | {
+        disabled?: T;
+        day3_sent_at?: T;
+        day14_sent_at?: T;
+        day30_sent_at?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1775,6 +1793,7 @@ export interface EmailSetting {
           | "gdpr-request-resolved"
           | "dealer-password-reset"
           | "admin-new-lead-notification"
+          | "admin-new-gdpr-notification"
           | "dealer-reminder-1"
           | "dealer-reminder-2"
           | "customer-feedback-3d"

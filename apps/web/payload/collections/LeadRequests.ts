@@ -228,6 +228,20 @@ export const LeadRequests: CollectionConfig = {
               ],
             },
             { name: "internal_notes", type: "textarea" },
+            {
+              name: "customer_feedback_emails",
+              type: "group",
+              admin: {
+                description:
+                  "Track which feedback emails have gone out (Sprint 7 cron). Set 'disabled' to opt the lead out (e.g. customer asked to be left alone or admin marked spam).",
+              },
+              fields: [
+                { name: "disabled", type: "checkbox", defaultValue: false },
+                { name: "day3_sent_at", type: "date" },
+                { name: "day14_sent_at", type: "date" },
+                { name: "day30_sent_at", type: "date" },
+              ],
+            },
           ],
         },
       ],

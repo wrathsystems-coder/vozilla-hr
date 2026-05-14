@@ -14,6 +14,9 @@ import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-remi
 import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
 import DealerPasswordReset, { type DealerPasswordResetProps } from "@/emails/dealer-password-reset";
 import NewsletterConfirm, { type NewsletterConfirmProps } from "@/emails/newsletter-confirm";
+import CustomerFeedback3d, { type CustomerFeedback3dProps } from "@/emails/customer-feedback-3d";
+import CustomerFeedback14d, { type CustomerFeedback14dProps } from "@/emails/customer-feedback-14d";
+import CustomerFeedback30d, { type CustomerFeedback30dProps } from "@/emails/customer-feedback-30d";
 import { sendEmail, type SendResult } from "@/lib/email/client";
 import { getEmailSettings, resolveTemplate, type EmailTemplateKey } from "@/lib/email/settings";
 
@@ -40,7 +43,10 @@ export type DispatchArgs =
   | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
   | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props }
   | { key: "dealer-password-reset"; to: Recipients; props: DealerPasswordResetProps }
-  | { key: "newsletter-confirm"; to: Recipients; props: NewsletterConfirmProps };
+  | { key: "newsletter-confirm"; to: Recipients; props: NewsletterConfirmProps }
+  | { key: "customer-feedback-3d"; to: Recipients; props: CustomerFeedback3dProps }
+  | { key: "customer-feedback-14d"; to: Recipients; props: CustomerFeedback14dProps }
+  | { key: "customer-feedback-30d"; to: Recipients; props: CustomerFeedback30dProps };
 
 type RenderResult = { template: ReactElement; subject: string };
 
@@ -112,16 +118,29 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
         template: NewsletterConfirm(args.props),
         subject: "Potvrdi pretplatu na newsletter vozilla.hr",
       };
+    case "customer-feedback-3d":
+      return {
+        template: CustomerFeedback3d(args.props),
+        subject: `Kako ide s upitom ${args.props.displayId}?`,
+      };
+    case "customer-feedback-14d":
+      return {
+        template: CustomerFeedback14d(args.props),
+        subject: `Pregovori s dilerima — upit ${args.props.displayId}`,
+      };
+    case "customer-feedback-30d":
+      return {
+        template: CustomerFeedback30d(args.props),
+        subject: `Posljednje pitanje o upitu ${args.props.displayId}`,
+      };
   }
 }
 
 export async function dispatch(args: DispatchArgs): Promise<SendResult> {
   const settings = await getEmailSettings();
-  // The DispatchArgs union is narrower than EmailTemplateKey on purpose —
-  // newsletter-confirm and customer-feedback-{3d,14d,30d} ship in later
-  // Sprint 7 commits. The cast is safe because every key produced here
-  // is a member of EmailTemplateKey.
-  const templateKey = args.key as EmailTemplateKey;
+  // DispatchArgs.key is a strict subset of EmailTemplateKey; the cast
+  // just narrows the union for the resolveTemplate lookup.
+  const templateKey: EmailTemplateKey = args.key;
   const tpl = resolveTemplate(settings, templateKey);
 
   if (!tpl.enabled) {

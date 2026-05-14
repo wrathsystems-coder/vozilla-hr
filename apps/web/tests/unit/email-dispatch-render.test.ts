@@ -147,6 +147,49 @@ describe("renderTemplate subject construction", () => {
     expect(subject).toBe("Reset lozinke za vozilla.hr — dileri");
   });
 
+  it("customer-feedback-3d subject includes display id", () => {
+    const { subject } = renderTemplate({
+      key: "customer-feedback-3d",
+      to: "ana@example.hr",
+      props: {
+        customerName: "Ana",
+        displayId: "VZ-2026-05-14-A1B2",
+        trackerUrl: "https://vozilla.hr/upit/abc",
+        vehicleLabel: "Audi A4",
+        dealerCount: 3,
+      },
+    });
+    expect(subject).toBe("Kako ide s upitom VZ-2026-05-14-A1B2?");
+  });
+
+  it("customer-feedback-14d subject includes display id", () => {
+    const { subject } = renderTemplate({
+      key: "customer-feedback-14d",
+      to: "ana@example.hr",
+      props: {
+        customerName: "Ana",
+        displayId: "VZ-2026-05-14-A1B2",
+        trackerUrl: "https://vozilla.hr/upit/abc",
+        vehicleLabel: "",
+      },
+    });
+    expect(subject).toBe("Pregovori s dilerima — upit VZ-2026-05-14-A1B2");
+  });
+
+  it("customer-feedback-30d subject includes display id", () => {
+    const { subject } = renderTemplate({
+      key: "customer-feedback-30d",
+      to: "ana@example.hr",
+      props: {
+        customerName: "Ana",
+        displayId: "VZ-2026-05-14-A1B2",
+        trackerUrl: "https://vozilla.hr/upit/abc",
+        vehicleLabel: "Škoda Octavia",
+      },
+    });
+    expect(subject).toBe("Posljednje pitanje o upitu VZ-2026-05-14-A1B2");
+  });
+
   it("newsletter-confirm has a fixed HR subject", () => {
     const { subject } = renderTemplate({
       key: "newsletter-confirm",
