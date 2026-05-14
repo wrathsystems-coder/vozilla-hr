@@ -1,7 +1,10 @@
 # Pre-launch checklist — vozilla.hr
 
-> Final form in Sprint 7. This is a skeleton with section markers. Each
-> item gets verified during Sprint 7 polish.
+> Sprint 7 — code-side items (the ones the engineering team owns) are
+> done. The operational / deployment items (Vercel envs, Cloudflare,
+> Resend DNS, etc.) are pending the go-live decision.
+>
+> Mark items off as you verify them on the production environment.
 
 ## 1. Brand and content
 
@@ -30,28 +33,40 @@
 
 - [ ] Cookies blocked before consent (test in fresh incognito)
 - [ ] Cookie banner logs consent with timestamp / IP / UA
-- [ ] GDPR request form works end-to-end
+- [ ] GDPR request form works end-to-end (also fires
+      `admin-new-gdpr-notification` to ADMIN_NOTIFICATION_EMAIL)
 - [ ] Consent NOT pre-checked anywhere
 - [ ] OUP / PP / PK accessible BEFORE consent (no JS / cookie required)
-- [ ] PDF download for legal pages works
+- [ ] PDF download for legal pages works (`/print/<slug>` auto-print →
+      browser Save as PDF)
 - [ ] DPO email in `config/company.yml`
-- [ ] Newsletter feature flag `false` (or `true` after legal review)
+- [ ] Newsletter feature flag `false` (or `true` after legal review).
+      When flipping to `true`: confirm `/api/newsletter/subscribe`
+      returns 200, confirm email arrives, confirm /odjava-newslettera
+      with the HMAC link unsubscribes.
 - [ ] HANFA disclaimer on leasing calculator
 - [ ] DSA "kako provjeravamo recenzije" page published
+- [ ] Customer-feedback day 3/14/30 cron behaves as expected on a
+      manually-aged test lead (`/api/cron/customer-feedback`)
 
 ## 4. Technical
 
 - [ ] `pnpm build` passes (placeholder check strict mode)
-- [ ] `pnpm test` passes
+- [ ] `pnpm test` passes (last verified Sprint 7: 299/299)
 - [ ] `pnpm test:e2e` passes
+- [ ] `pnpm test:a11y` passes — axe-core across 17 page templates
 - [ ] Lighthouse production: Perf ≥ 90, A11y ≥ 90, BP ≥ 90, SEO ≥ 95
 - [ ] Core Web Vitals green
 - [ ] axe-core: zero serious / critical violations
+- [ ] Flip `color-contrast` rule back on in `tests/e2e/a11y.spec.ts` once
+      brand HEX is finalised
 - [ ] sitemap.xml + robots.txt valid
 - [ ] Schema.org valid on every page type (Rich Results Test)
 - [ ] OG / Twitter Card valid (debugger tools)
 - [ ] 404 + 500 pages helpful and on-brand
-- [ ] Sentry catches a synthetic error and notifies
+- [ ] Sentry catches a synthetic error and notifies (DSN populated)
+- [ ] CSP header verified on a production response (must include
+      `script-src 'self' 'nonce-…' 'strict-dynamic'` for public routes)
 
 ## 5. Security
 

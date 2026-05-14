@@ -541,6 +541,10 @@ Content + entiteti managed by Payload CMS 3. Tablice se kreiraju kroz Payload mi
 | `user_agent` | text |  |
 | `status` | select | ✓ |
 | `internal_notes` | textarea |  |
+| `customer_feedback_emails.disabled` | checkbox |  |
+| `customer_feedback_emails.day3_sent_at` | date |  |
+| `customer_feedback_emails.day14_sent_at` | date |  |
+| `customer_feedback_emails.day30_sent_at` | date |  |
 | `updatedAt` | date |  |
 | `createdAt` | date |  |
 

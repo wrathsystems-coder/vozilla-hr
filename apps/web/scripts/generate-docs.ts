@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { writeFile, readFile } from "node:fs/promises";
+import { writeFile, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
 import { getTableConfig, type PgTable } from "drizzle-orm/pg-core";
@@ -171,6 +171,88 @@ async function generateDatabaseSchemaDoc() {
   console.log(`  ✓ docs/database-schema.md`);
 }
 
+// Walks app/**/route.ts to surface every API endpoint with HTTP methods
+// + a route-grouped table. Pulls the first comment in each file as the
+// summary so docs stay close to the implementation.
+
+const METHOD_RE = /export\s+(?:async\s+)?function\s+(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)\b/g;
+const SUMMARY_RE = /\/\/\s*(.+?)(?:\n|$)/;
+
+async function walkRoutes(
+  dir: string,
+  baseSegments: string[] = [],
+): Promise<Array<{ urlPath: string; filePath: string; methods: string[]; summary: string }>> {
+  const out: Array<{ urlPath: string; filePath: string; methods: string[]; summary: string }> = [];
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.name.startsWith("_")) continue;
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      // Skip route groups — they are organisational, not part of the URL.
+      const seg = entry.name.startsWith("(") && entry.name.endsWith(")") ? null : entry.name;
+      const next = seg === null ? baseSegments : [...baseSegments, seg];
+      out.push(...(await walkRoutes(fullPath, next)));
+    } else if (entry.name === "route.ts") {
+      const content = await readFile(fullPath, "utf-8");
+      const methods = new Set<string>();
+      let m: RegExpExecArray | null;
+      while ((m = METHOD_RE.exec(content))) methods.add(m[1]);
+      METHOD_RE.lastIndex = 0;
+      // Skip the "use server" / "import" preamble when scanning for a summary.
+      const afterPreamble = content
+        .split("\n")
+        .filter((line) => !line.startsWith("import") && line.trim() !== "")
+        .slice(0, 8)
+        .join("\n");
+      const summaryMatch = afterPreamble.match(SUMMARY_RE);
+      const summary = summaryMatch ? summaryMatch[1].trim() : "";
+      const urlPath = "/" + baseSegments.join("/");
+      out.push({
+        urlPath,
+        filePath: path.relative(path.resolve(process.cwd()), fullPath).replaceAll("\\", "/"),
+        methods: [...methods].sort(),
+        summary,
+      });
+    }
+  }
+  return out;
+}
+
+async function generateApiRoutesDoc() {
+  console.log("  → walking app/**/route.ts");
+  const appDir = path.resolve(process.cwd(), "app");
+  const routes = await walkRoutes(appDir);
+  routes.sort((a, b) => a.urlPath.localeCompare(b.urlPath));
+
+  // Group by top-level path prefix so the table is readable: api/cron/*,
+  // api/leads, api/newsletter/*, etc. surface together.
+  const groups = new Map<string, typeof routes>();
+  for (const r of routes) {
+    const segments = r.urlPath.split("/").filter(Boolean);
+    const key = segments.length >= 2 ? `/${segments[0]}/${segments[1]}` : `/${segments[0] ?? ""}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(r);
+  }
+
+  let md = `# API routes — vozilla.hr\n\n`;
+  md += `> Auto-generated from \`app/**/route.ts\`. Run \`pnpm generate:docs\` to refresh.\n\n`;
+  md += `Total endpoints: ${routes.length}.\n\n`;
+
+  for (const [prefix, list] of [...groups.entries()].sort()) {
+    md += `## \`${prefix}\`\n\n`;
+    md += `| Path | Methods | File | Summary |\n|---|---|---|---|\n`;
+    for (const r of list) {
+      const methods = r.methods.join(", ") || "—";
+      md += `| \`${r.urlPath}\` | ${methods} | \`${r.filePath}\` | ${r.summary || "—"} |\n`;
+    }
+    md += `\n`;
+  }
+
+  const outPath = path.resolve(process.cwd(), "../../docs/api-routes.md");
+  await writeFile(outPath, md, "utf-8");
+  console.log(`  ✓ docs/api-routes.md (${routes.length} routes)`);
+}
+
 async function main() {
   console.log("→ generate:docs starting");
 
@@ -179,6 +261,9 @@ async function main() {
 
   console.log("\n→ database-schema.md");
   await generateDatabaseSchemaDoc();
+
+  console.log("\n→ api-routes.md");
+  await generateApiRoutesDoc();
 
   console.log("\n✓ done");
 }
