@@ -118,6 +118,19 @@ describe("renderTemplate subject construction", () => {
     expect(flagged.subject).toBe("[admin] Novi upit VZ-1 (review)");
   });
 
+  it("dealer-password-reset has a fixed HR subject", () => {
+    const { subject } = renderTemplate({
+      key: "dealer-password-reset",
+      to: "d@x.hr",
+      props: {
+        dealerLegalName: "Auto Salon Zagreb",
+        resetUrl: "https://vozilla.hr/dileri/reset/abc123",
+        ttlHours: 1,
+      },
+    });
+    expect(subject).toBe("Reset lozinke za vozilla.hr — dileri");
+  });
+
   it("dealer-reminder-2 rounds expiresInHours into the subject", () => {
     const { subject } = renderTemplate({
       key: "dealer-reminder-2",

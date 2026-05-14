@@ -98,15 +98,11 @@ export async function forgotPasswordAction(
 
   try {
     await dispatch({
-      key: "magic-link",
+      key: "dealer-password-reset",
       to: email,
       props: {
-        recipientName: dealer.legal_name,
-        subject: "Reset lozinke za vozilla.hr — dileri",
-        heading: "Resetiraj svoju lozinku",
-        explanation:
-          "Zatražio si reset lozinke za diler račun. Klikni na link ispod da postaviš novu lozinku. Ako nisi ti tražio, slobodno zanemari ovaj email — tvoja lozinka ostaje ista.",
-        url,
+        dealerLegalName: dealer.legal_name,
+        resetUrl: url,
         ttlHours: PASSWORD_RESET_TTL_HOURS,
       },
     });

@@ -9,6 +9,7 @@ import AdminNewLeadNotification, {
 } from "@/emails/admin-new-lead-notification";
 import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-reminder-1";
 import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
+import DealerPasswordReset, { type DealerPasswordResetProps } from "@/emails/dealer-password-reset";
 import { sendEmail, type SendResult } from "@/lib/email/client";
 import { getEmailSettings, resolveTemplate, type EmailTemplateKey } from "@/lib/email/settings";
 
@@ -32,7 +33,8 @@ export type DispatchArgs =
   | { key: "gdpr-request-resolved"; to: Recipients; props: GdprRequestResolvedProps }
   | { key: "admin-new-lead-notification"; to: Recipients; props: AdminNewLeadProps }
   | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
-  | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props };
+  | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props }
+  | { key: "dealer-password-reset"; to: Recipients; props: DealerPasswordResetProps };
 
 type RenderResult = { template: ReactElement; subject: string };
 
@@ -88,6 +90,11 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
       return {
         template: DealerReminder2(args.props),
         subject: `Drugi podsjetnik: ${args.props.displayId} ističe za ${Math.round(args.props.expiresInHours)}h`,
+      };
+    case "dealer-password-reset":
+      return {
+        template: DealerPasswordReset(args.props),
+        subject: "Reset lozinke za vozilla.hr — dileri",
       };
   }
 }
