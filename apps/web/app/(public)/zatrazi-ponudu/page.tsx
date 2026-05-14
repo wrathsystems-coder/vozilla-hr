@@ -29,6 +29,7 @@ const VALID_SOURCES: ReadonlySet<CtaSource> = new Set([
   "quiz",
   "leasing",
   "sticky",
+  "oglas",
   "other",
 ]);
 

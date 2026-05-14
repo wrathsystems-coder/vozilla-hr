@@ -34,6 +34,7 @@ const SOURCE_VALUES = [
   "quiz",
   "leasing",
   "sticky",
+  "oglas",
   "other",
 ] as const;
 

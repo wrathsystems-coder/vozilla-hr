@@ -19,7 +19,8 @@ export type CtaSource =
   | "usporedba"
   | "quiz"
   | "leasing"
-  | "sticky";
+  | "sticky"
+  | "oglas";
 
 export type CtaParams = {
   brand?: string;

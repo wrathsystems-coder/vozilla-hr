@@ -13,6 +13,7 @@ export type CtaSource =
   | "quiz"
   | "leasing"
   | "sticky"
+  | "oglas"
   | "other";
 
 export type RequestType = "new" | "used" | "leasing" | "unsure";

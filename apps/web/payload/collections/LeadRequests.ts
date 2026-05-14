@@ -200,6 +200,7 @@ export const LeadRequests: CollectionConfig = {
                 { label: "Quiz", value: "quiz" },
                 { label: "Leasing kalkulator", value: "leasing" },
                 { label: "Sticky widget", value: "sticky" },
+                { label: "Oglas (rabljeno vozilo)", value: "oglas" },
                 { label: "Drugo", value: "other" },
               ],
             },

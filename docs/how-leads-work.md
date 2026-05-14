@@ -28,23 +28,26 @@ backend zna odakle je upit došao. Vrijednost pada u `lead_requests.source`
 (Postgres enum). Sprint 6 dodaje 4 nova ulaza preko `requestQuoteHref()`
 helpera u `lib/catalog/cta.ts`:
 
-| Izvor       | Ulaz                                                                                        | Pre-fill                    |
-| ----------- | ------------------------------------------------------------------------------------------- | --------------------------- |
-| `header`    | Globalni "Zatraži ponudu" CTA u header-u                                                    | (ništa)                     |
-| `hub`       | `/nova-vozila/` hub stranice                                                                | (ništa)                     |
-| `brand`     | `/nova-vozila/marke/{brand}/`                                                               | `marka`                     |
-| `category`  | `/nova-vozila/kategorije/{kat}/`                                                            | `kategorija`                |
-| `detail`    | `/nova-vozila/marke/{brand}/{model}/`                                                       | `marka`, `model`            |
-| `recenzija` | `/recenzije/{slug}/` (Sprint 6)                                                             | `marka`, `model`            |
-| `usporedba` | `/usporedi/` (dynamic + `/usporedi/{slug}/`)                                                | `marka`, `model`            |
-| `leasing`   | `/leasing/kalkulator/` (Sprint 6)                                                           | `cijena`, `polog`, `period` |
-| `quiz`      | `/pomoc-pri-izboru/rezultati/{token}/` (Sprint 6)                                           | `marka`, `model`            |
-| `sticky`    | Sticky widget mini-forma                                                                    | (ništa)                     |
-| `other`     | Fallback (npr. `/rabljena-vozila/oglas/{id}/` — `oglas` enum value čeka Sprint 7 migraciju) | varies                      |
+| Izvor       | Ulaz                                              | Pre-fill                    |
+| ----------- | ------------------------------------------------- | --------------------------- |
+| `header`    | Globalni "Zatraži ponudu" CTA u header-u          | (ništa)                     |
+| `hub`       | `/nova-vozila/` hub stranice                      | (ništa)                     |
+| `brand`     | `/nova-vozila/marke/{brand}/`                     | `marka`                     |
+| `category`  | `/nova-vozila/kategorije/{kat}/`                  | `kategorija`                |
+| `detail`    | `/nova-vozila/marke/{brand}/{model}/`             | `marka`, `model`            |
+| `recenzija` | `/recenzije/{slug}/` (Sprint 6)                   | `marka`, `model`            |
+| `usporedba` | `/usporedi/` (dynamic + `/usporedi/{slug}/`)      | `marka`, `model`            |
+| `leasing`   | `/leasing/kalkulator/` (Sprint 6)                 | `cijena`, `polog`, `period` |
+| `quiz`      | `/pomoc-pri-izboru/rezultati/{token}/` (Sprint 6) | `marka`, `model`            |
+| `sticky`    | Sticky widget mini-forma                          | (ništa)                     |
+| `oglas`     | `/rabljena-vozila/oglas/{id}/` (Sprint 7)         | `marka`, `model`, `oglas`   |
+| `other`     | Fallback (nepoznat / direktan URL bez `?izvor=`)  | varies                      |
 
-`other` je trenutno korišten za rabljene-oglase CTA jer `oglas` nije u
-enum-u — dodaje se Sprint 7 zajedno s Postgres `ALTER TYPE ADD VALUE`
-migracijom.
+`oglas` je dodan u Sprintu 7 (migration `20260514_150158`) preko
+`ALTER TYPE ADD VALUE 'oglas' BEFORE 'other'`. CTA na used-car detail
+stranici (`apps/web/app/(public)/rabljena-vozila/oglas/[id]/page.tsx`)
+više ne pada na `other` — sad nosi `?izvor=oglas&oglas={id}` tako da
+admin u dispatch UI-ju odmah vidi da je upit došao iz listing-detail-a.
 
 ---
 

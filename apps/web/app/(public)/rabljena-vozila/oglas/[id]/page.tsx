@@ -68,14 +68,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 }
 
 function contactHref(listing: UsedCarDetail): string {
-  // Pre-fill the lead wizard with brand + model + listing id. Source uses
-  // 'other' because the Sprint 4 enum doesn't include 'oglas' — adding it
-  // requires a Postgres enum migration deferred to Sprint 7 polish.
+  // Pre-fill the lead wizard with brand + model + listing id.
   const qs = new URLSearchParams({
     marka: listing.model.brand.slug,
     model: listing.model.slug,
     oglas: String(listing.id),
-    izvor: "other",
+    izvor: "oglas",
   });
   return `/zatrazi-ponudu?${qs.toString()}`;
 }
