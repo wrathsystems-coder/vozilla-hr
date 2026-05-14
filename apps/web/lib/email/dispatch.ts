@@ -102,8 +102,8 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
 export async function dispatch(args: DispatchArgs): Promise<SendResult> {
   const settings = await getEmailSettings();
   // The DispatchArgs union is narrower than EmailTemplateKey on purpose —
-  // newsletter-confirm / customer-feedback / dealer-password-reset arrive
-  // in later commits. The cast is safe because every key produced here
+  // newsletter-confirm and customer-feedback-{3d,14d,30d} ship in later
+  // Sprint 7 commits. The cast is safe because every key produced here
   // is a member of EmailTemplateKey.
   const templateKey = args.key as EmailTemplateKey;
   const tpl = resolveTemplate(settings, templateKey);
