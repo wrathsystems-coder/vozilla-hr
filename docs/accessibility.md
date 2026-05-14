@@ -19,7 +19,13 @@ WCAG 2.1 AA is **minimum**, not aspiration. CLAUDE.md rule #6.
 
 ## Testing
 
-- **CI**: axe-core integration test (Sprint 7) — fail = no deploy
+- **Automated**: `pnpm test:a11y` runs axe-core via Playwright across
+  17 canonical page templates (home, hub, lead wizard, leasing
+  calculator, dealer login, legal pages, etc.). Fails on serious /
+  critical violations; soft-warns on moderate / minor. WCAG 2.1 A/AA
+  tags. `color-contrast` is disabled until brand HEX moves out of
+  `XXX_BRAND_*` placeholder territory — flip it on after Sprint 7
+  brand handoff.
 - **Manual**: NVDA (Windows) and VoiceOver (macOS) on critical flows:
   lead form, dealer dashboard, admin lead processing, magic link tracker
 - **Mobile**: TalkBack (Android) and VoiceOver (iOS) on lead form
@@ -40,6 +46,7 @@ WCAG 2.1 AA is **minimum**, not aspiration. CLAUDE.md rule #6.
 
 ## TODO
 
-- [ ] axe-core CI integration (Sprint 7)
+- [x] axe-core CI integration (Sprint 7 — `pnpm test:a11y`)
+- [ ] Flip `color-contrast` rule back on after brand HEX is finalised
 - [ ] Manual screen reader test on full lead flow before launch
 - [ ] Document keyboard shortcuts, if any are added
