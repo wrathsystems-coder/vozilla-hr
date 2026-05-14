@@ -25,6 +25,7 @@ export type EmailTemplateKey =
   | "gdpr-request-resolved"
   | "dealer-password-reset"
   | "admin-new-lead-notification"
+  | "admin-new-gdpr-notification"
   | "dealer-reminder-1"
   | "dealer-reminder-2"
   | "customer-feedback-3d"

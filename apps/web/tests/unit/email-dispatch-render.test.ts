@@ -118,6 +118,22 @@ describe("renderTemplate subject construction", () => {
     expect(flagged.subject).toBe("[admin] Novi upit VZ-1 (review)");
   });
 
+  it("admin-new-gdpr-notification subject includes the display id", () => {
+    const { subject } = renderTemplate({
+      key: "admin-new-gdpr-notification",
+      to: "admin@vozilla.hr",
+      props: {
+        displayId: "GDPR-2026-05-14-A1B2",
+        requestType: "erasure",
+        customerEmailMasked: "an***@example.hr",
+        linkedLeadId: 42,
+        resolutionDays: 30,
+        adminUrl: "https://vozilla.hr/admin/collections/gdpr_requests/7",
+      },
+    });
+    expect(subject).toBe("[admin] Novi GDPR zahtjev GDPR-2026-05-14-A1B2");
+  });
+
   it("dealer-password-reset has a fixed HR subject", () => {
     const { subject } = renderTemplate({
       key: "dealer-password-reset",

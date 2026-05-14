@@ -7,6 +7,9 @@ import GdprRequestResolved, { type GdprRequestResolvedProps } from "@/emails/gdp
 import AdminNewLeadNotification, {
   type AdminNewLeadProps,
 } from "@/emails/admin-new-lead-notification";
+import AdminNewGdprNotification, {
+  type AdminNewGdprNotificationProps,
+} from "@/emails/admin-new-gdpr-notification";
 import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-reminder-1";
 import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
 import DealerPasswordReset, { type DealerPasswordResetProps } from "@/emails/dealer-password-reset";
@@ -32,6 +35,7 @@ export type DispatchArgs =
   | { key: "gdpr-request-received"; to: Recipients; props: GdprRequestReceivedProps }
   | { key: "gdpr-request-resolved"; to: Recipients; props: GdprRequestResolvedProps }
   | { key: "admin-new-lead-notification"; to: Recipients; props: AdminNewLeadProps }
+  | { key: "admin-new-gdpr-notification"; to: Recipients; props: AdminNewGdprNotificationProps }
   | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
   | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props }
   | { key: "dealer-password-reset"; to: Recipients; props: DealerPasswordResetProps };
@@ -80,6 +84,11 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
         subject: `[admin] Novi upit ${args.props.displayId}${
           args.props.flagReview ? " (review)" : ""
         }`,
+      };
+    case "admin-new-gdpr-notification":
+      return {
+        template: AdminNewGdprNotification(args.props),
+        subject: `[admin] Novi GDPR zahtjev ${args.props.displayId}`,
       };
     case "dealer-reminder-1":
       return {

@@ -39,6 +39,7 @@ export const EmailSettings: GlobalConfig = {
             { label: "GDPR riješen", value: "gdpr-request-resolved" },
             { label: "Diler password reset", value: "dealer-password-reset" },
             { label: "Admin: novi lead", value: "admin-new-lead-notification" },
+            { label: "Admin: novi GDPR zahtjev", value: "admin-new-gdpr-notification" },
             { label: "Diler reminder #1 (24h)", value: "dealer-reminder-1" },
             { label: "Diler reminder #2 (48h)", value: "dealer-reminder-2" },
             { label: "Customer feedback (dan 3)", value: "customer-feedback-3d" },

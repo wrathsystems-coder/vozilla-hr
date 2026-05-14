@@ -4,6 +4,8 @@ import { z } from "zod";
 import config from "@payload-config";
 import { logAudit } from "@/lib/audit-log";
 import { dispatch } from "@/lib/email/dispatch";
+import { maskEmail } from "@/lib/email/mask";
+import { siteUrl } from "@/lib/seo/site-url";
 import { generateGdprDisplayId } from "@/lib/gdpr/display-id";
 import { getClientIp } from "@/lib/http/client-ip";
 import { isValidLeadDisplayId } from "@/lib/leads/display-id";
@@ -16,6 +18,7 @@ export const dynamic = "force-dynamic";
 
 const ENDPOINT = "gdpr.create";
 const RESOLUTION_DAYS = 30;
+const ADMIN_NOTIFY_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL ?? "noreply@vozilla.hr";
 
 const REQUEST_TYPES = ["access", "erasure", "rectification", "portability", "objection"] as const;
 
@@ -183,16 +186,30 @@ export async function POST(request: NextRequest) {
     ipAddress: ip,
   });
 
-  await dispatch({
-    key: "gdpr-request-received",
-    to: body.customer_email,
-    props: {
-      customerName: body.customer_name,
-      displayId,
-      requestType: body.request_type,
-      resolutionDays: RESOLUTION_DAYS,
-    },
-  });
+  await Promise.all([
+    dispatch({
+      key: "gdpr-request-received",
+      to: body.customer_email,
+      props: {
+        customerName: body.customer_name,
+        displayId,
+        requestType: body.request_type,
+        resolutionDays: RESOLUTION_DAYS,
+      },
+    }),
+    dispatch({
+      key: "admin-new-gdpr-notification",
+      to: ADMIN_NOTIFY_EMAIL,
+      props: {
+        displayId,
+        requestType: body.request_type,
+        customerEmailMasked: maskEmail(body.customer_email.toLowerCase()),
+        linkedLeadId: leadRequestId,
+        resolutionDays: RESOLUTION_DAYS,
+        adminUrl: `${siteUrl()}/admin/collections/gdpr_requests/${createdId}`,
+      },
+    }),
+  ]);
 
   const responseBody = { display_id: displayId, status: "pending" };
   if (idempotencyKey) {
