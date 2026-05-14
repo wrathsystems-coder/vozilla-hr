@@ -110,10 +110,12 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Run on everything except Next internals + static files we know
-    // never need a CSP. The webhook receivers (api/cron/*) still go
-    // through middleware so the header is set even on 401 replies.
+    // never need a CSP. .* (not .+) so the root path "/" also matches
+    // — earlier .+ excluded it and the homepage shipped without CSP.
+    // Webhook receivers (api/cron/*) still go through middleware so
+    // the header is set even on 401 replies.
     {
-      source: "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\..*).+)",
+      source: "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)",
     },
   ],
 };
