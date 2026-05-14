@@ -24,6 +24,8 @@ type SendArgs = {
   /** Structured props the template rendered with — stored on the email_log row for debugging. */
   payload?: Record<string, unknown>;
   from?: string;
+  /** Reply-to address (typically info@vozilla.hr) so customer replies hit a monitored inbox. */
+  replyTo?: string;
 };
 
 export type SendResult = {
@@ -32,7 +34,7 @@ export type SendResult = {
 };
 
 export async function sendEmail(args: SendArgs): Promise<SendResult> {
-  const { to, subject, template, templateName, payload, from } = args;
+  const { to, subject, template, templateName, payload, from, replyTo } = args;
   const html = await render(template);
   const text = await render(template, { plainText: true });
   const fromAddress = from ?? process.env.RESEND_FROM_EMAIL ?? "noreply@vozilla.hr";
@@ -62,6 +64,7 @@ export async function sendEmail(args: SendArgs): Promise<SendResult> {
       subject,
       html,
       text,
+      ...(replyTo ? { replyTo } : {}),
     });
     if (result.error) {
       throw new Error(`Resend send failed: ${result.error.message}`);

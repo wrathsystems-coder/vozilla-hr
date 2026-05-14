@@ -1,10 +1,14 @@
 import type { GlobalConfig } from "payload";
+import { makeGlobalRevalidateHook } from "@/lib/payload/revalidate-hook";
 
 export const EmailSettings: GlobalConfig = {
   slug: "email_settings",
   access: {
     read: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [makeGlobalRevalidateHook(["email_settings"])],
   },
   fields: [
     {

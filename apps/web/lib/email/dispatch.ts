@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import LeadConfirmation, { type LeadConfirmationProps } from "@/emails/lead-confirmation";
 import LeadToDealer, { type LeadToDealerProps } from "@/emails/lead-to-dealer";
 import MagicLink, { type MagicLinkProps } from "@/emails/magic-link";
@@ -9,13 +10,17 @@ import AdminNewLeadNotification, {
 import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-reminder-1";
 import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
 import { sendEmail, type SendResult } from "@/lib/email/client";
+import { getEmailSettings, resolveTemplate, type EmailTemplateKey } from "@/lib/email/settings";
 
 // Single entry point for transactional email. Discriminated union on `key`
 // so each call site is forced to provide the right props for its template.
 //
-// Subjects are hardcoded HR (UI-tier text per CLAUDE.md). Sprint 7 polish
-// will read EmailSettings global to honour admin-side enabled/subject_override
-// toggles; until then dispatch is straight-through.
+// Per-template runtime behaviour comes from the EmailSettings global:
+//   - enabled=false → skip dispatch entirely (logged via console.info,
+//     synthetic SendResult returned so callers don't need to special-case)
+//   - subject_override → wins over the hardcoded HR subject below
+//   - from_email → wins over RESEND_FROM_EMAIL env
+//   - reply_to → passed to Resend as replyTo (replies hit info@ inbox)
 
 type Recipients = string | string[];
 
@@ -29,54 +34,84 @@ export type DispatchArgs =
   | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
   | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props };
 
-export async function dispatch(args: DispatchArgs): Promise<SendResult> {
-  let template;
-  let subject: string;
+type RenderResult = { template: ReactElement; subject: string };
 
+/**
+ * Pure renderer + default subject. Exported so unit tests can exercise
+ * subject construction without hitting Payload or Resend.
+ */
+export function renderTemplate(args: DispatchArgs): RenderResult {
   switch (args.key) {
     case "lead-confirmation":
-      template = LeadConfirmation(args.props);
-      subject = `Zaprimili smo tvoj upit ${args.props.displayId}`;
-      break;
+      return {
+        template: LeadConfirmation(args.props),
+        subject: `Zaprimili smo tvoj upit ${args.props.displayId}`,
+      };
     case "lead-to-dealer": {
       const vehicle =
         [args.props.brand, args.props.model].filter(Boolean).join(" ") || "novo vozilo";
-      template = LeadToDealer(args.props);
-      subject = `Novi upit od kupca — ${vehicle} — ${args.props.displayId}`;
-      break;
+      return {
+        template: LeadToDealer(args.props),
+        subject: `Novi upit od kupca — ${vehicle} — ${args.props.displayId}`,
+      };
     }
     case "magic-link":
       // Caller controls subject for magic-link — context varies wildly
       // (tracker resend / password reset / draft resume).
-      template = MagicLink(args.props);
-      subject = args.props.subject;
-      break;
+      return { template: MagicLink(args.props), subject: args.props.subject };
     case "gdpr-request-received":
-      template = GdprRequestReceived(args.props);
-      subject = `Zaprimili smo tvoj GDPR zahtjev (${args.props.displayId})`;
-      break;
+      return {
+        template: GdprRequestReceived(args.props),
+        subject: `Zaprimili smo tvoj GDPR zahtjev (${args.props.displayId})`,
+      };
     case "gdpr-request-resolved":
-      template = GdprRequestResolved(args.props);
-      subject =
-        args.props.resolution === "resolved"
-          ? `Tvoj GDPR zahtjev (${args.props.displayId}) je riješen`
-          : `Tvoj GDPR zahtjev (${args.props.displayId}) je odbijen`;
-      break;
+      return {
+        template: GdprRequestResolved(args.props),
+        subject:
+          args.props.resolution === "resolved"
+            ? `Tvoj GDPR zahtjev (${args.props.displayId}) je riješen`
+            : `Tvoj GDPR zahtjev (${args.props.displayId}) je odbijen`,
+      };
     case "admin-new-lead-notification":
-      template = AdminNewLeadNotification(args.props);
-      subject = `[admin] Novi upit ${args.props.displayId}${
-        args.props.flagReview ? " (review)" : ""
-      }`;
-      break;
+      return {
+        template: AdminNewLeadNotification(args.props),
+        subject: `[admin] Novi upit ${args.props.displayId}${
+          args.props.flagReview ? " (review)" : ""
+        }`,
+      };
     case "dealer-reminder-1":
-      template = DealerReminder1(args.props);
-      subject = `Podsjetnik: kupac čeka odgovor — ${args.props.displayId}`;
-      break;
+      return {
+        template: DealerReminder1(args.props),
+        subject: `Podsjetnik: kupac čeka odgovor — ${args.props.displayId}`,
+      };
     case "dealer-reminder-2":
-      template = DealerReminder2(args.props);
-      subject = `Drugi podsjetnik: ${args.props.displayId} ističe za ${Math.round(args.props.expiresInHours)}h`;
-      break;
+      return {
+        template: DealerReminder2(args.props),
+        subject: `Drugi podsjetnik: ${args.props.displayId} ističe za ${Math.round(args.props.expiresInHours)}h`,
+      };
   }
+}
+
+export async function dispatch(args: DispatchArgs): Promise<SendResult> {
+  const settings = await getEmailSettings();
+  // The DispatchArgs union is narrower than EmailTemplateKey on purpose —
+  // newsletter-confirm / customer-feedback / dealer-password-reset arrive
+  // in later commits. The cast is safe because every key produced here
+  // is a member of EmailTemplateKey.
+  const templateKey = args.key as EmailTemplateKey;
+  const tpl = resolveTemplate(settings, templateKey);
+
+  if (!tpl.enabled) {
+    console.info(
+      `[email] template "${args.key}" is disabled in EmailSettings — not sending to ${
+        Array.isArray(args.to) ? args.to.join(", ") : args.to
+      }`,
+    );
+    return { id: `skipped:${args.key}`, logId: 0 };
+  }
+
+  const { template, subject: defaultSubject } = renderTemplate(args);
+  const subject = tpl.subjectOverride ?? defaultSubject;
 
   return sendEmail({
     to: args.to,
@@ -84,5 +119,7 @@ export async function dispatch(args: DispatchArgs): Promise<SendResult> {
     template,
     templateName: args.key,
     payload: args.props as unknown as Record<string, unknown>,
+    from: settings.fromEmail ?? undefined,
+    replyTo: settings.replyTo ?? undefined,
   });
 }
