@@ -147,6 +147,19 @@ describe("renderTemplate subject construction", () => {
     expect(subject).toBe("Reset lozinke za vozilla.hr — dileri");
   });
 
+  it("newsletter-confirm has a fixed HR subject", () => {
+    const { subject } = renderTemplate({
+      key: "newsletter-confirm",
+      to: "ana@example.hr",
+      props: {
+        recipientName: "",
+        confirmUrl: "https://vozilla.hr/odjava-newslettera?confirm=abc",
+        ttlHours: 24,
+      },
+    });
+    expect(subject).toBe("Potvrdi pretplatu na newsletter vozilla.hr");
+  });
+
   it("dealer-reminder-2 rounds expiresInHours into the subject", () => {
     const { subject } = renderTemplate({
       key: "dealer-reminder-2",

@@ -13,6 +13,7 @@ import AdminNewGdprNotification, {
 import DealerReminder1, { type DealerReminder1Props } from "@/emails/dealer-reminder-1";
 import DealerReminder2, { type DealerReminder2Props } from "@/emails/dealer-reminder-2";
 import DealerPasswordReset, { type DealerPasswordResetProps } from "@/emails/dealer-password-reset";
+import NewsletterConfirm, { type NewsletterConfirmProps } from "@/emails/newsletter-confirm";
 import { sendEmail, type SendResult } from "@/lib/email/client";
 import { getEmailSettings, resolveTemplate, type EmailTemplateKey } from "@/lib/email/settings";
 
@@ -38,7 +39,8 @@ export type DispatchArgs =
   | { key: "admin-new-gdpr-notification"; to: Recipients; props: AdminNewGdprNotificationProps }
   | { key: "dealer-reminder-1"; to: Recipients; props: DealerReminder1Props }
   | { key: "dealer-reminder-2"; to: Recipients; props: DealerReminder2Props }
-  | { key: "dealer-password-reset"; to: Recipients; props: DealerPasswordResetProps };
+  | { key: "dealer-password-reset"; to: Recipients; props: DealerPasswordResetProps }
+  | { key: "newsletter-confirm"; to: Recipients; props: NewsletterConfirmProps };
 
 type RenderResult = { template: ReactElement; subject: string };
 
@@ -104,6 +106,11 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
       return {
         template: DealerPasswordReset(args.props),
         subject: "Reset lozinke za vozilla.hr — dileri",
+      };
+    case "newsletter-confirm":
+      return {
+        template: NewsletterConfirm(args.props),
+        subject: "Potvrdi pretplatu na newsletter vozilla.hr",
       };
   }
 }
