@@ -24,10 +24,16 @@ Out of scope (MVP):
 ### Network / transport
 
 - HTTPS everywhere (Cloudflare strict, HSTS preload)
-- CSP defined in `next.config.ts` — minimal in Sprint 0, expanded in Sprint 7
-- Security headers: X-Frame-Options DENY, X-Content-Type-Options nosniff,
-  Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy
-  (camera/mic/geolocation off)
+- CSP set per-request by `apps/web/middleware.ts`. Public routes get a
+  strict policy with `'self'` + per-request nonce + `strict-dynamic`
+  for inline JSON-LD; explicit allowlists for reCAPTCHA and Cookiebot.
+  `/admin/*` routes get a relaxed policy with `'unsafe-eval' 'unsafe-inline'`
+  because Payload's Lexical editor compiles schemas at runtime. The
+  relaxation is scoped — a vuln in the admin editor can't be leveraged
+  against the public site.
+- Security headers (next.config.ts): X-Frame-Options DENY,
+  X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-
+  cross-origin, Permissions-Policy (camera / mic / geolocation off).
 
 ### Application
 
@@ -60,7 +66,7 @@ Out of scope (MVP):
 
 ## TODO
 
-- [ ] Final CSP policy (Sprint 7)
-- [ ] Rate limit thresholds per endpoint (Sprint 4)
+- [x] Final CSP policy (Sprint 7 — `apps/web/middleware.ts`)
+- [x] Rate limit thresholds per endpoint (Sprint 4 — `lib/rate-limit/`)
 - [ ] On-call rotation document
 - [ ] Annual penetration test plan (post-launch)
