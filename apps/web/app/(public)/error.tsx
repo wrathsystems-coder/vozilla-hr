@@ -1,6 +1,8 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
+import { useEffect } from "react";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
@@ -11,6 +13,12 @@ type ErrorProps = {
 };
 
 export default function Error({ error, reset }: ErrorProps) {
+  useEffect(() => {
+    // No-op when SENTRY_DSN is empty (MVP default). Reporting the
+    // server-supplied digest helps correlate with server-side traces.
+    Sentry.captureException(error);
+  }, [error]);
+
   return (
     <Container className="py-20 text-center">
       <p className="text-text-muted text-sm font-semibold">500</p>
