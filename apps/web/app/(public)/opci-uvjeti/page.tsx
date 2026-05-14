@@ -6,7 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function OpciUvjetiPage() {
-  return (
-    <LegalPageShell title="Opći uvjeti" contentPlaceholder="[XXX_OUP_TEKST: pravnik dostavlja]" />
-  );
+  return <LegalPageShell slug="opci-uvjeti" />;
 }

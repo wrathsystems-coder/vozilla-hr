@@ -6,10 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function PolitikaPrivatnostiPage() {
-  return (
-    <LegalPageShell
-      title="Politika privatnosti"
-      contentPlaceholder="[XXX_PP_TEKST: pravnik dostavlja]"
-    />
-  );
+  return <LegalPageShell slug="politika-privatnosti" />;
 }

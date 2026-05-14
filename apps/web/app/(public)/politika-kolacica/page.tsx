@@ -6,10 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function PolitikaKolacicaPage() {
-  return (
-    <LegalPageShell
-      title="Politika kolačića"
-      contentPlaceholder="[XXX_PK_TEKST: pravnik dostavlja]"
-    />
-  );
+  return <LegalPageShell slug="politika-kolacica" />;
 }
