@@ -65,7 +65,7 @@ describe("email dispatch + templates (integration)", () => {
       expect(html).toContain("Audi A4");
       expect(html).toContain("Ana Anić");
       expect(html).toContain("+385911234567");
-      expect(html).toContain("još 4 dilerima");
+      expect(html).toContain("još 4 partnerima");
       expect(html).toContain("48 sati");
     });
 
@@ -170,7 +170,7 @@ describe("email dispatch + templates (integration)", () => {
     it("dispatches lead-to-dealer with vehicle in subject", async () => {
       const result = await dispatch({
         key: "lead-to-dealer",
-        to: "diler@example.com",
+        to: "partner@example.com",
         props: {
           dealerName: "Auto Salon",
           displayId: "VZ-1",

@@ -20,7 +20,7 @@ export default function CustomerFeedback14d(props: CustomerFeedback14dProps) {
         <Text className="text-base text-gray-700">Bok, {props.customerName},</Text>
         <Text className="text-base text-gray-700">
           Prošlo je 14 dana od tvog upita
-          {props.vehicleLabel ? ` za ${props.vehicleLabel}` : ""}. Kako ide razgovor s dilerima?
+          {props.vehicleLabel ? ` za ${props.vehicleLabel}` : ""}. Kako ide razgovor s partnerima?
           Jesi li uspio/la pregovarati cijenu, ili razmišljaš o drugom modelu?
         </Text>
         <Text className="text-base text-gray-700">

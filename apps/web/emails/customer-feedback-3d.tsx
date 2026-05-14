@@ -13,15 +13,15 @@ export type CustomerFeedback3dProps = {
   trackerUrl: string;
   /** Vehicle string for context (e.g. "Audi A4") — empty when none specified. */
   vehicleLabel: string;
-  /** Count of dealers the lead went to (for "još 3 dilera" copy). */
+  /** Count of dealers the lead went to (for "još 3 partnera" copy). */
   dealerCount: number;
 };
 
 export default function CustomerFeedback3d(props: CustomerFeedback3dProps) {
   const dealerLine =
     props.dealerCount === 1
-      ? "Diler ima sve potrebne podatke i trebao bi te kontaktirati u idućih nekoliko dana."
-      : `${props.dealerCount} dilera ima sve potrebne podatke i trebali bi te kontaktirati u idućih nekoliko dana.`;
+      ? "Partner ima sve potrebne podatke i trebao bi te kontaktirati u idućih nekoliko dana."
+      : `${props.dealerCount} partnera ima sve potrebne podatke i trebali bi te kontaktirati u idućih nekoliko dana.`;
 
   return (
     <EmailLayout preview={`Kako ide s tvojim upitom ${props.displayId}?`}>
@@ -33,7 +33,7 @@ export default function CustomerFeedback3d(props: CustomerFeedback3dProps) {
           {props.vehicleLabel ? ` za ${props.vehicleLabel}` : ""}. {dealerLine}
         </Text>
         <Text className="text-base text-gray-700">
-          Označi koji su te dileri kontaktirali — pomažeš nam da znamo tko ozbiljno radi.
+          Označi koji su te partneri kontaktirali — pomažeš nam da znamo tko ozbiljno radi.
         </Text>
       </Section>
 

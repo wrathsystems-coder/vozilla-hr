@@ -2,7 +2,7 @@ import { Button, Heading, Hr, Section, Text } from "@react-email/components";
 import { EmailLayout } from "./_layout";
 
 // Sprint 7. Replaces the generic magic-link.tsx reuse from Sprint 5 so
-// dealer password-reset emails read in the right voice ("Tvoj diler račun
+// dealer password-reset emails read in the right voice ("Tvoj partnerski račun
 // za vozilla.hr") and we can tune subject + copy independently of the
 // other magic-link flows.
 
@@ -15,13 +15,13 @@ export type DealerPasswordResetProps = {
 
 export default function DealerPasswordReset(props: DealerPasswordResetProps) {
   return (
-    <EmailLayout preview="Reset lozinke za diler račun na vozilla.hr">
+    <EmailLayout preview="Reset lozinke za partnerski račun na vozilla.hr">
       <Section>
         <Heading className="text-2xl font-bold text-gray-900">Resetiraj svoju lozinku</Heading>
         <Text className="text-base text-gray-700">Bok, {props.dealerLegalName},</Text>
         <Text className="text-base text-gray-700">
-          Zatražio si reset lozinke za diler račun. Klikni na link ispod da postaviš novu lozinku.
-          Ako nisi ti tražio, slobodno zanemari ovaj email — tvoja lozinka ostaje ista.
+          Zatražio si reset lozinke za partnerski račun. Klikni na link ispod da postaviš novu
+          lozinku. Ako nisi ti tražio, slobodno zanemari ovaj email — tvoja lozinka ostaje ista.
         </Text>
       </Section>
 

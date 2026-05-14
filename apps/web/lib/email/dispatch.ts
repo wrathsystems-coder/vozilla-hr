@@ -111,7 +111,7 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
     case "dealer-password-reset":
       return {
         template: DealerPasswordReset(args.props),
-        subject: "Reset lozinke za vozilla.hr — dileri",
+        subject: "Reset lozinke za vozilla.hr — partneri",
       };
     case "newsletter-confirm":
       return {
@@ -126,7 +126,7 @@ export function renderTemplate(args: DispatchArgs): RenderResult {
     case "customer-feedback-14d":
       return {
         template: CustomerFeedback14d(args.props),
-        subject: `Pregovori s dilerima — upit ${args.props.displayId}`,
+        subject: `Pregovori s partnerima — upit ${args.props.displayId}`,
       };
     case "customer-feedback-30d":
       return {

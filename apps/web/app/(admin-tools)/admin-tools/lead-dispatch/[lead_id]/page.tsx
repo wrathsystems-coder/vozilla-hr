@@ -68,7 +68,7 @@ export default async function LeadDispatchPage({ params }: { params: Params }) {
     const breakdown = scoreBreakdown(s.dealer, cfg.weights);
     return {
       dealerId: s.dealer.id,
-      dealerName: fullDealer?.legal_name ?? "Diler",
+      dealerName: fullDealer?.legal_name ?? "Partner",
       city: fullDealer?.address?.city ?? null,
       distanceKm: s.distanceKm,
       qualityScore: s.qualityScore,
@@ -141,14 +141,14 @@ export default async function LeadDispatchPage({ params }: { params: Params }) {
           </p>
         ) : isAlreadyDispatched ? (
           <p className="rounded-md border border-emerald-500/30 bg-emerald-500/5 p-4 text-sm">
-            Lead je već poslan dilerima. Dodatni dispatch ide preko ručnog odabira (re-send će
+            Lead je već poslan partnerima. Dodatni dispatch ide preko ručnog odabira (re-send će
             preskočiti dilere kojima je već poslan).
           </p>
         ) : null}
 
         <section>
           <Heading level={2} className="text-base">
-            Auto-suggest 5 dilera
+            Auto-suggest 5 partnera
           </Heading>
           <p className="text-text-muted mt-1 text-xs">
             Algoritam: 1/response × {cfg.weights.w_response} + conversion ×{" "}

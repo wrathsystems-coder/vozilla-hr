@@ -8,7 +8,7 @@ import config from "../payload/payload.config";
 
 const FEATURE_DESCRIPTIONS: Record<string, string> = {
   newsletter: "Newsletter signup + double opt-in flow",
-  sms_notifications: "SMS notifikacije dilerima",
+  sms_notifications: "SMS notifikacije partnerima",
   whatsapp_notifications: "WhatsApp Business API notifikacije",
   google_analytics_4: "GA4 web tracking",
   posthog: "PostHog product analytics + session replay",

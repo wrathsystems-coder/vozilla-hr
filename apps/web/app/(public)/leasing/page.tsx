@@ -29,7 +29,7 @@ export default function LeasingHubPage() {
           <Heading level={1}>Leasing</Heading>
           <p className="text-text-muted mt-3 max-w-2xl text-base">
             Procijeni mjesečnu ratu, usporedi operativni i financijski leasing, i pošalji upit
-            dilerima — sve s jednog mjesta.
+            partnerima — sve s jednog mjesta.
           </p>
         </Container>
       </section>

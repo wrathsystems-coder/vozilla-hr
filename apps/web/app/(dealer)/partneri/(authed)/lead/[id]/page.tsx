@@ -84,7 +84,9 @@ function CompetitorBadge({
     <div className="border-surface-border bg-surface rounded-md border p-3 text-right text-sm">
       <p className="text-text-muted text-xs uppercase tracking-wide">Konkurencija</p>
       <p className="font-medium">
-        {count === 0 ? "Samo ti" : `Lead poslan još ${count} ${count === 1 ? "dileru" : "dilera"}`}
+        {count === 0
+          ? "Samo ti"
+          : `Lead poslan još ${count} ${count === 1 ? "partneru" : "partnera"}`}
       </p>
       {rank ? (
         <p className="text-text-muted mt-1 text-xs">

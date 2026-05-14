@@ -23,7 +23,7 @@ finalne. Agent ih nikad ne generira.
 
 ## Brand logoi (po marki)
 
-Dileri / proizvođači — uploadaju se u `public/branding/brands/{slug}.svg`,
+Partneri / proizvođači — uploadaju se u `public/branding/brands/{slug}.svg`,
 gdje `slug` odgovara `brands.slug` u Payload kolekciji
 (npr. `audi`, `skoda`, `vw`).
 

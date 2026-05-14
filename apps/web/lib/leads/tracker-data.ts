@@ -52,7 +52,7 @@ export async function loadTrackerData(leadId: number): Promise<TrackerData | nul
     const dealer = typeof a.dealer === "number" ? null : (a.dealer as Dealer);
     return {
       id: a.id,
-      dealerName: dealer?.legal_name ?? "Diler",
+      dealerName: dealer?.legal_name ?? "Partner",
       dealerCity: dealer?.address?.city ?? null,
       status: a.status,
       sentAt: a.sent_at ?? null,

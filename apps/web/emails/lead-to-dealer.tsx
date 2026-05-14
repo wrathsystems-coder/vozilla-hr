@@ -19,7 +19,7 @@ export type LeadToDealerProps = {
   customerPostcode: string;
   preferredContactMethod: string;
   bestContactTime?: string | null;
-  /** N-1 from total dispatched: "ovaj lead poslan još N dilerima". */
+  /** N-1 from total dispatched: "ovaj lead poslan još N partnerima". */
   competitorCount: number;
   dashboardUrl: string;
   responseDeadlineHours: number;
@@ -128,7 +128,7 @@ export default function LeadToDealer(props: LeadToDealerProps) {
           {`Molimo kontaktirajte kupca u sljedećih ${props.responseDeadlineHours} sati.`}
         </Text>
         <Text className="text-xs text-gray-600">
-          {`Ovaj lead poslan je još ${props.competitorCount} dilerima. Brzina i kvaliteta odgovora utječu na vaš rang u sustavu.`}
+          {`Ovaj lead poslan je još ${props.competitorCount} partnerima. Brzina i kvaliteta odgovora utječu na vaš rang u sustavu.`}
         </Text>
       </Section>
 

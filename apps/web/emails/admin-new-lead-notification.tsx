@@ -32,7 +32,7 @@ export default function AdminNewLeadNotification(props: AdminNewLeadProps) {
         </Text>
         {props.flagReview ? (
           <Text className="text-sm text-yellow-800">
-            reCAPTCHA score je ispod review threshold-a — provjeri ručno prije slanja dilerima.
+            reCAPTCHA score je ispod review threshold-a — provjeri ručno prije slanja partnerima.
           </Text>
         ) : null}
       </Section>

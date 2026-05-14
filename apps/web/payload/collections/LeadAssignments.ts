@@ -23,7 +23,7 @@ export const LeadAssignments: CollectionConfig = {
       admin: {
         readOnly: true,
         description:
-          "Snapshot dealer.quality_score u trenutku dispatch-a — audit trail za rang dilera.",
+          "Snapshot dealer.quality_score u trenutku dispatch-a — audit trail za rang partnera.",
       },
     },
     {

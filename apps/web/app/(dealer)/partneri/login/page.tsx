@@ -26,7 +26,7 @@ export default async function DealerLoginPage({ searchParams }: { searchParams: 
     <Container className="py-16">
       <div className="mx-auto max-w-md space-y-6">
         <div className="space-y-2 text-center">
-          <Heading level={1}>Diler prijava</Heading>
+          <Heading level={1}>Partner prijava</Heading>
           <p className="text-text-muted text-sm">
             Prijavi se da pristupiš leadovima koje ti je dodijelio vozilla.hr.
           </p>

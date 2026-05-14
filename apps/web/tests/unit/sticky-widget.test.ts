@@ -7,7 +7,7 @@ import {
 } from "@/components/widgets/sticky-config";
 
 describe("isExcludedPath", () => {
-  it("excludes admin and dileri trees", () => {
+  it("excludes admin and partneri trees", () => {
     expect(isExcludedPath("/admin")).toBe(true);
     expect(isExcludedPath("/admin/lead-dispatch/17")).toBe(true);
     expect(isExcludedPath("/partneri")).toBe(true);

@@ -19,7 +19,7 @@ export default function BoughtForm({ token }: { token: string }) {
         className="rounded-md border border-emerald-500/30 bg-emerald-500/5 p-3 text-sm"
         role="status"
       >
-        Hvala što si nam javio. Dileri više neće biti podsjećani na ovaj upit.
+        Hvala što si nam javio. Partneri više neće biti podsjećani na ovaj upit.
       </p>
     );
   }
@@ -58,7 +58,7 @@ export default function BoughtForm({ token }: { token: string }) {
         </label>
         <Select id="bought-where" name="where" required defaultValue="">
           <option value="">— odaberi —</option>
-          <option value="vozilla">Preko vozilla.hr dilera</option>
+          <option value="vozilla">Preko vozilla.hr partnera</option>
           <option value="elsewhere">Drugdje</option>
         </Select>
       </div>

@@ -41,7 +41,7 @@ export default function DealerReminder2(props: DealerReminder2Props) {
       <Section className="mt-6">
         <Text className="text-sm text-gray-700">
           {props.competitorCount > 0
-            ? `Lead poslan još ${props.competitorCount} dilerima. Drugi su možda već reagirali.`
+            ? `Lead poslan još ${props.competitorCount} partnerima. Drugi su možda već reagirali.`
             : "Kupac još uvijek čeka tvoj odgovor."}
         </Text>
       </Section>

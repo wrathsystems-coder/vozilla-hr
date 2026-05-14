@@ -89,7 +89,7 @@ function buildAdminCsp(): string {
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
-  // Sprint 8 catalog faza renamed partner portal from /dileri/* to
+  // Sprint 8 catalog faza renamed the partner portal from /dileri/* to
   // /partneri/*. 301 any stale bookmark / external link / cached
   // crawler URL so the rename is non-breaking for users.
   if (pathname === "/dileri" || pathname.startsWith("/dileri/")) {

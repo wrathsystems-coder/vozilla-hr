@@ -104,7 +104,7 @@ export default function StickyWidget() {
         {!expanded ? (
           <>
             <p className="text-text-muted mt-1 text-xs">
-              Ostavi email/telefon i mi šaljemo upit dilerima.
+              Ostavi email/telefon i mi šaljemo upit partnerima.
             </p>
             <Button
               type="button"

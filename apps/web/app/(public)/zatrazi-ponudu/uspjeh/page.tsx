@@ -47,9 +47,12 @@ export default async function UspjehPage({
           </Heading>
           <ul className="text-text mt-4 space-y-2 text-sm">
             <li>✉️ Provjeri email — poslali smo ti potvrdu i osobni link za praćenje upita.</li>
-            <li>⏱️ Naš tim će u sljedećih 24-48h proslijediti upit prema 3-5 odabranih dilera.</li>
             <li>
-              📞 Dileri će te direktno kontaktirati na tvoj email ili telefon, ovisno o postavkama.
+              ⏱️ Naš tim će u sljedećih 24-48h proslijediti upit prema 3-5 odabranih partnera.
+            </li>
+            <li>
+              📞 Partneri će te direktno kontaktirati na tvoj email ili telefon, ovisno o
+              postavkama.
             </li>
             <li>
               📨 Ako u idućem danu ne primiš poruku, provjeri spam folder. Tracker link iz emaila

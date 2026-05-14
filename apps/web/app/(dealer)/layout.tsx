@@ -7,7 +7,7 @@ import "../globals.css";
 // via lib/dealer/auth.ts requireDealer() — the login page does not gate.
 
 export const metadata: Metadata = {
-  title: { default: "Dileri — vozilla.hr", template: "%s — Dileri — vozilla.hr" },
+  title: { default: "Partneri — vozilla.hr", template: "%s — Partneri — vozilla.hr" },
   robots: { index: false, follow: false, nocache: true },
 };
 

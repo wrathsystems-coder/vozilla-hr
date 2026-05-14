@@ -20,10 +20,10 @@ export const metadata: Metadata = {
 };
 
 const ASSIGNMENT_STATUS_LABEL: Record<TrackerAssignment["status"], string> = {
-  sent: "Diler je obaviješten",
-  viewed: "Diler je pregledao upit",
-  contacted: "Diler te kontaktirao",
-  closed: "Diler je zatvorio kontakt",
+  sent: "Partner je obaviješten",
+  viewed: "Partner je pregledao upit",
+  contacted: "Partner te kontaktirao",
+  closed: "Partner je zatvorio kontakt",
 };
 
 function fmtDateTime(iso: string | null | undefined): string | null {
@@ -103,7 +103,7 @@ function statusLabel(status: string): string {
     case "in_progress":
       return "U obradi";
     case "sent":
-      return "Poslano dilerima";
+      return "Poslano partnerima";
     case "closed":
       return "Otkazano";
     case "spam":
@@ -130,7 +130,7 @@ function Timeline({ lead }: { lead: { status: string; createdAt?: string } }) {
     },
     {
       key: "sent",
-      label: "Poslano dilerima",
+      label: "Poslano partnerima",
       date: null,
       done: lead.status === "sent",
       current: lead.status === "sent",
@@ -161,10 +161,10 @@ function Dealers({ assignments, token }: { assignments: TrackerAssignment[]; tok
     return (
       <section className="border-surface-border bg-surface-muted rounded-md border p-5">
         <Heading level={2} className="text-base">
-          Tvoji dileri
+          Tvoji partneri
         </Heading>
         <p className="text-text-muted mt-2 text-sm">
-          Naš tim još nije proslijedio upit. Email s obavijesti dolazi čim diler primi upit.
+          Naš tim još nije proslijedio upit. Email s obavijesti dolazi čim partner primi upit.
         </p>
       </section>
     );
@@ -173,7 +173,7 @@ function Dealers({ assignments, token }: { assignments: TrackerAssignment[]; tok
   return (
     <section>
       <Heading level={2} className="text-lg">
-        Tvoji dileri ({assignments.length})
+        Tvoji partneri ({assignments.length})
       </Heading>
       <ul className="mt-4 space-y-3">
         {assignments.map((a) => (
@@ -212,7 +212,7 @@ function Bought({ token }: { token: string }) {
       </Heading>
       <p className="text-text-muted text-sm">
         Ako si kupio vozilo (preko nas ili negdje drugdje), javi nam — zaustavit ćemo dalje
-        kontaktiranje od strane dilera.
+        kontaktiranje od strane partnera.
       </p>
       <BoughtForm token={token} />
     </section>

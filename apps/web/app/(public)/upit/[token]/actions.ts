@@ -163,7 +163,7 @@ export async function markBoughtAction(
       closed_at: ts,
       outcome: parsed.data.where === "vozilla" && a.contacted_at ? "sold" : "customer_unresponsive",
       outcome_reason: `Kupac je označio: kupljeno preko ${
-        parsed.data.where === "vozilla" ? "vozilla.hr dilera" : "drugog izvora"
+        parsed.data.where === "vozilla" ? "vozilla.hr partnera" : "drugog izvora"
       }${parsed.data.brand || parsed.data.model ? ` (${[parsed.data.brand, parsed.data.model].filter(Boolean).join(" ")})` : ""}.`,
     };
     await payload.update({

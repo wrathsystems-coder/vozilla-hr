@@ -86,7 +86,7 @@ export default function Step4Consent({
             <Link href="/opci-uvjeti" className="underline" target="_blank" rel="noreferrer">
               Općim uvjetima
             </Link>{" "}
-            i privolu na obradu osobnih podataka u svrhu posredovanja prema dilerima (
+            i privolu na obradu osobnih podataka u svrhu posredovanja prema partnerima (
             <Link
               href="/politika-privatnosti"
               className="underline"

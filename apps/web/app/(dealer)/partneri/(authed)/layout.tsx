@@ -16,7 +16,7 @@ export default async function DealerAuthedLayout({ children }: { children: React
       <header className="border-surface-border bg-surface border-b">
         <Container className="flex items-center justify-between py-4">
           <Link href="/partneri/dashboard" className="font-semibold">
-            vozilla.hr <span className="text-text-muted font-normal">— dileri</span>
+            vozilla.hr <span className="text-text-muted font-normal">— partneri</span>
           </Link>
           <nav className="flex items-center gap-4 text-sm">
             <Link href="/partneri/dashboard" className="hover:underline">

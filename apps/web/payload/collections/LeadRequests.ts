@@ -222,7 +222,7 @@ export const LeadRequests: CollectionConfig = {
                 { label: "Novo", value: "new" },
                 { label: "Pregled", value: "under_review" },
                 { label: "U obradi", value: "in_progress" },
-                { label: "Poslano dilerima", value: "sent" },
+                { label: "Poslano partnerima", value: "sent" },
                 { label: "Zatvoreno", value: "closed" },
                 { label: "Spam", value: "spam" },
               ],

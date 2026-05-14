@@ -46,7 +46,8 @@ export default async function DealerResetPasswordPage({ params }: { params: Para
         ) : (
           <>
             <p className="text-text-muted text-sm">
-              Postavi novu lozinku za svoj diler račun. Nakon promjene, prijavi se s novom lozinkom.
+              Postavi novu lozinku za svoj partnerski račun. Nakon promjene, prijavi se s novom
+              lozinkom.
             </p>
             <ResetForm token={token} />
           </>

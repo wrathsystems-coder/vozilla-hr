@@ -144,7 +144,7 @@ describe("renderTemplate subject construction", () => {
         ttlHours: 1,
       },
     });
-    expect(subject).toBe("Reset lozinke za vozilla.hr — dileri");
+    expect(subject).toBe("Reset lozinke za vozilla.hr — partneri");
   });
 
   it("customer-feedback-3d subject includes display id", () => {
@@ -173,7 +173,7 @@ describe("renderTemplate subject construction", () => {
         vehicleLabel: "",
       },
     });
-    expect(subject).toBe("Pregovori s dilerima — upit VZ-2026-05-14-A1B2");
+    expect(subject).toBe("Pregovori s partnerima — upit VZ-2026-05-14-A1B2");
   });
 
   it("customer-feedback-30d subject includes display id", () => {

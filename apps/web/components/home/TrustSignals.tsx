@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 
 const stats = [
-  { value: "[XXX_TRUST_DEALERS: broj]", label: "Provjereni dileri" },
+  { value: "[XXX_TRUST_DEALERS: broj]", label: "Provjereni partneri" },
   { value: "[XXX_TRUST_CUSTOMERS: broj]", label: "Zadovoljni kupci" },
   { value: "[XXX_TRUST_REVIEWS: broj]", label: "Objavljenih recenzija" },
 ];

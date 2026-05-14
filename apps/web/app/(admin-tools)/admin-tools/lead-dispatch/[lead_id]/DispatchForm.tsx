@@ -75,7 +75,7 @@ export default function DispatchForm({ leadId, suggestions, warnings }: Props) {
 
       {suggestions.length === 0 ? (
         <p className="text-text-muted">
-          Nema dilera u radijusu za ovaj lead. Proširi radijus ili ručno dodaj dilera (Sprint 5
+          Nema partnera u radijusu za ovaj lead. Proširi radijus ili ručno dodaj partnera (Sprint 5
           polish).
         </p>
       ) : (
@@ -164,7 +164,7 @@ export default function DispatchForm({ leadId, suggestions, warnings }: Props) {
           Odabrano: <strong>{selections.length}</strong> / {suggestions.length}
         </p>
         <Button type="button" onClick={onSubmit} disabled={pending || selections.length === 0}>
-          {pending ? "Šaljem…" : `Pošalji ${selections.length} dilerima`}
+          {pending ? "Šaljem…" : `Pošalji ${selections.length} partnerima`}
         </Button>
       </div>
 

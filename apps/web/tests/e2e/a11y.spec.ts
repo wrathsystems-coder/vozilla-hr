@@ -34,7 +34,7 @@ const PAGES = [
   { name: "opci-uvjeti", path: "/opci-uvjeti" },
   { name: "politika-privatnosti", path: "/politika-privatnosti" },
   { name: "gdpr-zahtjev", path: "/gdpr-zahtjev" },
-  { name: "dileri login", path: "/partneri/login" },
+  { name: "partneri login", path: "/partneri/login" },
   { name: "404 catch-all", path: "/nepostojeca-stranica-za-axe" },
 ];
 

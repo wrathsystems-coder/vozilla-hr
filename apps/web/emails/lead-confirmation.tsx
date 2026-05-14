@@ -24,12 +24,12 @@ export default function LeadConfirmation(props: LeadConfirmationProps) {
         <Heading className="text-2xl font-bold text-gray-900">Hvala, {props.customerName}!</Heading>
         <Text className="text-base text-gray-700">
           Zaprimili smo tvoj upit pod brojem <strong>{props.displayId}</strong>. Naš tim će ga
-          pregledati i proslijediti odabranim dilerima u sljedećih{" "}
+          pregledati i proslijediti odabranim partnerima u sljedećih{" "}
           <strong>[XXX_LEAD_PROCESSING_HOURS_RANGE]</strong> sati.
         </Text>
         <Text className="text-base text-gray-700">
-          Dileri će te direktno kontaktirati {contact}. Provjeri i spam folder ako u idućem danu ne
-          primiš poruku.
+          Partneri će te direktno kontaktirati {contact}. Provjeri i spam folder ako u idućem danu
+          ne primiš poruku.
         </Text>
       </Section>
 
@@ -38,8 +38,8 @@ export default function LeadConfirmation(props: LeadConfirmationProps) {
           Prati status upita
         </Heading>
         <Text className="text-sm text-gray-700">
-          Tvoj osobni link spremili smo u ovaj email. Otvori ga bilo kada da vidiš koji su te dileri
-          kontaktirali, označiš zainteresiranost ili otkažeš upit.
+          Tvoj osobni link spremili smo u ovaj email. Otvori ga bilo kada da vidiš koji su te
+          partneri kontaktirali, označiš zainteresiranost ili otkažeš upit.
         </Text>
         <Button
           href={props.trackerUrl}

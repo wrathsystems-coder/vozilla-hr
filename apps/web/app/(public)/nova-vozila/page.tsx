@@ -15,7 +15,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Nova vozila",
   description:
-    "Istraži marke, modele i kategorije novih vozila. Zatraži ponudu od provjerenih dilera u nekoliko klikova.",
+    "Istraži marke, modele i kategorije novih vozila. Zatraži ponudu od provjerenih partnera u nekoliko klikova.",
   alternates: { canonical: "/nova-vozila" },
 };
 
@@ -40,7 +40,7 @@ export default async function NovaVozilaHubPage() {
           </Heading>
           <p className="text-text-muted mt-4 max-w-2xl text-lg">
             Pregledaj marke, modele i kategorije. Kad nađeš ono što tražiš, jednim klikom zatraži
-            ponudu — naši dileri se javljaju u roku od 24 sata.
+            ponudu — naši partneri se javljaju u roku od 24 sata.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

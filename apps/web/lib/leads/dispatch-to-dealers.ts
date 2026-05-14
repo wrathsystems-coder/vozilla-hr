@@ -7,13 +7,13 @@ import { dispatch } from "@/lib/email/dispatch";
 import { siteUrl } from "@/lib/seo/site-url";
 import { now } from "@/lib/utils/time";
 
-// Spec: docs/spec/04-features-and-flows.md "TOK 3 — Diler prima lead".
+// Spec: docs/spec/04-features-and-flows.md "TOK 3 — Partner prima lead".
 // Inserts one lead_assignment per selected dealer (skipping pre-existing
 // pairs since LeadAssignments enforces (lead, dealer) uniqueness at the
 // app layer), bumps each dealer's monthly counter, transitions the lead
 // to status='sent', dispatches lead-to-dealer emails, writes the audit
 // row. competitorCount in each email = (selected.length - 1) — Carwow
-// "lead poslan još N dilerima" transparency.
+// "lead poslan još N partnerima" transparency.
 
 const DEFAULT_RESPONSE_DEADLINE_HOURS = 48;
 
@@ -193,7 +193,7 @@ export async function dispatchToDealers(input: DispatchInput): Promise<DispatchO
         key: "lead-to-dealer",
         to: (c.dealer.email as string | undefined) ?? "",
         props: {
-          dealerName: (c.dealer.legal_name as string | undefined) ?? "Diler",
+          dealerName: (c.dealer.legal_name as string | undefined) ?? "Partner",
           displayId: lead.display_id as string,
           brand,
           model,

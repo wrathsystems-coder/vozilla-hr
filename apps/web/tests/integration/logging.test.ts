@@ -101,7 +101,7 @@ describe("logging helpers (integration)", () => {
   it("markSent updates status, providerMessageId, sentAt", async () => {
     const { id } = await logEmailQueued({
       templateName: "lead-to-dealer",
-      recipientEmail: "diler@example.com",
+      recipientEmail: "partner@example.com",
       subject: "Novi upit",
     });
     await markSent(id, "resend-msg-abc");

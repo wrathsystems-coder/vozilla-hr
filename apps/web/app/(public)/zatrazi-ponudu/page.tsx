@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Zatraži ponudu",
   description:
-    "Pošalji upit i odabrani dileri direktno te kontaktiraju s ponudom u nekoliko koraka.",
+    "Pošalji upit i odabrani partneri direktno te kontaktiraju s ponudom u nekoliko koraka.",
   robots: { index: true, follow: true },
 };
 
@@ -92,8 +92,8 @@ export default async function ZatraziPonuduPage({
       <div className="mx-auto max-w-2xl">
         <Heading level={1}>Zatraži ponudu</Heading>
         <p className="text-text-muted mt-3 text-base">
-          Popuni 4 koraka i naš tim šalje upit prema 3-5 odabranih dilera. Direktno te kontaktiraju
-          s ponudom.
+          Popuni 4 koraka i naš tim šalje upit prema 3-5 odabranih partnera. Direktno te
+          kontaktiraju s ponudom.
         </p>
         <div className="mt-10">
           <LeadWizard

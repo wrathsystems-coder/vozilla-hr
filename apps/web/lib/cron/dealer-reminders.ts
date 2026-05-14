@@ -171,7 +171,7 @@ async function handleFirstReminder(
     key: "dealer-reminder-1",
     to: (dealer.email as string | undefined) ?? "",
     props: {
-      dealerName: (dealer.legal_name as string | undefined) ?? "Diler",
+      dealerName: (dealer.legal_name as string | undefined) ?? "Partner",
       displayId: (lead.display_id as string | undefined) ?? `#${leadId}`,
       vehicle: vehicleLabel(lead),
       customerName: (lead.customer_name as string | undefined) ?? "",
@@ -222,7 +222,7 @@ async function handleSecondReminder(
     key: "dealer-reminder-2",
     to: (dealer.email as string | undefined) ?? "",
     props: {
-      dealerName: (dealer.legal_name as string | undefined) ?? "Diler",
+      dealerName: (dealer.legal_name as string | undefined) ?? "Partner",
       displayId: (lead.display_id as string | undefined) ?? `#${leadId}`,
       vehicle: vehicleLabel(lead),
       customerName: (lead.customer_name as string | undefined) ?? "",
