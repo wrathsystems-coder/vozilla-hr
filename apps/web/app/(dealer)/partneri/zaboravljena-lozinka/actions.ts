@@ -94,7 +94,7 @@ export async function forgotPasswordAction(
     entityId: dealer.id as number,
     ttlHours: PASSWORD_RESET_TTL_HOURS,
   });
-  const url = `${siteUrl()}/dileri/reset/${token}`;
+  const url = `${siteUrl()}/partneri/reset/${token}`;
 
   try {
     await dispatch({

@@ -3,7 +3,7 @@ import "../globals.css";
 
 // Dealer portal route group has its own root <html>/<body> so it doesn't
 // inherit the public chrome (Header/Footer/CookieBanner/StickyWidget) or
-// Payload's RootLayout. Individual pages under /dileri/* gate themselves
+// Payload's RootLayout. Individual pages under /partneri/* gate themselves
 // via lib/dealer/auth.ts requireDealer() — the login page does not gate.
 
 export const metadata: Metadata = {

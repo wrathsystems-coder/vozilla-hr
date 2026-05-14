@@ -15,7 +15,7 @@ export const mainNav: NavItem[] = [
 
 export const secondaryNav: NavItem[] = [
   { label: "Za dilere", href: "/za-dilere" },
-  { label: "Prijava", href: "/dileri/login" },
+  { label: "Prijava", href: "/partneri/login" },
 ];
 
 export const primaryCta: NavItem = {

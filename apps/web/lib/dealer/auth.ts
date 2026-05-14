@@ -7,7 +7,7 @@ import type { Dealer } from "@/payload-types";
 
 // Dealer-portal session helper, parallel to lib/admin/auth.ts. The Payload
 // auth cookie (`payload-token`) is shared across auth collections — we
-// gate on `user.collection === 'dealers'` so an admin browsing /dileri/*
+// gate on `user.collection === 'dealers'` so an admin browsing /partneri/*
 // is treated as logged out, and vice versa.
 
 export type DealerSession = {
@@ -27,10 +27,10 @@ export async function getDealerSession(): Promise<DealerSession | null> {
 export async function requireDealer(redirectTo: string): Promise<DealerSession> {
   const session = await getDealerSession();
   if (!session) {
-    redirect(`/dileri/login?redirect=${encodeURIComponent(redirectTo)}`);
+    redirect(`/partneri/login?redirect=${encodeURIComponent(redirectTo)}`);
   }
   if (!session.dealer.is_active) {
-    redirect(`/dileri/login?reason=inactive`);
+    redirect(`/partneri/login?reason=inactive`);
   }
   return session;
 }

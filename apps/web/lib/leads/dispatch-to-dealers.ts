@@ -184,7 +184,7 @@ export async function dispatchToDealers(input: DispatchInput): Promise<DispatchO
     modelRel && typeof modelRel !== "number"
       ? ((modelRel as { name?: string }).name ?? null)
       : null;
-  const dashboardBase = `${siteUrl()}/dileri/lead`;
+  const dashboardBase = `${siteUrl()}/partneri/lead`;
 
   let emailsDispatched = 0;
   for (const c of created) {

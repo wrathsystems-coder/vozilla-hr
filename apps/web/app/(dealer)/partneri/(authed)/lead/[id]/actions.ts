@@ -10,7 +10,7 @@ import { getClientIp } from "@/lib/http/client-ip";
 import { now } from "@/lib/utils/time";
 import type { Dealer, LeadAssignment } from "@/payload-types";
 
-// Status-mutation server actions for /dileri/lead/[id]. All actions:
+// Status-mutation server actions for /partneri/lead/[id]. All actions:
 //   - re-resolve the dealer session (defence in depth — never trust the
 //     incoming form payload to identify the actor)
 //   - look up the (lead, dealer) assignment by composite filter — refuses
@@ -47,7 +47,7 @@ async function ipFromHeaders(): Promise<string> {
 }
 
 export async function markViewed(leadId: number): Promise<ActionResult> {
-  const { dealer } = await requireDealer(`/dileri/lead/${leadId}`);
+  const { dealer } = await requireDealer(`/partneri/lead/${leadId}`);
   const assignment = await loadOwnAssignment(leadId, dealer.id as number);
   if (!assignment) return { ok: false, message: "Lead nije pronađen." };
 
@@ -72,12 +72,12 @@ export async function markViewed(leadId: number): Promise<ActionResult> {
     after: { status: "viewed" },
     ipAddress: await ipFromHeaders(),
   });
-  revalidatePath(`/dileri/lead/${leadId}`);
+  revalidatePath(`/partneri/lead/${leadId}`);
   return { ok: true };
 }
 
 export async function markContacted(leadId: number): Promise<ActionResult> {
-  const { dealer } = await requireDealer(`/dileri/lead/${leadId}`);
+  const { dealer } = await requireDealer(`/partneri/lead/${leadId}`);
   const assignment = await loadOwnAssignment(leadId, dealer.id as number);
   if (!assignment) return { ok: false, message: "Lead nije pronađen." };
   if (assignment.status === "closed") return { ok: false, message: "Lead je već zatvoren." };
@@ -103,7 +103,7 @@ export async function markContacted(leadId: number): Promise<ActionResult> {
     after: { status: "contacted" },
     ipAddress: await ipFromHeaders(),
   });
-  revalidatePath(`/dileri/lead/${leadId}`);
+  revalidatePath(`/partneri/lead/${leadId}`);
   return { ok: true };
 }
 
@@ -114,7 +114,7 @@ export type CloseInput = {
 };
 
 export async function closeLead(input: CloseInput): Promise<ActionResult> {
-  const { dealer } = await requireDealer(`/dileri/lead/${input.leadId}`);
+  const { dealer } = await requireDealer(`/partneri/lead/${input.leadId}`);
   if (!input.outcome) return { ok: false, message: "Odaberi ishod." };
 
   const assignment = await loadOwnAssignment(input.leadId, dealer.id as number);
@@ -147,12 +147,12 @@ export async function closeLead(input: CloseInput): Promise<ActionResult> {
     after: { status: "closed", outcome: input.outcome },
     ipAddress: await ipFromHeaders(),
   });
-  revalidatePath(`/dileri/lead/${input.leadId}`);
+  revalidatePath(`/partneri/lead/${input.leadId}`);
   return { ok: true };
 }
 
 export async function saveNotes(leadId: number, notes: string): Promise<ActionResult> {
-  const { dealer } = await requireDealer(`/dileri/lead/${leadId}`);
+  const { dealer } = await requireDealer(`/partneri/lead/${leadId}`);
   const assignment = await loadOwnAssignment(leadId, dealer.id as number);
   if (!assignment) return { ok: false, message: "Lead nije pronađen." };
 
@@ -172,6 +172,6 @@ export async function saveNotes(leadId: number, notes: string): Promise<ActionRe
     entityId: assignment.id,
     ipAddress: await ipFromHeaders(),
   });
-  revalidatePath(`/dileri/lead/${leadId}`);
+  revalidatePath(`/partneri/lead/${leadId}`);
   return { ok: true };
 }

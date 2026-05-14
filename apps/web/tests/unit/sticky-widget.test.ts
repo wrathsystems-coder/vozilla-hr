@@ -10,8 +10,8 @@ describe("isExcludedPath", () => {
   it("excludes admin and dileri trees", () => {
     expect(isExcludedPath("/admin")).toBe(true);
     expect(isExcludedPath("/admin/lead-dispatch/17")).toBe(true);
-    expect(isExcludedPath("/dileri")).toBe(true);
-    expect(isExcludedPath("/dileri/login")).toBe(true);
+    expect(isExcludedPath("/partneri")).toBe(true);
+    expect(isExcludedPath("/partneri/login")).toBe(true);
   });
 
   it("excludes the wizard, tracker, GDPR form, and legal pages", () => {

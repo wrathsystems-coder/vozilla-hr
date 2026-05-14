@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DealerProfilePage() {
-  const { dealer } = await requireDealer("/dileri/profil");
+  const { dealer } = await requireDealer("/partneri/profil");
 
   const countyRows = await getDb()
     .select({ id: counties.id, name: counties.name })

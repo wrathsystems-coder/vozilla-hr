@@ -40,7 +40,7 @@ export const WidgetSettings: GlobalConfig = {
           fields: [{ name: "path", type: "text" }],
           defaultValue: [
             { path: "/admin/*" },
-            { path: "/dileri/*" },
+            { path: "/partneri/*" },
             { path: "/upit/*" },
             { path: "/zatrazi-ponudu" },
             { path: "/gdpr-zahtjev" },

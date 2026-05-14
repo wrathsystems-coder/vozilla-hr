@@ -176,7 +176,7 @@ async function handleFirstReminder(
       vehicle: vehicleLabel(lead),
       customerName: (lead.customer_name as string | undefined) ?? "",
       competitorCount,
-      dashboardUrl: `${siteUrl()}/dileri/lead/${leadId}`,
+      dashboardUrl: `${siteUrl()}/partneri/lead/${leadId}`,
       hoursSinceSent,
     },
   });
@@ -227,7 +227,7 @@ async function handleSecondReminder(
       vehicle: vehicleLabel(lead),
       customerName: (lead.customer_name as string | undefined) ?? "",
       competitorCount,
-      dashboardUrl: `${siteUrl()}/dileri/lead/${leadId}`,
+      dashboardUrl: `${siteUrl()}/partneri/lead/${leadId}`,
       hoursSinceSent,
       expiresInHours,
     },

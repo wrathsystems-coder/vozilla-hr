@@ -3,7 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 import type { Brand, Dealer, LeadAssignment, LeadRequest, Model } from "@/payload-types";
 
-// Loads everything the dealer's /dileri/lead/[id] page needs:
+// Loads everything the dealer's /partneri/lead/[id] page needs:
 //   - the lead (any dealer can theoretically see basic info, but we gate
 //     access via the existence of an assignment row for this dealer)
 //   - this dealer's assignment (or null → 404)

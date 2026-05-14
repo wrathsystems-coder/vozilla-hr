@@ -32,7 +32,7 @@ describe("renderTemplate subject construction", () => {
         customerName: "Ana",
         customerEmailMasked: "a***@y.hr",
         customerPhoneMasked: "+385••••",
-        adminUrl: "https://vozilla.hr/dileri/lead/1",
+        adminUrl: "https://vozilla.hr/partneri/lead/1",
         competitorCount: 3,
       },
     } as never);
@@ -49,7 +49,7 @@ describe("renderTemplate subject construction", () => {
         customerName: "Ana",
         customerEmailMasked: "a***@y.hr",
         customerPhoneMasked: "+385••••",
-        adminUrl: "https://vozilla.hr/dileri/lead/2",
+        adminUrl: "https://vozilla.hr/partneri/lead/2",
         competitorCount: 1,
       },
     } as never);
@@ -140,7 +140,7 @@ describe("renderTemplate subject construction", () => {
       to: "d@x.hr",
       props: {
         dealerLegalName: "Auto Salon Zagreb",
-        resetUrl: "https://vozilla.hr/dileri/reset/abc123",
+        resetUrl: "https://vozilla.hr/partneri/reset/abc123",
         ttlHours: 1,
       },
     });
@@ -213,7 +213,7 @@ describe("renderTemplate subject construction", () => {
         brand: "Audi",
         model: "A4",
         customerName: "Ana",
-        adminUrl: "https://vozilla.hr/dileri/lead/1",
+        adminUrl: "https://vozilla.hr/partneri/lead/1",
         hoursSinceSent: 48,
         expiresInHours: 23.6,
         competitorCount: 2,

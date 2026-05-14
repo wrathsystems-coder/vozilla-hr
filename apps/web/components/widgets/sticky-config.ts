@@ -8,7 +8,7 @@ export const STICKY_CONFIG = {
   dismissForHours: 24,
   excludedPaths: [
     "/admin",
-    "/dileri",
+    "/partneri",
     "/upit",
     "/zatrazi-ponudu",
     "/gdpr-zahtjev",

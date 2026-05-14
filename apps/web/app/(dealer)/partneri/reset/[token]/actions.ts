@@ -101,5 +101,5 @@ export async function resetPasswordAction(
     ipAddress: ip,
   });
 
-  redirect("/dileri/login?reset=ok");
+  redirect("/partneri/login?reset=ok");
 }

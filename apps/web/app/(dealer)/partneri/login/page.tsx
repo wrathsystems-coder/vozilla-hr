@@ -19,7 +19,7 @@ export default async function DealerLoginPage({ searchParams }: { searchParams: 
 
   if (session) {
     // Already authenticated — bounce to dashboard (or wherever they were headed).
-    redirect(safeRedirect(redirectTo) ?? "/dileri/dashboard");
+    redirect(safeRedirect(redirectTo) ?? "/partneri/dashboard");
   }
 
   return (
@@ -50,10 +50,10 @@ export default async function DealerLoginPage({ searchParams }: { searchParams: 
           </p>
         ) : null}
 
-        <LoginForm redirectTo={safeRedirect(redirectTo) ?? "/dileri/dashboard"} />
+        <LoginForm redirectTo={safeRedirect(redirectTo) ?? "/partneri/dashboard"} />
 
         <p className="text-text-muted text-center text-sm">
-          <Link className="underline" href="/dileri/zaboravljena-lozinka">
+          <Link className="underline" href="/partneri/zaboravljena-lozinka">
             Zaboravljena lozinka?
           </Link>
         </p>
@@ -63,13 +63,13 @@ export default async function DealerLoginPage({ searchParams }: { searchParams: 
 }
 
 /**
- * Only accept same-site, /dileri-prefixed paths. Prevents an attacker from
- * crafting /dileri/login?redirect=https://evil.example/ that would bounce a
+ * Only accept same-site, /partneri-prefixed paths. Prevents an attacker from
+ * crafting /partneri/login?redirect=https://evil.example/ that would bounce a
  * freshly-authenticated dealer off-site.
  */
 function safeRedirect(input: string | undefined): string | null {
   if (!input) return null;
-  if (!input.startsWith("/dileri/")) return null;
+  if (!input.startsWith("/partneri/")) return null;
   if (input.startsWith("//")) return null;
   return input;
 }

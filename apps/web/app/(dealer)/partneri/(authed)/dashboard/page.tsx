@@ -43,7 +43,7 @@ export default async function DealerDashboardPage({
 }: {
   searchParams: SearchParams;
 }) {
-  const { dealer } = await requireDealer("/dileri/dashboard");
+  const { dealer } = await requireDealer("/partneri/dashboard");
   const { status } = await searchParams;
   const filter = normalizeFilter(status);
 
@@ -130,7 +130,7 @@ function StatusFilter({ active }: { active: "all" | "sent" | "viewed" | "contact
       {STATUS_OPTIONS.map((opt) => {
         const isActive = active === opt.value;
         const href =
-          opt.value === "all" ? "/dileri/dashboard" : `/dileri/dashboard?status=${opt.value}`;
+          opt.value === "all" ? "/partneri/dashboard" : `/partneri/dashboard?status=${opt.value}`;
         return (
           <Link
             key={opt.value}
@@ -196,7 +196,7 @@ function AssignmentsTable({ assignments }: { assignments: DashboardAssignment[] 
               <td className="text-text-muted px-3 py-2">{formatRelative(a.sentAt)}</td>
               <td className="px-3 py-2 text-right">
                 <Link
-                  href={`/dileri/lead/${a.leadId}`}
+                  href={`/partneri/lead/${a.leadId}`}
                   className="text-brand-accent hover:underline"
                 >
                   Otvori →

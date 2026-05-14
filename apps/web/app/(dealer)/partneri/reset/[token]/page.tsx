@@ -38,7 +38,7 @@ export default async function DealerResetPasswordPage({ params }: { params: Para
           <div className="border-state-error/30 bg-state-error/5 space-y-3 rounded-md border p-4 text-sm">
             <p>Ovaj link nije važeći — možda je istekao (vrijedi 1 sat) ili je već iskorišten.</p>
             <p>
-              <Link href="/dileri/zaboravljena-lozinka" className="underline">
+              <Link href="/partneri/zaboravljena-lozinka" className="underline">
                 Zatraži novi reset link
               </Link>
             </p>
@@ -53,7 +53,7 @@ export default async function DealerResetPasswordPage({ params }: { params: Para
         )}
 
         <p className="text-text-muted text-center text-sm">
-          <Link href="/dileri/login" className="underline">
+          <Link href="/partneri/login" className="underline">
             ← Natrag na prijavu
           </Link>
         </p>

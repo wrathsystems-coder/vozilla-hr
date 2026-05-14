@@ -87,7 +87,19 @@ function buildAdminCsp(): string {
 }
 
 export function middleware(request: NextRequest) {
-  const isAdmin = request.nextUrl.pathname.startsWith("/admin");
+  const { pathname, search } = request.nextUrl;
+
+  // Sprint 8 catalog faza renamed partner portal from /dileri/* to
+  // /partneri/*. 301 any stale bookmark / external link / cached
+  // crawler URL so the rename is non-breaking for users.
+  if (pathname === "/dileri" || pathname.startsWith("/dileri/")) {
+    const target = request.nextUrl.clone();
+    target.pathname = "/partneri" + pathname.slice("/dileri".length);
+    target.search = search;
+    return NextResponse.redirect(target, 301);
+  }
+
+  const isAdmin = pathname.startsWith("/admin");
 
   // Propagate the nonce on the request so server components can render
   // <script nonce={...}> for JSON-LD blocks. Even admin routes get one

@@ -34,7 +34,7 @@ export async function loginAction(
     .toLowerCase();
   const password = String(formData.get("password") ?? "");
   const honeypot = String(formData.get("website") ?? "");
-  const redirectTo = sanitizeRedirect(String(formData.get("redirect_to") ?? "/dileri/dashboard"));
+  const redirectTo = sanitizeRedirect(String(formData.get("redirect_to") ?? "/partneri/dashboard"));
 
   if (honeypot.length > 0) {
     // Bot — pretend success-ish but go nowhere meaningful. Return a generic
@@ -170,14 +170,14 @@ export async function logoutAction(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.set(parseSetCookie(expired));
 
-  redirect("/dileri/login");
+  redirect("/partneri/login");
 }
 
 const GENERIC_ERROR = "Pogrešan email ili lozinka.";
 
 function sanitizeRedirect(input: string): string {
-  if (!input.startsWith("/dileri/")) return "/dileri/dashboard";
-  if (input.startsWith("//")) return "/dileri/dashboard";
+  if (!input.startsWith("/partneri/")) return "/partneri/dashboard";
+  if (input.startsWith("//")) return "/partneri/dashboard";
   return input;
 }
 

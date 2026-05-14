@@ -22,7 +22,7 @@ export default async function LeadDetailPage({ params }: { params: Params }) {
   const leadId = Number(id);
   if (!Number.isInteger(leadId) || leadId <= 0) notFound();
 
-  const { dealer } = await requireDealer(`/dileri/lead/${leadId}`);
+  const { dealer } = await requireDealer(`/partneri/lead/${leadId}`);
   const detail = await loadLeadDetailForDealer(leadId, dealer.id as number);
   if (!detail) notFound();
 
@@ -35,7 +35,7 @@ export default async function LeadDetailPage({ params }: { params: Params }) {
         <div className="flex items-baseline justify-between gap-4">
           <div>
             <p className="text-text-muted text-sm">
-              <Link href="/dileri/dashboard" className="underline">
+              <Link href="/partneri/dashboard" className="underline">
                 ← Dashboard
               </Link>
             </p>

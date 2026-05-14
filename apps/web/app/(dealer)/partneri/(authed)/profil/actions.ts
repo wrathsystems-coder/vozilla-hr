@@ -44,7 +44,7 @@ export async function updateProfileAction(
   _prev: ProfileActionState,
   formData: FormData,
 ): Promise<ProfileActionState> {
-  const { dealer } = await requireDealer("/dileri/profil");
+  const { dealer } = await requireDealer("/partneri/profil");
 
   const parsed = profileSchema.safeParse({
     phone: String(formData.get("phone") ?? "").trim(),
@@ -110,6 +110,6 @@ export async function updateProfileAction(
     ipAddress: ip,
   });
 
-  revalidatePath("/dileri/profil");
+  revalidatePath("/partneri/profil");
   return { status: "success" };
 }

@@ -58,7 +58,7 @@ describe("email dispatch + templates (integration)", () => {
           preferredContactMethod: "phone",
           bestContactTime: "9-17h",
           competitorCount: 4,
-          dashboardUrl: "https://vozilla.hr/dileri/lead/17",
+          dashboardUrl: "https://vozilla.hr/partneri/lead/17",
           responseDeadlineHours: 48,
         }),
       );
@@ -183,7 +183,7 @@ describe("email dispatch + templates (integration)", () => {
           customerPostcode: "10000",
           preferredContactMethod: "phone",
           competitorCount: 4,
-          dashboardUrl: "https://vozilla.hr/dileri/lead/1",
+          dashboardUrl: "https://vozilla.hr/partneri/lead/1",
           responseDeadlineHours: 48,
         },
       });
@@ -218,7 +218,7 @@ describe("email dispatch + templates (integration)", () => {
           subject: "Resetiraj svoju lozinku",
           heading: "Resetiraj lozinku",
           explanation: "Klikni za postavljanje nove lozinke.",
-          url: "https://vozilla.hr/dileri/zaboravljena-lozinka/abc",
+          url: "https://vozilla.hr/partneri/zaboravljena-lozinka/abc",
           ttlHours: 1,
         },
       });

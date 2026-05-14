@@ -23,7 +23,7 @@ export default function DealerForgotPasswordPage() {
         <ForgotForm />
 
         <p className="text-text-muted text-center text-sm">
-          <Link href="/dileri/login" className="underline">
+          <Link href="/partneri/login" className="underline">
             ← Natrag na prijavu
           </Link>
         </p>
