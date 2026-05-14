@@ -1,4 +1,7 @@
 import type { CollectionConfig } from "payload";
+import { makeCollectionRevalidateHooks } from "@/lib/payload/revalidate-hook";
+
+const revalidate = makeCollectionRevalidateHooks(["body_types"]);
 
 export const BodyTypes: CollectionConfig = {
   slug: "body_types",
@@ -11,6 +14,10 @@ export const BodyTypes: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidate.afterChange],
+    afterDelete: [revalidate.afterDelete],
   },
   fields: [
     { name: "slug", type: "text", required: true, unique: true },

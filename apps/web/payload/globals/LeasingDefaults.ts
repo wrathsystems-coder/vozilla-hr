@@ -1,10 +1,14 @@
 import type { GlobalConfig } from "payload";
+import { makeGlobalRevalidateHook } from "@/lib/payload/revalidate-hook";
 
 export const LeasingDefaults: GlobalConfig = {
   slug: "leasing_defaults",
   access: {
     read: () => true,
     update: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [makeGlobalRevalidateHook(["leasing_defaults"])],
   },
   fields: [
     {

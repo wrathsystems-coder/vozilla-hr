@@ -1,8 +1,14 @@
 import type { CollectionConfig } from "payload";
+import { makeCollectionRevalidateHooks } from "@/lib/payload/revalidate-hook";
 
 // UNIQUE (brand, slug) is enforced at app layer (importer + Zod) per
 // Sprint 1 decision. Payload doesn't support compound unique on
 // relationship fields out of the box.
+
+// "models" busts model-list/detail fetchers; "brands" because the brand
+// listing fetchers include model counts and a model deactivation should
+// reflect immediately on /nova-vozila/marke/.
+const revalidate = makeCollectionRevalidateHooks(["models", "brands"]);
 
 export const Models: CollectionConfig = {
   slug: "models",
@@ -15,6 +21,10 @@ export const Models: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidate.afterChange],
+    afterDelete: [revalidate.afterDelete],
   },
   fields: [
     { name: "brand", type: "relationship", relationTo: "brands", required: true },

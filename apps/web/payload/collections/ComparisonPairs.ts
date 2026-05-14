@@ -1,4 +1,7 @@
 import type { CollectionConfig } from "payload";
+import { makeCollectionRevalidateHooks } from "@/lib/payload/revalidate-hook";
+
+const revalidate = makeCollectionRevalidateHooks(["comparison_pairs"]);
 
 export const ComparisonPairs: CollectionConfig = {
   slug: "comparison_pairs",
@@ -14,6 +17,10 @@ export const ComparisonPairs: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidate.afterChange],
+    afterDelete: [revalidate.afterDelete],
   },
   fields: [
     {

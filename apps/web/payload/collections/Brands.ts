@@ -1,4 +1,10 @@
 import type { CollectionConfig } from "payload";
+import { makeCollectionRevalidateHooks } from "@/lib/payload/revalidate-hook";
+
+// "brands" busts the brand-list fetchers; "models" because /marke/[brand]
+// re-fetches brand-with-models and a brand rename/deactivation needs to
+// flush model pages that show its name.
+const revalidate = makeCollectionRevalidateHooks(["brands", "models"]);
 
 export const Brands: CollectionConfig = {
   slug: "brands",
@@ -11,6 +17,10 @@ export const Brands: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidate.afterChange],
+    afterDelete: [revalidate.afterDelete],
   },
   fields: [
     {

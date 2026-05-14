@@ -1,4 +1,7 @@
 import type { CollectionConfig } from "payload";
+import { makeCollectionRevalidateHooks } from "@/lib/payload/revalidate-hook";
+
+const revalidate = makeCollectionRevalidateHooks(["reviews"]);
 
 export const Reviews: CollectionConfig = {
   slug: "reviews",
@@ -14,6 +17,10 @@ export const Reviews: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [revalidate.afterChange],
+    afterDelete: [revalidate.afterDelete],
   },
   fields: [
     { name: "slug", type: "text", required: true, unique: true },
