@@ -80,8 +80,10 @@ describe("POST /api/gdpr-request (integration)", () => {
     expect(found.docs[0].request_type).toBe("erasure");
 
     const emails = await getDb().select().from(emailLog);
-    expect(emails).toHaveLength(1);
-    expect(emails[0].templateName).toBe("gdpr-request-received");
+    expect(emails).toHaveLength(2);
+    const byTemplate = new Set(emails.map((e) => e.templateName));
+    expect(byTemplate.has("gdpr-request-received")).toBe(true);
+    expect(byTemplate.has("admin-new-gdpr-notification")).toBe(true);
 
     const audits = await getDb().select().from(auditLog);
     expect(audits.find((a) => a.action === "gdpr.create")).toBeDefined();

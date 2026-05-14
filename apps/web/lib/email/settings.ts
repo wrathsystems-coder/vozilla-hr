@@ -54,36 +54,57 @@ function nonEmpty(v: string | null | undefined): string | null {
   return t.length > 0 ? t : null;
 }
 
-export const getEmailSettings = unstable_cache(
-  async (): Promise<EmailSettingsResolved> => {
-    try {
-      const p = await getPayload({ config });
-      const g = (await p.findGlobal({ slug: "email_settings" })) as EmailSetting;
+async function loadEmailSettings(): Promise<EmailSettingsResolved> {
+  try {
+    const p = await getPayload({ config });
+    const g = (await p.findGlobal({ slug: "email_settings" })) as EmailSetting;
 
-      const templates: EmailSettingsResolved["templates"] = {};
-      for (const row of g.templates ?? []) {
-        // Last write wins on duplicates — Payload UI shouldn't allow them
-        // but the array field doesn't enforce uniqueness.
-        templates[row.key] = {
-          enabled: row.enabled !== false, // default true when null/undefined
-          subjectOverride: nonEmpty(row.subject_override),
-        };
-      }
-
-      return {
-        fromEmail: nonEmpty(g.from_email),
-        replyTo: nonEmpty(g.reply_to),
-        templates,
+    const templates: EmailSettingsResolved["templates"] = {};
+    for (const row of g.templates ?? []) {
+      // Last write wins on duplicates — Payload UI shouldn't allow them
+      // but the array field doesn't enforce uniqueness.
+      templates[row.key] = {
+        enabled: row.enabled !== false, // default true when null/undefined
+        subjectOverride: nonEmpty(row.subject_override),
       };
-    } catch {
-      // No DB / global never saved / Payload booting — dispatch falls back
-      // to env-only defaults so first dev boot still works.
-      return FALLBACK;
     }
-  },
-  ["email:settings"],
-  { tags: ["email_settings"], revalidate: ONE_HOUR },
-);
+
+    return {
+      fromEmail: nonEmpty(g.from_email),
+      replyTo: nonEmpty(g.reply_to),
+      templates,
+    };
+  } catch {
+    // No DB / global never saved / Payload booting — dispatch falls back
+    // to env-only defaults so first dev boot still works.
+    return FALLBACK;
+  }
+}
+
+const getEmailSettingsCached = unstable_cache(loadEmailSettings, ["email:settings"], {
+  tags: ["email_settings"],
+  revalidate: ONE_HOUR,
+});
+
+/**
+ * Fetches EmailSettings via Next's ISR cache when running inside a request
+ * scope (production / dev / build), falls back to a direct load when called
+ * from outside the request lifecycle (vitest integration tests, ad-hoc
+ * scripts) — unstable_cache throws "Invariant: incrementalCache missing"
+ * in that case, which would otherwise break every dispatch() consumer.
+ */
+export async function getEmailSettings(): Promise<EmailSettingsResolved> {
+  try {
+    return await getEmailSettingsCached();
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    if (message.includes("incrementalCache")) {
+      return loadEmailSettings();
+    }
+    // Some other unexpected throw — surface so the test/build fails loudly.
+    throw err;
+  }
+}
 
 /**
  * Returns per-template state with enabled-default-true semantics so the
