@@ -395,6 +395,88 @@ export interface ModelVersion {
   co2_emission_g_km?: number | null;
   price_eur?: number | null;
   year?: number | null;
+  /**
+   * Maks. brzina (km/h)
+   */
+  max_speed_kmh?: number | null;
+  /**
+   * Ubrzanje 0-100 km/h (sek, npr. 7.2)
+   */
+  acceleration_0_100_s?: number | null;
+  /**
+   * Prtljažnik (L, seats up)
+   */
+  boot_capacity_l?: number | null;
+  /**
+   * Curb weight (kg)
+   */
+  weight_kg?: number | null;
+  /**
+   * Duljina (mm)
+   */
+  length_mm?: number | null;
+  /**
+   * Širina (mm, bez retrovizora)
+   */
+  width_mm?: number | null;
+  /**
+   * Visina (mm)
+   */
+  height_mm?: number | null;
+  /**
+   * Razmak osovina (mm)
+   */
+  wheelbase_mm?: number | null;
+  /**
+   * Broj vrata (3/4/5)
+   */
+  doors_count?: number | null;
+  /**
+   * Broj sjedala (2/4/5/7)
+   */
+  seats_count?: number | null;
+  drivetrain?: ("fwd" | "rwd" | "awd" | "4x4") | null;
+  /**
+   * Multi-value oprema — filter koristi AND (vozilo mora imati sve odabrane).
+   */
+  equipment?:
+    | (
+        | "panorama"
+        | "hud"
+        | "heated_seats"
+        | "ventilated_seats"
+        | "leather_seats"
+        | "electric_seats"
+        | "adaptive_cruise"
+        | "lane_assist"
+        | "blind_spot"
+        | "camera_360"
+        | "parking_sensors"
+        | "led_matrix"
+        | "wireless_charging"
+        | "apple_carplay"
+        | "android_auto"
+        | "premium_audio"
+      )[]
+    | null;
+  /**
+   * Boje dostupne za ovaj trim (multi-select)
+   */
+  colors_available?:
+    | (
+        | "white"
+        | "black"
+        | "grey"
+        | "silver"
+        | "blue"
+        | "red"
+        | "green"
+        | "brown"
+        | "yellow"
+        | "orange"
+        | "beige"
+      )[]
+    | null;
   is_current?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -872,7 +954,7 @@ export interface LeadAssignment {
   lead: number | LeadRequest;
   dealer: number | Dealer;
   /**
-   * Snapshot dealer.quality_score u trenutku dispatch-a — audit trail za rang dilera.
+   * Snapshot dealer.quality_score u trenutku dispatch-a — audit trail za rang partnera.
    */
   quality_score_at_dispatch?: number | null;
   status: "sent" | "viewed" | "contacted" | "closed";
@@ -1244,6 +1326,19 @@ export interface ModelVersionsSelect<T extends boolean = true> {
   co2_emission_g_km?: T;
   price_eur?: T;
   year?: T;
+  max_speed_kmh?: T;
+  acceleration_0_100_s?: T;
+  boot_capacity_l?: T;
+  weight_kg?: T;
+  length_mm?: T;
+  width_mm?: T;
+  height_mm?: T;
+  wheelbase_mm?: T;
+  doors_count?: T;
+  seats_count?: T;
+  drivetrain?: T;
+  equipment?: T;
+  colors_available?: T;
   is_current?: T;
   updatedAt?: T;
   createdAt?: T;
