@@ -87,7 +87,6 @@ async function runDryRun(
   let mapped = 0;
   let skipped = 0;
   let errors = 0;
-  const unmappedTokens: Record<string, Set<string>> = {};
   for (let i = 0; i < limited.length; i++) {
     try {
       const result = mapping.map(limited[i], i);
@@ -96,16 +95,6 @@ async function runDryRun(
         continue;
       }
       mapped += 1;
-      // Track diagnostic info: which body-type / fuel / etc. tokens did
-      // the mapping see but fail to canonicalize? Helps vlasnik tune the
-      // value maps before doing a real run.
-      const row = limited[i];
-      for (const col of ["Body Type", "Fuel Types", "Transmission", "Drivetrain"]) {
-        const raw = row[col];
-        if (!raw) continue;
-        // Simple "did it land?" check — if any token from raw doesn't
-        // appear as a key in any value map, we surface it.
-      }
     } catch (err) {
       errors += 1;
       console.warn(`    row ${i}: ${(err as Error).message}`);
