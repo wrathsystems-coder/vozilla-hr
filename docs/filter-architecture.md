@@ -33,35 +33,47 @@ postaje filter; sve što nije, ne troši filter UI slot.
 
 ### Multi-select dimenzije (OR within group)
 
-| Dimenzija    | Column type         | Param key    | Index               |
-| ------------ | ------------------- | ------------ | ------------------- |
-| Marka        | enum (FK na brands) | `marka`      | B-tree FK           |
-| Model        | enum (FK na models) | `model`      | B-tree FK           |
-| Kategorija   | enum (FK body_type) | `kategorija` | B-tree FK           |
-| Gorivo       | enum (single)       | `gorivo`     | B-tree              |
-| Mjenjač      | enum (single)       | `mjenjac`    | B-tree              |
-| Pogon        | enum (single)       | `pogon`      | B-tree (drivetrain) |
-| Boje         | enum (single)       | `boja`       | B-tree              |
-| Stanje       | enum (single)       | `stanje`     | B-tree              |
-| Broj sjedala | numeric (int)       | `sjedala`    | B-tree              |
-| Broj vrata   | numeric (int)       | `vrata`      | B-tree              |
-| Oprema       | `text[]`            | `oprema`     | **GIN**             |
-| Segment      | enum (A/B/.../S)    | `segment`    | B-tree              |
+| Dimenzija         | Column type           | Param key           | Index               |
+| ----------------- | --------------------- | ------------------- | ------------------- |
+| Marka             | enum (FK na brands)   | `marka`             | B-tree FK           |
+| Model             | enum (FK na models)   | `model`             | B-tree FK           |
+| Kategorija        | enum (FK body_type)   | `kategorija`        | B-tree FK           |
+| Gorivo            | enum (single)         | `gorivo`            | B-tree              |
+| Mjenjač           | enum (single)         | `mjenjac`           | B-tree              |
+| Pogon             | enum (single)         | `pogon`             | B-tree (drivetrain) |
+| Boje              | `text[]` (multi-join) | `boja`              | **GIN**             |
+| Stanje            | enum (single)         | `stanje`            | B-tree              |
+| Broj sjedala      | numeric (int)         | `sjedala`           | B-tree              |
+| Broj vrata        | numeric (int)         | `vrata`             | B-tree              |
+| Oprema            | `text[]` (multi-join) | `oprema`            | **GIN**             |
+| Segment           | enum (A/B/.../S)      | `segment`           | B-tree              |
+| Engine config     | enum (single)         | `motor_konfig`      | B-tree              |
+| Eco norma         | enum (single)         | `eko_norma`         | B-tree              |
+| NCAP zvjezdice    | numeric (int 1-5)     | `ncap`              | B-tree              |
+| Materijal sjedala | `text[]` (multi-join) | `sjedala_materijal` | **GIN** (via FK)    |
+| Materijal volana  | `text[]` (multi-join) | `volan_materijal`   | **GIN** (via FK)    |
+| Climate zones     | numeric (int 1-4)     | `klima_zone`        | B-tree              |
 
 ### Range dimenzije (single `_od` / `_do` pair, oba opcionalna)
 
-| Dimenzija          | Param keys                        | Column                                       | Index  |
-| ------------------ | --------------------------------- | -------------------------------------------- | ------ |
-| Cijena (EUR)       | `cijena_od` / `cijena_do`         | `model_versions.price_eur`                   | B-tree |
-| Godina             | `godina_od` / `godina_do`         | `model_versions.year`                        | B-tree |
-| Kilometri          | `km_od` / `km_do`                 | `used_car_listings.mileage_km`               | B-tree |
-| Snaga (HP)         | `snaga_od` / `snaga_do`           | `model_versions.power_hp`                    | B-tree |
-| Max brzina (km/h)  | `brzina_od` / `brzina_do`         | `model_versions.max_speed_kmh`               | B-tree |
-| Prtljažnik (L)     | `prtljaznik_od` / `prtljaznik_do` | `model_versions.boot_capacity_l`             | B-tree |
-| Težina (kg)        | `tezina_od` / `tezina_do`         | `model_versions.weight_kg`                   | B-tree |
-| Ubrzanje 0-100 (s) | `ubrzanje_od` / `ubrzanje_do`     | `model_versions.acceleration_0_100_s`        | B-tree |
-| Potrošnja (L/100)  | `potrosnja_od` / `potrosnja_do`   | `model_versions.fuel_consumption_combined_l` | B-tree |
-| CO₂ (g/km)         | `co2_od` / `co2_do`               | `model_versions.co2_emission_g_km`           | B-tree |
+| Dimenzija          | Param keys                        | Column                                       | Index            |
+| ------------------ | --------------------------------- | -------------------------------------------- | ---------------- |
+| Cijena (EUR)       | `cijena_od` / `cijena_do`         | `model_versions.price_eur`                   | B-tree           |
+| Godina             | `godina_od` / `godina_do`         | `model_versions.year`                        | B-tree           |
+| Kilometri          | `km_od` / `km_do`                 | `used_car_listings.mileage_km`               | B-tree           |
+| Snaga (HP)         | `snaga_od` / `snaga_do`           | `model_versions.power_hp`                    | B-tree           |
+| Zakretni moment    | `moment_od` / `moment_do`         | `model_versions.torque_nm`                   | B-tree           |
+| Max brzina (km/h)  | `brzina_od` / `brzina_do`         | `model_versions.max_speed_kmh`               | B-tree           |
+| Prtljažnik (L)     | `prtljaznik_od` / `prtljaznik_do` | `model_versions.boot_capacity_l`             | B-tree           |
+| Nosivost (kg)      | `nosivost_od` / `nosivost_do`     | `model_versions.load_capacity_kg`            | B-tree           |
+| Težina (kg)        | `tezina_od` / `tezina_do`         | `model_versions.weight_kg`                   | B-tree           |
+| Ubrzanje 0-100 (s) | `ubrzanje_od` / `ubrzanje_do`     | `model_versions.acceleration_0_100_s`        | B-tree           |
+| Potrošnja (L/100)  | `potrosnja_od` / `potrosnja_do`   | `model_versions.fuel_consumption_combined_l` | B-tree           |
+| CO₂ (g/km)         | `co2_od` / `co2_do`               | `model_versions.co2_emission_g_km`           | B-tree           |
+| EV doseg (km)      | `ev_doseg_od` / `ev_doseg_do`     | `model_versions.ev_range_km`                 | B-tree (partial) |
+| Ekran (inch)       | `ekran_od` / `ekran_do`           | `model_versions.infotainment_screen_in`      | B-tree           |
+| USB priključaka    | `usb_od` / `usb_do`               | `model_versions.usb_ports`                   | B-tree           |
+| Zračnih jastuka    | `jastuci_od` / `jastuci_do`       | `model_versions.airbags_count`               | B-tree           |
 
 Range filter UX: dvostruko-ručka slider + preset bucket chip-ovi ispod
 (npr. cijena: 'do 20k', '20-30k', '30-40k', '40-60k', '60k+'). Bucket-i
@@ -313,6 +325,46 @@ pages dobivaju `<meta name="robots" content="noindex, follow">`.
    - Integration: facet endpoint vs known seed set
 8. **Sitemap proširenje** — brand/category landing pages ostaju u
    sitemap-u (canonical), query-filtered URLs are NOT in sitemap.
+
+---
+
+## Extended spec dimensions — Sprint 8 audit follow-up
+
+Po user CSV-u s 49 stupaca otkriveno je još 13 spec atributa preko core
+35 — sve mapirano u **iste 3 obrasce** (numeric range / single enum /
+text[] multi-join + GIN). Bez novog mechanizma, bez paralelnog sustava.
+
+| Novi atribut        | Tip                        | Importer source             |
+| ------------------- | -------------------------- | --------------------------- |
+| Torque (Nm)         | numeric range              | `Torque (Nm)` direct        |
+| EV range (km)       | numeric range, partial idx | `EV Range (km)` direct      |
+| Load capacity (kg)  | numeric range              | `Load Capacity (kg)`        |
+| Climate zones       | small int (1-4)            | `Climate Zones` direct      |
+| Infotainment screen | numeric (inch, largest)    | parsed from free-text       |
+| USB ports           | int                        | `USB Ports` direct          |
+| Euro NCAP stars     | int nullable 1-5           | parsed from descriptor      |
+| Airbags count       | int                        | `Airbags` direct            |
+| Eco norm            | single enum                | `Eco Norm` mapValue         |
+| Engine config       | single enum                | substring-extract canonical |
+| Seat materials      | `text[]` GIN               | substring-extract canonical |
+| Steering materials  | `text[]` GIN               | substring-extract canonical |
+| Interface features  | merged into `equipment[]`  | regex extract (no new dim)  |
+
+**Substring extraction** koristi `extractCanonicalTokens()` u
+`scripts/import/helpers.ts` — longest-match-wins consume-span semantika
+(testirano u `tests/unit/import-helpers.test.ts`). Tako "Veganska koža"
+ne tagira plain `leather` paralelno, i Hrvatska morfologija (`tkanin`
+prefix) hvata sve padežne varijante.
+
+**Free-text notes** sačuvani u `*_notes` text kolonama (admin display)
+— canonical token se koristi za filter, raw za prikaz. Korisnik koji
+filtrira "kožna sjedala" hvata BMW (Vernasca), Porsche (plain), Tesla
+(Premium leather), ali u UI-ju vidi pravu specifikaciju.
+
+**Seller Location** — namjerno NE pripada `model_versions`. Pripada
+`used_car_listings` per-listing s `location_id` FK preko `counties`
+(infrastruktura već postoji od Sprint 4). Catalog import (default
+mapping) ga ignorira; used-car import (drugi mapping) ga koristi.
 
 ---
 

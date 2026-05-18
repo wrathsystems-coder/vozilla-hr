@@ -4,6 +4,7 @@ import * as migration_20260514_150158 from "./20260514_150158";
 import * as migration_20260514_154535 from "./20260514_154535";
 import * as migration_20260514_163301 from "./20260514_163301";
 import * as migration_20260514_211252_sprint8_model_versions_filter_columns from "./20260514_211252_sprint8_model_versions_filter_columns";
+import * as migration_20260518_144240_sprint8_extended_filter_dimensions from "./20260518_144240_sprint8_extended_filter_dimensions";
 
 export const migrations = [
   {
@@ -35,5 +36,10 @@ export const migrations = [
     up: migration_20260514_211252_sprint8_model_versions_filter_columns.up,
     down: migration_20260514_211252_sprint8_model_versions_filter_columns.down,
     name: "20260514_211252_sprint8_model_versions_filter_columns",
+  },
+  {
+    up: migration_20260518_144240_sprint8_extended_filter_dimensions.up,
+    down: migration_20260518_144240_sprint8_extended_filter_dimensions.down,
+    name: "20260518_144240_sprint8_extended_filter_dimensions",
   },
 ];

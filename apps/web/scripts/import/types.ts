@@ -28,22 +28,46 @@ export type ModelPayload = {
   is_active?: boolean;
 };
 
+export type EngineConfig =
+  | "inline_3"
+  | "inline_4"
+  | "inline_5"
+  | "inline_6"
+  | "v6"
+  | "v8"
+  | "v10"
+  | "v12"
+  | "boxer_4"
+  | "boxer_6"
+  | "rotary"
+  | "electric_motor"
+  | "hybrid_motor"
+  | "other";
+
+export type EcoNorm = "euro_4" | "euro_5" | "euro_6" | "euro_6d" | "bev";
+
 export type ModelVersionPayload = {
   brandSlug: string;
   modelSlug: string;
   name: string; // trim label, e.g. "2.0 TDI Sport"
   engine_type?: "benzin" | "dizel" | "hibrid" | "phev" | "ev";
   engine_displacement_cc?: number;
+  engine_config?: EngineConfig;
+  engine_config_notes?: string;
+  eco_norm?: EcoNorm;
   power_kw?: number;
   power_hp?: number;
+  torque_nm?: number;
   transmission?: "manual" | "automatic" | "dct" | "cvt";
   fuel_consumption_combined_l?: number;
   co2_emission_g_km?: number;
+  ev_range_km?: number;
   price_eur?: number;
   year?: number;
   max_speed_kmh?: number;
   acceleration_0_100_s?: number;
   boot_capacity_l?: number;
+  load_capacity_kg?: number;
   weight_kg?: number;
   length_mm?: number;
   width_mm?: number;
@@ -51,8 +75,17 @@ export type ModelVersionPayload = {
   wheelbase_mm?: number;
   doors_count?: number;
   seats_count?: number;
+  climate_zones?: number;
+  infotainment_screen_in?: number;
+  usb_ports?: number;
+  euro_ncap_stars?: number;
+  airbags_count?: number;
   drivetrain?: "fwd" | "rwd" | "awd" | "4x4";
-  equipment?: string[]; // panorama / hud / heated_seats / …
+  equipment?: string[]; // panorama / hud / heated_seats / aeb / touchscreen / …
+  seat_materials?: string[]; // fabric / leather / vegan_leather / alcantara / …
+  seat_material_notes?: string;
+  steering_materials?: string[]; // leather / alcantara / fabric / synthetic_leather / plastic
+  steering_material_notes?: string;
   colors_available?: string[];
   is_current?: boolean;
 };

@@ -23,6 +23,8 @@
     "seed": "tsx scripts/seed.ts",
     "seed:vehicles": "tsx scripts/seed-vehicles.ts",
     "import:vehicles": "tsx scripts/import-vehicles.ts",
+    "import:audit-csv": "tsx scripts/audit-import-csv.mjs",
+    "import:audit-mapping": "tsx scripts/audit-import-mapping.mjs",
     "seed:comparisons": "tsx scripts/seed-comparisons.ts",
     "seed:demo": "tsx scripts/seed-demo.ts",
     "seed:cleanup-demo": "tsx scripts/seed-cleanup-demo.ts",
