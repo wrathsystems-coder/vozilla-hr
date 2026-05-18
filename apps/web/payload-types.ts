@@ -384,6 +384,39 @@ export interface ModelVersion {
   engine_displacement_cc?: number | null;
   power_kw?: number | null;
   power_hp?: number | null;
+  /**
+   * Maks. zakretni moment (Nm)
+   */
+  torque_nm?: number | null;
+  /**
+   * Canonical config — koristi se za filter. Raw opis u engine_config_notes.
+   */
+  engine_config?:
+    | (
+        | "inline_3"
+        | "inline_4"
+        | "inline_5"
+        | "inline_6"
+        | "v6"
+        | "v8"
+        | "v10"
+        | "v12"
+        | "boxer_4"
+        | "boxer_6"
+        | "rotary"
+        | "electric_motor"
+        | "hybrid_motor"
+        | "other"
+      )
+    | null;
+  /**
+   * Raw opis iz CSV-a (npr. "Inline-4 Atmo + elektromotor", "Flat-6 Bi-Turbo (Boxer)") — display only
+   */
+  engine_config_notes?: string | null;
+  /**
+   * Ekološka norma (EURO standard ili BEV za 0-emisije)
+   */
+  eco_norm?: ("euro_4" | "euro_5" | "euro_6" | "euro_6d" | "bev") | null;
   transmission?: ("manual" | "automatic" | "dct" | "cvt") | null;
   /**
    * L/100km kombinirano (WLTP)
@@ -393,6 +426,10 @@ export interface ModelVersion {
    * g/km (WLTP)
    */
   co2_emission_g_km?: number | null;
+  /**
+   * WLTP električni doseg (km) — nullable za non-EV
+   */
+  ev_range_km?: number | null;
   price_eur?: number | null;
   year?: number | null;
   /**
@@ -407,6 +444,10 @@ export interface ModelVersion {
    * Prtljažnik (L, seats up)
    */
   boot_capacity_l?: number | null;
+  /**
+   * Maks. nosivost / payload (kg)
+   */
+  load_capacity_kg?: number | null;
   /**
    * Curb weight (kg)
    */
@@ -435,6 +476,26 @@ export interface ModelVersion {
    * Broj sjedala (2/4/5/7)
    */
   seats_count?: number | null;
+  /**
+   * Broj klima zona (1/2/3/4)
+   */
+  climate_zones?: number | null;
+  /**
+   * Veličina glavnog ekrana (inch, npr. 12.3). Iz CSV "Infotainment Screen".
+   */
+  infotainment_screen_in?: number | null;
+  /**
+   * Broj USB priključaka
+   */
+  usb_ports?: number | null;
+  /**
+   * Broj Euro NCAP zvjezdica (1-5). Null = nije testirano.
+   */
+  euro_ncap_stars?: number | null;
+  /**
+   * Broj zračnih jastuka
+   */
+  airbags_count?: number | null;
   drivetrain?: ("fwd" | "rwd" | "awd" | "4x4") | null;
   /**
    * Multi-value oprema — filter koristi AND (vozilo mora imati sve odabrane).
@@ -445,20 +506,60 @@ export interface ModelVersion {
         | "hud"
         | "heated_seats"
         | "ventilated_seats"
+        | "massage_seats"
+        | "memory_seats"
         | "leather_seats"
+        | "alcantara_seats"
+        | "vegan_leather_seats"
         | "electric_seats"
         | "adaptive_cruise"
         | "lane_assist"
         | "blind_spot"
         | "camera_360"
+        | "rear_camera"
         | "parking_sensors"
+        | "auto_parking"
+        | "aeb"
         | "led_matrix"
+        | "led_lights"
+        | "night_vision"
+        | "travel_assist"
+        | "sport_chrono"
+        | "pasm"
         | "wireless_charging"
         | "apple_carplay"
         | "android_auto"
         | "premium_audio"
+        | "harman_kardon"
+        | "burmester_audio"
+        | "bose_audio"
+        | "touchscreen"
+        | "voice_assistant"
+        | "physical_buttons"
+        | "rotary_controller"
+        | "touch_sliders"
       )[]
     | null;
+  /**
+   * Canonical materijali sjedala (multi-value) — filter sa GIN indexom. Raw opis u seat_material_notes.
+   */
+  seat_materials?:
+    | ("fabric" | "leather" | "vegan_leather" | "alcantara" | "synthetic_leather" | "microfiber")[]
+    | null;
+  /**
+   * Raw opis iz CSV-a (npr. "Koža Vernasca (M Sport perforirana)") — display only
+   */
+  seat_material_notes?: string | null;
+  /**
+   * Canonical materijali volana (multi-value)
+   */
+  steering_materials?:
+    | ("leather" | "alcantara" | "fabric" | "synthetic_leather" | "plastic")[]
+    | null;
+  /**
+   * Raw opis iz CSV-a — display only
+   */
+  steering_material_notes?: string | null;
   /**
    * Boje dostupne za ovaj trim (multi-select)
    */
@@ -1321,14 +1422,20 @@ export interface ModelVersionsSelect<T extends boolean = true> {
   engine_displacement_cc?: T;
   power_kw?: T;
   power_hp?: T;
+  torque_nm?: T;
+  engine_config?: T;
+  engine_config_notes?: T;
+  eco_norm?: T;
   transmission?: T;
   fuel_consumption_combined_l?: T;
   co2_emission_g_km?: T;
+  ev_range_km?: T;
   price_eur?: T;
   year?: T;
   max_speed_kmh?: T;
   acceleration_0_100_s?: T;
   boot_capacity_l?: T;
+  load_capacity_kg?: T;
   weight_kg?: T;
   length_mm?: T;
   width_mm?: T;
@@ -1336,8 +1443,17 @@ export interface ModelVersionsSelect<T extends boolean = true> {
   wheelbase_mm?: T;
   doors_count?: T;
   seats_count?: T;
+  climate_zones?: T;
+  infotainment_screen_in?: T;
+  usb_ports?: T;
+  euro_ncap_stars?: T;
+  airbags_count?: T;
   drivetrain?: T;
   equipment?: T;
+  seat_materials?: T;
+  seat_material_notes?: T;
+  steering_materials?: T;
+  steering_material_notes?: T;
   colors_available?: T;
   is_current?: T;
   updatedAt?: T;
