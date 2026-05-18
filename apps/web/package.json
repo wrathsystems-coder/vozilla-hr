@@ -22,6 +22,7 @@
     "payload": "payload",
     "seed": "tsx scripts/seed.ts",
     "seed:vehicles": "tsx scripts/seed-vehicles.ts",
+    "import:vehicles": "tsx scripts/import-vehicles.ts",
     "seed:comparisons": "tsx scripts/seed-comparisons.ts",
     "seed:demo": "tsx scripts/seed-demo.ts",
     "seed:cleanup-demo": "tsx scripts/seed-cleanup-demo.ts",

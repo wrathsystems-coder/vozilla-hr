@@ -58,6 +58,10 @@ playwright/.cache/
 *.pem
 .cache/
 
+# Local catalog datasets (vlasnik drops CSV/XLSX here for `pnpm import:vehicles`).
+# Don't commit raw catalog data — may include unpublished pricing + bloats repo.
+/data/
+
 # Claude Code — only commit settings.json and commands/
 .claude/*
 !.claude/settings.json
