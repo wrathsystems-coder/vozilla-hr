@@ -7,19 +7,122 @@ import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
 import { getAllActiveBrands, getAllBodyTypes, getTopBrandsForMegaMenu } from "@/lib/catalog/fetch";
 import { requestQuoteHref } from "@/lib/catalog/cta";
+import { parseFilter, hasAnyFilter } from "@/lib/catalog/filter";
+import { fetchModelVersionsList } from "@/lib/catalog/filter-fetch";
+import { fetchFacets } from "@/lib/catalog/facets";
+import FilterSidebar from "@/components/catalog/FilterSidebar";
+import ActiveFilterChips from "@/components/catalog/ActiveFilterChips";
+import ModelVersionListingCard from "@/components/catalog/ModelVersionListingCard";
+import CatalogSortBar from "@/components/catalog/CatalogSortBar";
+import CatalogPagination from "@/components/catalog/CatalogPagination";
 import JsonLd from "@/lib/seo/jsonld";
 import { breadcrumbsJsonLd } from "@/lib/seo/breadcrumbs";
 
-export const revalidate = 3600;
+const LISTING_PATH = "/nova-vozila";
 
-export const metadata: Metadata = {
-  title: "Nova vozila",
-  description:
-    "Istraži marke, modele i kategorije novih vozila. Zatraži ponudu od provjerenih partnera u nekoliko klikova.",
-  alternates: { canonical: "/nova-vozila" },
+// Filtered URLs need fresh data per request — `revalidate=0` opts out
+// of ISR when there's any filter param. The empty-filter hub keeps the
+// 1h revalidate via the inner Payload fetchers' unstable_cache wrappers.
+export const dynamic = "force-dynamic";
+
+type Props = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function NovaVozilaHubPage() {
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const sp = await searchParams;
+  const filter = parseFilter(sp);
+  if (!hasAnyFilter(filter)) {
+    return {
+      title: "Nova vozila",
+      description:
+        "Istraži marke, modele i kategorije novih vozila. Zatraži ponudu od provjerenih partnera u nekoliko klikova.",
+      alternates: { canonical: LISTING_PATH },
+    };
+  }
+  // Filtered URL — per filter-architecture.md: noindex, follow + canonical
+  // points at the filter-free landing. Stops Google indexing every combo.
+  return {
+    title: "Katalog novih vozila",
+    description: "Filtriran pregled novih vozila prema tvojim kriterijima.",
+    alternates: { canonical: LISTING_PATH },
+    robots: { index: false, follow: true },
+  };
+}
+
+export default async function NovaVozilaPage({ searchParams }: Props) {
+  const sp = await searchParams;
+  const filter = parseFilter(sp);
+
+  if (!hasAnyFilter(filter)) {
+    return <NovaVozilaHub />;
+  }
+
+  const [listResult, facets] = await Promise.all([
+    fetchModelVersionsList(filter),
+    fetchFacets(filter),
+  ]);
+
+  const breadcrumbs = [
+    { name: "Početna", href: "/" },
+    { name: "Nova vozila", href: LISTING_PATH },
+    { name: "Pretraga" },
+  ];
+
+  return (
+    <>
+      <JsonLd data={breadcrumbsJsonLd(breadcrumbs)} />
+
+      <section className="bg-surface-muted py-8">
+        <Container>
+          <Breadcrumbs items={breadcrumbs} className="mb-4" />
+          <Heading level={1}>Katalog vozila</Heading>
+        </Container>
+      </section>
+
+      <section className="bg-surface py-8">
+        <Container>
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
+            <aside className="lg:sticky lg:top-4 lg:self-start">
+              <FilterSidebar filter={filter} facets={facets} action={LISTING_PATH} />
+            </aside>
+
+            <div className="space-y-4">
+              <ActiveFilterChips filter={filter} action={LISTING_PATH} />
+              <CatalogSortBar filter={filter} total={listResult.total} action={LISTING_PATH} />
+
+              {listResult.items.length === 0 ? (
+                <div className="bg-surface-muted text-text-muted rounded-lg p-8 text-center">
+                  <p className="text-text text-base font-semibold">Nema rezultata</p>
+                  <p className="mt-2 text-sm">
+                    Nijedno vozilo ne odgovara odabranim filterima. Pokušaj ukloniti neki filter ili
+                    proširi raspone.
+                  </p>
+                </div>
+              ) : (
+                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {listResult.items.map((item) => (
+                    <li key={item.id}>
+                      <ModelVersionListingCard item={item} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <CatalogPagination
+                filter={filter}
+                totalPages={listResult.totalPages}
+                action={LISTING_PATH}
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
+
+async function NovaVozilaHub() {
   const [allBrands, bodyTypes, topBrands] = await Promise.all([
     getAllActiveBrands(),
     getAllBodyTypes(),
@@ -48,6 +151,12 @@ export default async function NovaVozilaHubPage() {
               className="bg-brand-accent text-brand-primary focus-visible:outline-brand-accent inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-semibold transition-colors hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               Zatraži ponudu
+            </Link>
+            <Link
+              href={`${LISTING_PATH}?godina_od=${new Date().getFullYear() - 1}`}
+              className="bg-surface text-text border-surface-border focus-visible:outline-brand-accent inline-flex items-center justify-center rounded-md border px-6 py-3 text-base font-semibold transition-colors hover:border-current focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              Pregledaj cijeli katalog →
             </Link>
             <Link
               href="/pomoc-pri-izboru"
