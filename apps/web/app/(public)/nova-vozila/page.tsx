@@ -153,12 +153,6 @@ async function NovaVozilaHub() {
               Zatraži ponudu
             </Link>
             <Link
-              href={`${LISTING_PATH}?godina_od=${new Date().getFullYear() - 1}`}
-              className="bg-surface text-text border-surface-border focus-visible:outline-brand-accent inline-flex items-center justify-center rounded-md border px-6 py-3 text-base font-semibold transition-colors hover:border-current focus-visible:outline-2 focus-visible:outline-offset-2"
-            >
-              Pregledaj cijeli katalog →
-            </Link>
-            <Link
               href="/pomoc-pri-izboru"
               className="bg-surface text-text border-surface-border focus-visible:outline-brand-accent inline-flex items-center justify-center rounded-md border px-6 py-3 text-base font-semibold transition-colors hover:border-current focus-visible:outline-2 focus-visible:outline-offset-2"
             >

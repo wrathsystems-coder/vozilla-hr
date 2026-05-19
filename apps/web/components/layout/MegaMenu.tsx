@@ -5,15 +5,28 @@ import { ChevronDown } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import type { Brand, BodyType } from "@/payload-types";
 
+// Megamenu trigger pattern: the label itself is a `<Link>` to the hub,
+// not a button that just toggles. Hover / focus opens the dropdown;
+// click on the label navigates. This matches typical megamenu UX
+// (Apple, Carwow, Mercedes site) — without this users have no way to
+// reach `/nova-vozila` from the top nav (every dropdown item links to
+// a sub-page like /marke/{slug}, never to the hub itself).
+//
+// Touch devices: hover/focus never fires, so click navigates immediately.
+// Mobile users get the menu through `<MobileNav>` (separate component);
+// MegaMenu is desktop-only (hidden md:block in Header).
+
 type Props = {
   label: string;
+  href: string;
   topBrands: Brand[];
   bodyTypes: BodyType[];
 };
 
-export default function MegaMenu({ label, topBrands, bodyTypes }: Props) {
+export default function MegaMenu({ label, href, topBrands, bodyTypes }: Props) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLLIElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const panelId = useId();
 
   useEffect(() => {
@@ -35,13 +48,37 @@ export default function MegaMenu({ label, topBrands, bodyTypes }: Props) {
     };
   }, [open]);
 
+  // Small leave delay so the user can move mouse from label across to
+  // the panel without it disappearing. 120ms is the same value Apple
+  // uses; feels instant but tolerates diagonal mouse travel.
+  function scheduleClose() {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => setOpen(false), 120);
+  }
+  function cancelClose() {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }
+  function openMenu() {
+    cancelClose();
+    setOpen(true);
+  }
+
   const close = () => setOpen(false);
 
   return (
-    <li ref={containerRef} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
+    <li
+      ref={containerRef}
+      className="relative"
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
+    >
+      <Link
+        href={href}
+        onFocus={openMenu}
+        onBlur={scheduleClose}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={panelId}
@@ -52,13 +89,15 @@ export default function MegaMenu({ label, topBrands, bodyTypes }: Props) {
           className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
           aria-hidden="true"
         />
-      </button>
+      </Link>
 
       {open && (
         <div
           id={panelId}
           role="menu"
           aria-label={label}
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
           className="border-surface-border bg-surface absolute left-1/2 top-full z-40 mt-2 w-screen max-w-5xl -translate-x-1/2 rounded-md border shadow-lg"
         >
           <div className="grid grid-cols-1 gap-8 p-8 md:grid-cols-3">

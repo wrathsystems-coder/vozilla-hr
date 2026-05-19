@@ -26,6 +26,14 @@ function buildNonce(): string {
 }
 
 function buildPublicCsp(nonce: string): string {
+  // Next.js dev mode uses `eval()` for source-map mapping + HMR; with
+  // strict CSP that throws "Evaluating a string as JavaScript violates
+  // the following Content Security Policy" and tears down every client
+  // component's hydration (wizard buttons, leasing slideri, every
+  // useState handler). Production build emits pre-compiled bundles
+  // with no eval — there the strict policy works. So: 'unsafe-eval'
+  // is dev-only, scoped to keep prod traffic locked down.
+  const isDev = process.env.NODE_ENV !== "production";
   const scriptSrc = [
     "'self'",
     `'nonce-${nonce}'`,
@@ -33,6 +41,7 @@ function buildPublicCsp(nonce: string): string {
     // own children without explicit allowlisting — required so the
     // reCAPTCHA SDK can load its iframe helpers.
     "'strict-dynamic'",
+    ...(isDev ? ["'unsafe-eval'"] : []),
     ...RECAPTCHA_HOSTS,
     ...COOKIEBOT_HOSTS,
   ].join(" ");
@@ -95,6 +104,16 @@ export function middleware(request: NextRequest) {
   if (pathname === "/dileri" || pathname.startsWith("/dileri/")) {
     const target = request.nextUrl.clone();
     target.pathname = "/partneri" + pathname.slice("/dileri".length);
+    target.search = search;
+    return NextResponse.redirect(target, 301);
+  }
+  // Same rename for the public "Za dilere" → "Za partnere" landing
+  // (footer + secondary nav link). Page itself doesn't exist yet so
+  // the link 404s either way, but legacy bookmarks should still resolve
+  // to the new path once it ships.
+  if (pathname === "/za-dilere") {
+    const target = request.nextUrl.clone();
+    target.pathname = "/za-partnere";
     target.search = search;
     return NextResponse.redirect(target, 301);
   }

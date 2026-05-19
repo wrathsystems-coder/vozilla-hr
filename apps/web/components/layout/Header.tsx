@@ -46,6 +46,7 @@ export default async function Header() {
                 <MegaMenu
                   key={item.href}
                   label={item.label}
+                  href={item.href}
                   topBrands={topBrands}
                   bodyTypes={bodyTypes}
                 />
