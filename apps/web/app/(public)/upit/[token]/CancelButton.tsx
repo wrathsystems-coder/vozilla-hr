@@ -39,7 +39,7 @@ export default function CancelButton({ token }: Props) {
   return (
     <div className="border-state-error/30 bg-state-error/5 space-y-3 rounded-md border p-4 text-sm">
       <p className="text-text">
-        Otkazivanje briše tvoje osobne podatke iz našeg sustava i obavještava sve dilere koji su
+        Otkazivanje briše tvoje osobne podatke iz našeg sustava i obavještava sve partnere koji su
         primili upit. Akcija se ne može poništiti. Hard delete sustav izvršava unutar 30 dana.
       </p>
       <div className="flex gap-3">

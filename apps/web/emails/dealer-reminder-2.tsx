@@ -60,7 +60,7 @@ export default function DealerReminder2(props: DealerReminder2Props) {
 
       <Section>
         <Text className="text-xs text-gray-500">
-          [XXX_EMAIL_SIGNATURE_DEALER: brand-voice potpis za dilere, 1-2 rečenice]
+          [XXX_EMAIL_SIGNATURE_DEALER: brand-voice potpis za partnere, 1-2 rečenice]
         </Text>
       </Section>
     </EmailLayout>

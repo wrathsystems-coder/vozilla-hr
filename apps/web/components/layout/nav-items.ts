@@ -14,7 +14,7 @@ export const mainNav: NavItem[] = [
 ];
 
 export const secondaryNav: NavItem[] = [
-  { label: "Za dilere", href: "/za-dilere" },
+  { label: "Za partnere", href: "/za-partnere" },
   { label: "Prijava", href: "/partneri/login" },
 ];
 
@@ -52,7 +52,7 @@ export const footerColumns: FooterColumn[] = [
     title: "Resursi",
     items: [
       { label: "Kako provjeravamo recenzije", href: "/kako-provjeravamo-recenzije" },
-      { label: "Za dilere", href: "/za-dilere" },
+      { label: "Za partnere", href: "/za-partnere" },
     ],
   },
 ];

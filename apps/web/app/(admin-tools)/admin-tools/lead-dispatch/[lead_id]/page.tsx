@@ -142,7 +142,7 @@ export default async function LeadDispatchPage({ params }: { params: Params }) {
         ) : isAlreadyDispatched ? (
           <p className="rounded-md border border-emerald-500/30 bg-emerald-500/5 p-4 text-sm">
             Lead je već poslan partnerima. Dodatni dispatch ide preko ručnog odabira (re-send će
-            preskočiti dilere kojima je već poslan).
+            preskočiti partnere kojima je već poslan).
           </p>
         ) : null}
 

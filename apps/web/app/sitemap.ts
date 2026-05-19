@@ -21,7 +21,7 @@ const STATIC_ROUTES: string[] = [
   "/savjeti",
   "/pomoc-pri-izboru",
   "/zatrazi-ponudu",
-  "/za-dilere",
+  "/za-partnere",
   "/kontakt",
   "/o-nama",
   "/cesta-pitanja",

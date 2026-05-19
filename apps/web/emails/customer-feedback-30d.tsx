@@ -26,7 +26,7 @@ export default function CustomerFeedback30d(props: CustomerFeedback30dProps) {
         <Text className="text-base text-gray-700">
           Možeš li nam, kao zadnju uslugu, označiti što se dogodilo? Jesi li kupio/la, gdje, jesi li
           zadovoljan/na s partnerom — sve to ostaje povjerljivo i pomaže nam da kasnije bolje
-          predlažemo dilere drugim kupcima.
+          predlažemo partnere drugim kupcima.
         </Text>
       </Section>
 
