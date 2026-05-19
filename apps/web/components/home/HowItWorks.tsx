@@ -1,25 +1,24 @@
 import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
+import { getMarketingCopy } from "@/lib/marketing/copy";
 
-const steps = [
-  {
-    n: 1,
-    title: "[XXX_HIW_1_TITLE: 2-4 riječi]",
-    body: "[XXX_HIW_1_BODY: 1-2 rečenice]",
-  },
-  {
-    n: 2,
-    title: "[XXX_HIW_2_TITLE: 2-4 riječi]",
-    body: "[XXX_HIW_2_BODY: 1-2 rečenice]",
-  },
-  {
-    n: 3,
-    title: "[XXX_HIW_3_TITLE: 2-4 riječi]",
-    body: "[XXX_HIW_3_BODY: 1-2 rečenice]",
-  },
+// Reads from MarketingCopy global. Admin can edit 3 steps; fallback
+// keeps `[XXX_*]` placeholders so placeholder-check picks them up
+// before content is authored.
+
+const FALLBACK_STEPS = [
+  { n: 1, title: "[XXX_HIW_1_TITLE: 2-4 riječi]", body: "[XXX_HIW_1_BODY: 1-2 rečenice]" },
+  { n: 2, title: "[XXX_HIW_2_TITLE: 2-4 riječi]", body: "[XXX_HIW_2_BODY: 1-2 rečenice]" },
+  { n: 3, title: "[XXX_HIW_3_TITLE: 2-4 riječi]", body: "[XXX_HIW_3_BODY: 1-2 rečenice]" },
 ];
 
-export default function HowItWorks() {
+export default async function HowItWorks() {
+  const { howItWorks } = await getMarketingCopy();
+  const steps =
+    howItWorks.length > 0
+      ? howItWorks.map((s) => ({ n: s.stepNumber, title: s.title, body: s.description }))
+      : FALLBACK_STEPS;
+
   return (
     <section className="bg-surface py-16">
       <Container>

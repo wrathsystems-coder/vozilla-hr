@@ -1,10 +1,14 @@
 import type { GlobalConfig } from "payload";
+import { makeGlobalRevalidateHook } from "@/lib/payload/revalidate-hook";
 
 export const MarketingCopy: GlobalConfig = {
   slug: "marketing_copy",
   access: {
     read: () => true,
     update: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [makeGlobalRevalidateHook(["marketing_copy"])],
   },
   fields: [
     {

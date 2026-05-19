@@ -1,23 +1,29 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Heading from "@/components/ui/Heading";
+import { getMarketingCopy } from "@/lib/marketing/copy";
 
-export default function Hero() {
+// Hero is async server component reading from the MarketingCopy global
+// so admin edits in Payload propagate to homepage. Fallback strings are
+// the original `[XXX_*]` markers — kept so a fresh DB still surfaces the
+// "this needs CMS content" cue. revalidateTag('marketing_copy') is wired
+// on the global's afterChange hook so saved edits invalidate instantly.
+
+export default async function Hero() {
+  const { hero } = await getMarketingCopy();
   return (
     <section className="bg-surface py-20 sm:py-28">
       <Container className="text-center">
         <Heading level={1} className="mx-auto max-w-3xl">
-          [XXX_HERO_HEADLINE: 5-8 riječi]
+          {hero.headline}
         </Heading>
-        <p className="text-text-muted mx-auto mt-4 max-w-2xl text-lg">
-          [XXX_HERO_SUBHEADLINE: 1-2 rečenice opisa platforme]
-        </p>
+        <p className="text-text-muted mx-auto mt-4 max-w-2xl text-lg">{hero.subheadline}</p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
-            href="/zatrazi-ponudu"
+            href={hero.primaryCtaHref}
             className="bg-brand-accent text-brand-primary focus-visible:outline-brand-accent inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-semibold transition-colors hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            Zatraži ponudu
+            {hero.primaryCtaLabel}
           </Link>
           <Link
             href="/pomoc-pri-izboru"
